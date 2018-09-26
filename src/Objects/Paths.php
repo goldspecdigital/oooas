@@ -2,14 +2,24 @@
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
+
 class Paths extends BaseObject
 {
     /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]
+     */
+    protected $pathItems;
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $pathItem
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths
      */
-    public static function create(): self
+    public static function create(PathItem ...$pathItem): self
     {
         $instance = new static();
+
+        $instance->pathItems = $pathItem;
 
         return $instance;
     }
@@ -19,6 +29,6 @@ class Paths extends BaseObject
      */
     public function toArray(): array
     {
-        return [];
+        return Arr::filter($this->pathItems);
     }
 }

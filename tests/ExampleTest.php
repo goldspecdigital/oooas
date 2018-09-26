@@ -5,6 +5,8 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Tests;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
@@ -24,7 +26,10 @@ class ExampleTest extends TestCase
             ->description('For using the Core Example App API')
             ->contact($contact);
 
-        $paths = Paths::create();
+        $paths = Paths::create(
+            PathItem::create('/audits', Operation::create()),
+            PathItem::create('/audits/{audit}', Operation::create())
+        );
 
         $servers = [
             Server::create('https://api.example.com/v1'),
