@@ -26,9 +26,18 @@ class ExampleTest extends TestCase
             ->description('For using the Core Example App API')
             ->contact($contact);
 
+        $listAudits = Operation::create(Operation::GET)
+            ->summary('List all audits')
+            ->operationId('audits.index');
+        $createAudit = Operation::create(Operation::POST)
+            ->summary('Create an audit')
+            ->operationId('audits.store');
+        $readAudit = Operation::create(Operation::GET)->summary('View an audit')
+            ->operationId('audits.show');
+
         $paths = Paths::create(
-            PathItem::create('/audits', Operation::create()),
-            PathItem::create('/audits/{audit}', Operation::create())
+            PathItem::create('/audits', $listAudits, $createAudit),
+            PathItem::create('/audits/{audit}', $readAudit)
         );
 
         $servers = [

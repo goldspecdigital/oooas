@@ -84,7 +84,7 @@ class OpenApi extends BaseObject
      */
     public function servers(Server ...$servers): self
     {
-        $this->servers = count($servers) > 0 ? $servers : null;
+        $this->servers = $servers ?: null;
 
         return $this;
     }
@@ -106,7 +106,7 @@ class OpenApi extends BaseObject
      */
     public function security(array ...$security): self
     {
-        $this->security = count($security) > 0 ? $security : null;
+        $this->security = $security ?: null;
 
         return $this;
     }
@@ -117,7 +117,7 @@ class OpenApi extends BaseObject
      */
     public function tags(Tag ...$tags): self
     {
-        $this->tags = count($tags) > 0 ? $tags : null;
+        $this->tags = $tags ?: null;
 
         return $this;
     }

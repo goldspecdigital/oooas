@@ -36,7 +36,13 @@ class PathItem extends BaseObject
      */
     public function toArray(): array
     {
-        return Arr::filter([$this->route => $this->operations]);
+        $operations = [];
+
+        foreach ($this->operations as $operation) {
+            $operations[$operation->getAction()] = $operation->toArray();
+        }
+
+        return Arr::filter([$this->route => $operations]);
     }
 
     /**
