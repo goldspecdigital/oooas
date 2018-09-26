@@ -43,7 +43,11 @@ class Operation extends BaseObject
      */
     protected $operationId;
 
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter[]|null
+     */
     protected $parameters;
+
     protected $requestBody;
     protected $responses;
 
@@ -162,6 +166,17 @@ class Operation extends BaseObject
     public function operationId(?string $operationId): self
     {
         $this->operationId = $operationId;
+
+        return $this;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter ...$parameters
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public function parameters(Parameter ...$parameters): self
+    {
+        $this->parameters = $parameters ?: null;
 
         return $this;
     }
