@@ -4,12 +4,12 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
-class Server extends BaseObject
+class Tag extends BaseObject
 {
     /**
      * @var string
      */
-    protected $url;
+    protected $name;
 
     /**
      * @var string|null
@@ -17,14 +17,14 @@ class Server extends BaseObject
     protected $description;
 
     /**
-     * @param string $url
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
+     * @param string $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
-    public static function create(string $url): self
+    public static function create(string $name): self
     {
         $instance = new static();
 
-        $instance->url = $url;
+        $instance->name = $name;
 
         return $instance;
     }
@@ -35,25 +35,25 @@ class Server extends BaseObject
     public function toArray(): array
     {
         return Arr::filter([
-            'url' => $this->url,
+            'name' => $this->name,
             'description' => $this->description,
         ]);
     }
 
     /**
-     * @param string $url
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
+     * @param string $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
-    public function url(string $url): self
+    public function name(string $name): self
     {
-        $this->url = $url;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
      * @param null|string $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
     public function description(?string $description): self
     {

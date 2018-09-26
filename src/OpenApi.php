@@ -6,6 +6,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\BaseObject;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 class OpenApi extends BaseObject
@@ -17,7 +18,6 @@ class OpenApi extends BaseObject
     protected $info;
     protected $servers;
     protected $paths;
-    protected $components;
     protected $security;
     protected $tags;
     protected $externalDocs;
@@ -49,13 +49,16 @@ class OpenApi extends BaseObject
             'info' => $this->info,
             'servers' => $this->servers,
             'paths' => $this->paths,
-            'components' => $this->components,
             'security' => $this->security,
             'tags' => $this->tags,
             'externalDocs' => $this->externalDocs,
         ]);
     }
 
+    /**
+     * @param string $version
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
     public function version(string $version): self
     {
         $this->version = $version;
@@ -63,6 +66,10 @@ class OpenApi extends BaseObject
         return $this;
     }
 
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
     public function info(?Info $info): self
     {
         $this->info = $info;
@@ -70,9 +77,46 @@ class OpenApi extends BaseObject
         return $this;
     }
 
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server ...$servers
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
     public function servers(Server ...$servers): self
     {
         $this->servers = count($servers) > 0 ? $servers : null;
+
+        return $this;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function paths(?Paths $paths): self
+    {
+        $this->paths = $paths;
+
+        return $this;
+    }
+
+    /**
+     * @param array ...$security
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function security(array ...$security): self
+    {
+        $this->security = count($security) > 0 ? $security : null;
+
+        return $this;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag ...$tags
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function tags(Tag ...$tags): self
+    {
+        $this->tags = count($tags) > 0 ? $tags : null;
 
         return $this;
     }
