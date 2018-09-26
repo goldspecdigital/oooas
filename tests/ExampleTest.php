@@ -3,6 +3,7 @@
 namespace GoldSpecDigital\ObjectOrientedOAS\Tests;
 
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
@@ -36,10 +37,14 @@ class ExampleTest extends TestCase
             Tag::create('Audits')->description('All the audits'),
         ];
 
+        $externalDocs = ExternalDocs::create('https://github.com/RoyalBoroughKingston/cwk-api/wiki')
+            ->description('GitHub Wiki');
+
         $openApi = OpenApi::create(OpenApi::VERSION_3_0_1, $info, $paths)
             ->servers(...$servers)
             ->security($security)
-            ->tags(...$tags);
+            ->tags(...$tags)
+            ->externalDocs($externalDocs);
 
         var_dump($openApi->toJson());
     }

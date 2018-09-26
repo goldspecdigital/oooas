@@ -2,6 +2,7 @@
 
 namespace GoldSpecDigital\ObjectOrientedOAS;
 
+use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\BaseObject;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
@@ -117,6 +118,17 @@ class OpenApi extends BaseObject
     public function tags(Tag ...$tags): self
     {
         $this->tags = count($tags) > 0 ? $tags : null;
+
+        return $this;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function externalDocs(?ExternalDocs $externalDocs): self
+    {
+        $this->externalDocs = $externalDocs;
 
         return $this;
     }
