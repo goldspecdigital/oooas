@@ -41,6 +41,9 @@ class Parameter extends BaseObject
      */
     protected $allowEmptyValue = false;
 
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
     protected $schema;
 
     /**
@@ -49,7 +52,7 @@ class Parameter extends BaseObject
      * @param $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function create(string $name, string $in, $schema): self
+    public static function create(string $name, string $in, Schema $schema): self
     {
         $instance = new static();
 
@@ -178,6 +181,17 @@ class Parameter extends BaseObject
     public function allowEmptyValue(bool $allowEmptyValue = true): self
     {
         $this->allowEmptyValue = $allowEmptyValue;
+
+        return $this;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     */
+    public function schema(Schema $schema): self
+    {
+        $this->schema = $schema;
 
         return $this;
     }

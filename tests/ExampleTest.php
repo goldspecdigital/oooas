@@ -6,8 +6,10 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
@@ -29,11 +31,16 @@ class ExampleTest extends TestCase
         $listAudits = Operation::create(Operation::GET)
             ->summary('List all audits')
             ->operationId('audits.index');
+
         $createAudit = Operation::create(Operation::POST)
             ->summary('Create an audit')
             ->operationId('audits.store');
+
+        $auditId = Schema::create(Schema::STRING, 'audit')->format(Schema::UUID);
+        
         $readAudit = Operation::create(Operation::GET)->summary('View an audit')
-            ->operationId('audits.show');
+            ->operationId('audits.show')
+            ->parameters(Parameter::path('audit', $auditId)->required());
 
         $paths = Paths::create(
             PathItem::create('/audits', $listAudits, $createAudit),
