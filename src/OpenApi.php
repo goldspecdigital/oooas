@@ -35,6 +35,9 @@ class OpenApi extends BaseObject
      */
     protected $paths;
 
+    /**
+     * @var array[]|null
+     */
     protected $security;
 
     /**
