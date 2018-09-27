@@ -2,6 +2,7 @@
 
 namespace GoldSpecDigital\ObjectOrientedOAS;
 
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\BaseObject;
@@ -34,6 +35,11 @@ class OpenApi extends BaseObject
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths
      */
     protected $paths;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Components|null
+     */
+    protected $components;
 
     /**
      * @var array[]|null
@@ -77,6 +83,7 @@ class OpenApi extends BaseObject
             'info' => $this->info,
             'servers' => $this->servers,
             'paths' => $this->paths,
+            'components' => $this->components,
             'security' => $this->security,
             'tags' => $this->tags,
             'externalDocs' => $this->externalDocs,
@@ -123,6 +130,17 @@ class OpenApi extends BaseObject
     public function paths(?Paths $paths): self
     {
         $this->paths = $paths;
+
+        return $this;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Components|null $components
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function components(?Components $components): self
+    {
+        $this->components = $components;
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Tests;
 
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
@@ -13,6 +14,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
@@ -80,6 +82,10 @@ class ExampleTest extends TestCase
             Server::create('https://api.example.com/v2'),
         ];
 
+        $components = Components::create()->securitySchemes(
+            SecurityScheme::oauth2('OAuth2', ['password' => ['tokenUrl' => 'https://api.example.com/oauth/authorize']])
+        );
+
         $security = ['OAuth2' => []];
 
         $externalDocs = ExternalDocs::create('https://github.com/RoyalBoroughKingston/cwk-api/wiki')
@@ -87,6 +93,7 @@ class ExampleTest extends TestCase
 
         $openApi = OpenApi::create(OpenApi::VERSION_3_0_1, $info, $paths)
             ->servers(...$servers)
+            ->components($components)
             ->security($security)
             ->tags(...$tags)
             ->externalDocs($externalDocs);
