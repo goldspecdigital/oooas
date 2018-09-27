@@ -67,14 +67,6 @@ class SecurityScheme extends BaseObject
     }
 
     /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
      * @param string $name
      * @return string
      */

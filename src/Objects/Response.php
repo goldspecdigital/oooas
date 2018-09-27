@@ -50,21 +50,13 @@ class Response extends BaseObject
     {
         $content = [];
         foreach ($this->content ?? [] as $contentItem) {
-            $content[$contentItem->getMediaType()] = $contentItem;
+            $content[$contentItem->mediaType] = $contentItem;
         }
 
         return Arr::filter([
             'description' => $this->description,
             'content' => $content ?: null,
         ]);
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode(): int
-    {
-        return $this->statusCode;
     }
 
     /**

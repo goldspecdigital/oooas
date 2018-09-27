@@ -163,7 +163,7 @@ class Operation extends BaseObject
     {
         $responses = [];
         foreach ($this->responses as $response) {
-            $responses[$response->getStatusCode()] = $response;
+            $responses[$response->statusCode] = $response;
         }
 
         return Arr::filter([
@@ -179,14 +179,6 @@ class Operation extends BaseObject
             'security' => $this->security,
             'servers' => $this->servers,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getAction(): string
-    {
-        return $this->action;
     }
 
     /**

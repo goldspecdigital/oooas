@@ -34,7 +34,7 @@ class Paths extends BaseObject
     {
         $pathItems = [];
         foreach ($this->pathItems as $pathItem) {
-            $pathItems[$pathItem->getRoute()] = $pathItem;
+            $pathItems[$pathItem->route] = $pathItem;
         }
 
         return Arr::filter($pathItems);

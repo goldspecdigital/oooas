@@ -4,6 +4,11 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string $mediaType
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example|null $example
+ */
 class MediaType extends BaseObject
 {
     const APPLICATION_JSON = 'application/json';
@@ -59,14 +64,6 @@ class MediaType extends BaseObject
             'schema' => $this->schema,
             'example' => $this->example,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getMediaType(): string
-    {
-        return $this->mediaType;
     }
 
     /**

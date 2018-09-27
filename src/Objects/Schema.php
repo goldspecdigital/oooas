@@ -247,12 +247,12 @@ class Schema extends BaseObject
     {
         $properties = [];
         foreach ($this->properties ?? [] as $property) {
-            $properties[$property->getName()] = $property->toArray();
+            $properties[$property->name] = $property->toArray();
         }
 
         $additionalProperties = [];
         foreach ($this->additionalProperties ?? [] as $additionalProperty) {
-            $additionalProperties[$additionalProperty->getName()] = $additionalProperty->toArray();
+            $additionalProperties[$additionalProperty->name] = $additionalProperty->toArray();
         }
 
         return Arr::filter([
@@ -280,14 +280,6 @@ class Schema extends BaseObject
             'maxProperties' => $this->maxProperties,
             'minProperties' => $this->minProperties,
         ]);
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getName(): ?string
-    {
-        return $this->name;
     }
 
     /**

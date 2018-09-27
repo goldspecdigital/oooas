@@ -46,7 +46,7 @@ class RequestBody extends BaseObject
     {
         $content = [];
         foreach ($this->content ?? [] as $contentItem) {
-            $content[$contentItem->getMediaType()] = $contentItem;
+            $content[$contentItem->mediaType] = $contentItem;
         }
 
         return Arr::filter([

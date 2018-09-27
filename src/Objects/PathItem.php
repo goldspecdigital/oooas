@@ -42,18 +42,10 @@ class PathItem extends BaseObject
     {
         $operations = [];
         foreach ($this->operations as $operation) {
-            $operations[$operation->getAction()] = $operation->toArray();
+            $operations[$operation->action] = $operation->toArray();
         }
 
         return Arr::filter($operations);
-    }
-
-    /**
-     * @return string
-     */
-    public function getRoute(): string
-    {
-        return $this->route;
     }
 
     /**
