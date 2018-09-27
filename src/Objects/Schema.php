@@ -592,7 +592,7 @@ class Schema extends BaseObject
      * @param bool|null $nullable
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function nullable(?bool $nullable): self
+    public function nullable(?bool $nullable = true): self
     {
         $instance = clone $this;
 
