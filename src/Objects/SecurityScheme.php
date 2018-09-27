@@ -75,9 +75,11 @@ class SecurityScheme extends BaseObject
      */
     public function name(string $name): string
     {
-        $this->name = $name;
+        $instance = clone $this;
 
-        return $this;
+        $instance->name = $name;
+
+        return $instance;
     }
 
     /**
@@ -86,9 +88,11 @@ class SecurityScheme extends BaseObject
      */
     public function type(string $type): string
     {
-        $this->type = $type;
+        $instance = clone $this;
 
-        return $this;
+        $instance->type = $type;
+
+        return $instance;
     }
 
     /**
@@ -97,8 +101,10 @@ class SecurityScheme extends BaseObject
      */
     public function flows(array $flows): string
     {
-        $this->flows = $flows;
+        $instance = clone $this;
 
-        return $this;
+        $instance->flows = $flows;
+
+        return $instance;
     }
 }

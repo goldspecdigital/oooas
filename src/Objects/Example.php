@@ -52,9 +52,11 @@ class Example extends BaseObject
      */
     public function summary(?string $summary): self
     {
-        $this->summary = $summary;
+        $instance = clone $this;
 
-        return $this;
+        $instance->summary = $summary;
+
+        return $instance;
     }
 
     /**
@@ -63,9 +65,11 @@ class Example extends BaseObject
      */
     public function description(?string $description): self
     {
-        $this->description = $description;
+        $instance = clone $this;
 
-        return $this;
+        $instance->description = $description;
+
+        return $instance;
     }
 
     /**
@@ -74,8 +78,10 @@ class Example extends BaseObject
      */
     public function value($value): self
     {
-        $this->value = $value;
+        $instance = clone $this;
 
-        return $this;
+        $instance->value = $value;
+
+        return $instance;
     }
 }

@@ -58,9 +58,11 @@ class PathItem extends BaseObject
      */
     public function route(string $route): self
     {
-        $this->route = $route;
+        $instance = clone $this;
 
-        return $this;
+        $instance->route = $route;
+
+        return $instance;
     }
 
     /**
@@ -69,8 +71,10 @@ class PathItem extends BaseObject
      */
     public function operations(Operation ...$operations): self
     {
-        $this->operations = $operations;
+        $instance = clone $this;
 
-        return $this;
+        $instance->operations = $operations;
+
+        return $instance;
     }
 }

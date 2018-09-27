@@ -46,9 +46,11 @@ class Server extends BaseObject
      */
     public function url(string $url): self
     {
-        $this->url = $url;
+        $instance = clone $this;
 
-        return $this;
+        $instance->url = $url;
+
+        return $instance;
     }
 
     /**
@@ -57,8 +59,10 @@ class Server extends BaseObject
      */
     public function description(?string $description): self
     {
-        $this->description = $description;
+        $instance = clone $this;
 
-        return $this;
+        $instance->description = $description;
+
+        return $instance;
     }
 }

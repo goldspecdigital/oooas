@@ -46,9 +46,11 @@ class Tag extends BaseObject
      */
     public function name(string $name): self
     {
-        $this->name = $name;
+        $instance = clone $this;
 
-        return $this;
+        $instance->name = $name;
+
+        return $instance;
     }
 
     /**
@@ -57,8 +59,10 @@ class Tag extends BaseObject
      */
     public function description(?string $description): self
     {
-        $this->description = $description;
+        $instance = clone $this;
 
-        return $this;
+        $instance->description = $description;
+
+        return $instance;
     }
 }

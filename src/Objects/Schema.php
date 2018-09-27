@@ -275,9 +275,11 @@ class Schema extends BaseObject
      */
     public function title(?string $title): self
     {
-        $this->title = $title;
+        $instance = clone $this;
 
-        return $this;
+        $instance->title = $title;
+
+        return $instance;
     }
 
     /**
@@ -286,9 +288,11 @@ class Schema extends BaseObject
      */
     public function description(?string $description): self
     {
-        $this->description = $description;
+        $instance = clone $this;
 
-        return $this;
+        $instance->description = $description;
+
+        return $instance;
     }
 
     /**
@@ -297,9 +301,11 @@ class Schema extends BaseObject
      */
     public function enum(...$enum): self
     {
-        $this->enum = $enum ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->enum = $enum ?: null;
+
+        return $instance;
     }
 
     /**
@@ -308,9 +314,11 @@ class Schema extends BaseObject
      */
     public function default($default): self
     {
-        $this->default = $default;
+        $instance = clone $this;
 
-        return $this;
+        $instance->default = $default;
+
+        return $instance;
     }
 
     /**
@@ -319,9 +327,11 @@ class Schema extends BaseObject
      */
     public function format(?string $format): self
     {
-        $this->format = $format;
+        $instance = clone $this;
 
-        return $this;
+        $instance->format = $format;
+
+        return $instance;
     }
 
     /**
@@ -330,9 +340,11 @@ class Schema extends BaseObject
      */
     public function type(string $type): self
     {
-        $this->type = $type;
+        $instance = clone $this;
 
-        return $this;
+        $instance->type = $type;
+
+        return $instance;
     }
 
     /**
@@ -341,9 +353,11 @@ class Schema extends BaseObject
      */
     public function items(Schema ...$items): self
     {
-        $this->items = $items ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->items = $items ?: null;
+
+        return $instance;
     }
 
     /**
@@ -352,9 +366,11 @@ class Schema extends BaseObject
      */
     public function maxItems(?int $maxItems): self
     {
-        $this->maximum = $maxItems;
+        $instance = clone $this;
 
-        return $this;
+        $instance->maximum = $maxItems;
+
+        return $instance;
     }
 
     /**
@@ -363,9 +379,11 @@ class Schema extends BaseObject
      */
     public function minItems(?int $minItems): self
     {
-        $this->maximum = $minItems;
+        $instance = clone $this;
 
-        return $this;
+        $instance->maximum = $minItems;
+
+        return $instance;
     }
 
     /**
@@ -374,9 +392,11 @@ class Schema extends BaseObject
      */
     public function uniqueItems(bool $uniqueItems = true): self
     {
-        $this->uniqueItems = $uniqueItems;
+        $instance = clone $this;
+
+        $instance->uniqueItems = $uniqueItems;
         
-        return $this;
+        return $instance;
     }
 
     /**
@@ -385,9 +405,11 @@ class Schema extends BaseObject
      */
     public function pattern(?string $pattern): self
     {
-        $this->pattern = $pattern;
+        $instance = clone $this;
 
-        return $this;
+        $instance->pattern = $pattern;
+
+        return $instance;
     }
 
     /**
@@ -396,9 +418,11 @@ class Schema extends BaseObject
      */
     public function maxLength(?int $maxLength): self
     {
-        $this->maxLength = $maxLength;
+        $instance = clone $this;
 
-        return $this;
+        $instance->maxLength = $maxLength;
+
+        return $instance;
     }
 
     /**
@@ -407,9 +431,11 @@ class Schema extends BaseObject
      */
     public function minLength(?int $minLength): self
     {
-        $this->minLength = $minLength;
+        $instance = clone $this;
 
-        return $this;
+        $instance->minLength = $minLength;
+
+        return $instance;
     }
 
     /**
@@ -418,9 +444,11 @@ class Schema extends BaseObject
      */
     public function maximum(?int $maximum): self
     {
-        $this->maximum = $maximum;
+        $instance = clone $this;
 
-        return $this;
+        $instance->maximum = $maximum;
+
+        return $instance;
     }
 
     /**
@@ -429,9 +457,11 @@ class Schema extends BaseObject
      */
     public function exclusiveMaximum(?int $exclusiveMaximum): self
     {
-        $this->exclusiveMaximum = $exclusiveMaximum;
+        $instance = clone $this;
 
-        return $this;
+        $instance->exclusiveMaximum = $exclusiveMaximum;
+
+        return $instance;
     }
 
     /**
@@ -440,9 +470,11 @@ class Schema extends BaseObject
      */
     public function minimum(?int $minimum): self
     {
-        $this->minimum = $minimum;
+        $instance = clone $this;
 
-        return $this;
+        $instance->minimum = $minimum;
+
+        return $instance;
     }
 
     /**
@@ -451,9 +483,11 @@ class Schema extends BaseObject
      */
     public function exclusiveMinimum(?int $exclusiveMinimum): self
     {
-        $this->exclusiveMinimum = $exclusiveMinimum;
+        $instance = clone $this;
 
-        return $this;
+        $instance->exclusiveMinimum = $exclusiveMinimum;
+
+        return $instance;
     }
 
     /**
@@ -462,9 +496,11 @@ class Schema extends BaseObject
      */
     public function multipleOf(?int $multipleOf): self
     {
-        $this->multipleOf = $multipleOf;
+        $instance = clone $this;
 
-        return $this;
+        $instance->multipleOf = $multipleOf;
+
+        return $instance;
     }
 
     /**
@@ -473,9 +509,11 @@ class Schema extends BaseObject
      */
     public function required(string ...$required): self
     {
-        $this->required = $required ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->required = $required ?: null;
+
+        return $instance;
     }
 
     /**
@@ -484,9 +522,11 @@ class Schema extends BaseObject
      */
     public function properties(Schema ...$properties): self
     {
-        $this->properties = $properties ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->properties = $properties ?: null;
+
+        return $instance;
     }
 
     /**
@@ -495,9 +535,11 @@ class Schema extends BaseObject
      */
     public function additionalProperties(Schema ...$additionalProperties): self
     {
-        $this->additionalProperties = $additionalProperties ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->additionalProperties = $additionalProperties ?: null;
+
+        return $instance;
     }
 
     /**
@@ -506,9 +548,11 @@ class Schema extends BaseObject
      */
     public function maxProperties(?int $maxProperties): self
     {
-        $this->maxProperties = $maxProperties;
+        $instance = clone $this;
 
-        return $this;
+        $instance->maxProperties = $maxProperties;
+
+        return $instance;
     }
 
     /**
@@ -517,8 +561,10 @@ class Schema extends BaseObject
      */
     public function minProperties(?int $minProperties): self
     {
-        $this->minProperties = $minProperties;
+        $instance = clone $this;
 
-        return $this;
+        $instance->minProperties = $minProperties;
+
+        return $instance;
     }
 }

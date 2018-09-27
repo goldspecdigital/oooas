@@ -68,9 +68,11 @@ class Response extends BaseObject
      */
     public function statusCode(int $statusCode): self
     {
-        $this->statusCode = $statusCode;
+        $instance = clone $this;
 
-        return $this;
+        $instance->statusCode = $statusCode;
+
+        return $instance;
     }
 
     /**
@@ -79,9 +81,11 @@ class Response extends BaseObject
      */
     public function description(?string $description): self
     {
-        $this->description = $description;
+        $instance = clone $this;
 
-        return $this;
+        $instance->description = $description;
+
+        return $instance;
     }
 
     /**
@@ -90,8 +94,10 @@ class Response extends BaseObject
      */
     public function content(MediaType ...$content): self
     {
-        $this->content = $content ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->content = $content ?: null;
+
+        return $instance;
     }
 }

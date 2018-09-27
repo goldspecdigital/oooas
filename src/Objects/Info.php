@@ -72,9 +72,11 @@ class Info extends BaseObject
      */
     public function title(string $title): self
     {
-        $this->title = $title;
+        $instance = clone $this;
 
-        return $this;
+        $instance->title = $title;
+
+        return $instance;
     }
 
     /**
@@ -83,9 +85,11 @@ class Info extends BaseObject
      */
     public function description(?string $description): self
     {
-        $this->description = $description;
+        $instance = clone $this;
 
-        return $this;
+        $instance->description = $description;
+
+        return $instance;
     }
 
     /**
@@ -94,9 +98,11 @@ class Info extends BaseObject
      */
     public function termsOfService(?string $termsOfService): self
     {
-        $this->termsOfService = $termsOfService;
+        $instance = clone $this;
 
-        return $this;
+        $instance->termsOfService = $termsOfService;
+
+        return $instance;
     }
 
     /**
@@ -105,9 +111,11 @@ class Info extends BaseObject
      */
     public function contact(?Contact $contact): self
     {
-        $this->contact = $contact;
+        $instance = clone $this;
 
-        return $this;
+        $instance->contact = $contact;
+
+        return $instance;
     }
 
     /**
@@ -116,9 +124,11 @@ class Info extends BaseObject
      */
     public function license(?License $license): self
     {
-        $this->license = $license;
+        $instance = clone $this;
 
-        return $this;
+        $instance->license = $license;
+
+        return $instance;
     }
 
     /**
@@ -127,8 +137,10 @@ class Info extends BaseObject
      */
     public function version(string $version): self
     {
-        $this->version = $version;
+        $instance = clone $this;
 
-        return $this;
+        $instance->version = $version;
+
+        return $instance;
     }
 }

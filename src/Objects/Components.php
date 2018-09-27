@@ -40,8 +40,10 @@ class Components extends BaseObject
      */
     public function securitySchemes(SecurityScheme ...$securitySchemes): self
     {
-        $this->securitySchemes = $securitySchemes ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->securitySchemes = $securitySchemes ?: null;
+
+        return $instance;
     }
 }

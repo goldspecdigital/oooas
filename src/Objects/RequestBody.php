@@ -57,9 +57,11 @@ class RequestBody extends BaseObject
      */
     public function description(?string $description): self
     {
-        $this->description = $description;
+        $instance = clone $this;
 
-        return $this;
+        $instance->description = $description;
+
+        return $instance;
     }
 
     /**
@@ -68,9 +70,11 @@ class RequestBody extends BaseObject
      */
     public function content(MediaType ...$content): self
     {
-        $this->content = count($content) > 1 ? $content : null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->content = count($content) > 1 ? $content : null;
+
+        return $instance;
     }
 
     /**
@@ -79,8 +83,10 @@ class RequestBody extends BaseObject
      */
     public function required(bool $required = true): self
     {
-        $this->required = $required;
+        $instance = clone $this;
 
-        return $this;
+        $instance->required = $required;
+
+        return $instance;
     }
 }

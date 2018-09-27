@@ -75,9 +75,11 @@ class MediaType extends BaseObject
      */
     public function mediaType(string $mediaType): self
     {
-        $this->mediaType = $mediaType;
+        $instance = clone $this;
 
-        return $this;
+        $instance->mediaType = $mediaType;
+
+        return $instance;
     }
 
     /**
@@ -86,8 +88,10 @@ class MediaType extends BaseObject
      */
     public function schema(Schema $schema): self
     {
-        $this->schema = $schema;
+        $instance = clone $this;
 
-        return $this;
+        $instance->schema = $schema;
+
+        return $instance;
     }
 }

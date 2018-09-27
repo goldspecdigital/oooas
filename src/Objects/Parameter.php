@@ -125,9 +125,11 @@ class Parameter extends BaseObject
      */
     public function name(string $name): self
     {
-        $this->name = $name;
+        $instance = clone $this;
 
-        return $this;
+        $instance->name = $name;
+
+        return $instance;
     }
 
     /**
@@ -136,9 +138,11 @@ class Parameter extends BaseObject
      */
     public function in(string $in): self
     {
-        $this->in = $in;
+        $instance = clone $this;
 
-        return $this;
+        $instance->in = $in;
+
+        return $instance;
     }
 
     /**
@@ -147,9 +151,11 @@ class Parameter extends BaseObject
      */
     public function description(?string $description): self
     {
-        $this->description = $description;
+        $instance = clone $this;
 
-        return $this;
+        $instance->description = $description;
+
+        return $instance;
     }
 
     /**
@@ -158,9 +164,11 @@ class Parameter extends BaseObject
      */
     public function required(bool $required = true): self
     {
-        $this->required = $required;
+        $instance = clone $this;
 
-        return $this;
+        $instance->required = $required;
+
+        return $instance;
     }
 
     /**
@@ -169,9 +177,11 @@ class Parameter extends BaseObject
      */
     public function deprecated(bool $deprecated = true): self
     {
-        $this->deprecated = $deprecated;
+        $instance = clone $this;
 
-        return $this;
+        $instance->deprecated = $deprecated;
+
+        return $instance;
     }
 
     /**
@@ -180,9 +190,11 @@ class Parameter extends BaseObject
      */
     public function allowEmptyValue(bool $allowEmptyValue = true): self
     {
-        $this->allowEmptyValue = $allowEmptyValue;
+        $instance = clone $this;
 
-        return $this;
+        $instance->allowEmptyValue = $allowEmptyValue;
+
+        return $instance;
     }
 
     /**
@@ -191,8 +203,10 @@ class Parameter extends BaseObject
      */
     public function schema(Schema $schema): self
     {
-        $this->schema = $schema;
+        $instance = clone $this;
 
-        return $this;
+        $instance->schema = $schema;
+
+        return $instance;
     }
 }

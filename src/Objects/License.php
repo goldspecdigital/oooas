@@ -46,9 +46,11 @@ class License extends BaseObject
      */
     public function name(string $name): self
     {
-        $this->name = $name;
+        $instance = clone $this;
 
-        return $this;
+        $instance->name = $name;
+
+        return $instance;
     }
 
     /**
@@ -57,8 +59,10 @@ class License extends BaseObject
      */
     public function url(?string $url): self
     {
-        $this->url = $url;
+        $instance = clone $this;
 
-        return $this;
+        $instance->url = $url;
+
+        return $instance;
     }
 }

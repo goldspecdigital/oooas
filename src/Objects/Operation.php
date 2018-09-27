@@ -178,9 +178,11 @@ class Operation extends BaseObject
      */
     public function action(string $action): self
     {
-        $this->action = $action;
+        $instance = clone $this;
 
-        return $this;
+        $instance->action = $action;
+
+        return $instance;
     }
 
     /**
@@ -189,9 +191,11 @@ class Operation extends BaseObject
      */
     public function tags(string ...$tags): self
     {
-        $this->tags = $tags ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->tags = $tags ?: null;
+
+        return $instance;
     }
 
     /**
@@ -200,9 +204,11 @@ class Operation extends BaseObject
      */
     public function summary(?string $summary): self
     {
-        $this->summary = $summary;
+        $instance = clone $this;
 
-        return $this;
+        $instance->summary = $summary;
+
+        return $instance;
     }
 
     /**
@@ -211,9 +217,11 @@ class Operation extends BaseObject
      */
     public function description(?string $description): self
     {
-        $this->description = $description;
+        $instance = clone $this;
 
-        return $this;
+        $instance->description = $description;
+
+        return $instance;
     }
 
     /**
@@ -222,9 +230,11 @@ class Operation extends BaseObject
      */
     public function externalDocs(?ExternalDocs $externalDocs): self
     {
-        $this->externalDocs = $externalDocs;
+        $instance = clone $this;
 
-        return $this;
+        $instance->externalDocs = $externalDocs;
+
+        return $instance;
     }
 
     /**
@@ -233,9 +243,11 @@ class Operation extends BaseObject
      */
     public function operationId(?string $operationId): self
     {
-        $this->operationId = $operationId;
+        $instance = clone $this;
 
-        return $this;
+        $instance->operationId = $operationId;
+
+        return $instance;
     }
 
     /**
@@ -244,9 +256,11 @@ class Operation extends BaseObject
      */
     public function parameters(Parameter ...$parameters): self
     {
-        $this->parameters = $parameters ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->parameters = $parameters ?: null;
+
+        return $instance;
     }
 
     /**
@@ -255,9 +269,11 @@ class Operation extends BaseObject
      */
     public function requestBody(?RequestBody $requestBody): self
     {
-        $this->requestBody = $requestBody;
+        $instance = clone $this;
 
-        return $this;
+        $instance->requestBody = $requestBody;
+
+        return $instance;
     }
 
     /**
@@ -266,9 +282,11 @@ class Operation extends BaseObject
      */
     public function responses(Response ...$responses): self
     {
-        $this->responses = $responses;
+        $instance = clone $this;
 
-        return $this;
+        $instance->responses = $responses;
+
+        return $instance;
     }
 
     /**
@@ -277,9 +295,11 @@ class Operation extends BaseObject
      */
     public function deprecated(bool $deprecated = true): self
     {
-        $this->deprecated = $deprecated;
+        $instance = clone $this;
 
-        return $this;
+        $instance->deprecated = $deprecated;
+
+        return $instance;
     }
 
     /**
@@ -288,8 +308,10 @@ class Operation extends BaseObject
      */
     public function servers(Server ...$servers): self
     {
-        $this->servers = $servers ?: null;
+        $instance = clone $this;
 
-        return $this;
+        $instance->servers = $servers ?: null;
+
+        return $instance;
     }
 }
