@@ -23,7 +23,8 @@ class Operation extends BaseObject
     const GET = 'get';
     const PUT = 'put';
     const POST = 'post';
-    const DELETE = 'options';
+    const DELETE = 'delete';
+    const OPTIONS = 'options';
     const HEAD = 'head';
     const PATCH = 'patch';
 
