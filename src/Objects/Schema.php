@@ -268,7 +268,7 @@ class Schema extends BaseObject
             'default' => $this->default,
             'format' => $this->format,
             'type' => $this->type,
-            'items' => $this->items,
+            'items' => $this->items ? ['allOf' => $this->items] : null,
             'maxItems' => $this->maxItems,
             'minItems' => $this->minItems,
             'uniqueItems' => $this->uniqueItems,

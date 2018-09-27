@@ -39,7 +39,10 @@ class ExampleTest extends TestCase
 
         $exampleObject = Schema::object()->properties(
             Schema::string('id')->format(Schema::UUID),
-            Schema::string('created_at')->format(Schema::DATE_TIME)
+            Schema::string('created_at')->format(Schema::DATE_TIME),
+            Schema::array('data')->items(
+                Schema::string('id')->format(Schema::UUID)
+            )
         )->required('id', 'created_at');
         $exampleResponse = Response::create(
             200,
