@@ -25,6 +25,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property int|null $maxProperties
  * @property int|null $minProperties
  * @property boolean|null $nullable
+ * @property mixed $example
  */
 class Schema extends BaseObject
 {
@@ -178,6 +179,11 @@ class Schema extends BaseObject
     protected $nullable;
 
     /**
+     * @var mixed
+     */
+    protected $example;
+
+    /**
      * @param string $type
      * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
@@ -286,6 +292,7 @@ class Schema extends BaseObject
             'maxProperties' => $this->maxProperties,
             'minProperties' => $this->minProperties,
             'nullable' => $this->nullable,
+            'example' => $this->example,
         ]);
     }
 
@@ -597,6 +604,19 @@ class Schema extends BaseObject
         $instance = clone $this;
 
         $instance->nullable = $nullable;
+
+        return $instance;
+    }
+
+    /**
+     * @param mixed $example
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function example($example): self
+    {
+        $instance = clone $this;
+
+        $instance->example = $example;
 
         return $instance;
     }

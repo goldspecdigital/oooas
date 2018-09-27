@@ -40,6 +40,7 @@ class ExampleTest extends TestCase
         $exampleObject = Schema::object()->properties(
             Schema::string('id')->format(Schema::UUID),
             Schema::string('created_at')->format(Schema::DATE_TIME),
+            Schema::integer('age')->example(60),
             Schema::array('data')->items(
                 Schema::string('id')->format(Schema::UUID)
             )
