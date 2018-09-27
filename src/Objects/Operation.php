@@ -53,6 +53,9 @@ class Operation extends BaseObject
      */
     protected $requestBody;
 
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[]|null
+     */
     protected $responses;
 
     /**
@@ -69,63 +72,71 @@ class Operation extends BaseObject
 
     /**
      * @param string $action
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function create(string $action): self
+    public static function create(string $action, Response ...$responses): self
     {
         $instance = new static();
 
         $instance->action = $action;
+        $instance->responses = $responses;
 
         return $instance;
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function get(): self
+    public static function get(Response ...$responses): self
     {
-        return static::create(static::GET);
+        return static::create(static::GET, ...$responses);
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function put(): self
+    public static function put(Response ...$responses): self
     {
-        return static::create(static::PUT);
+        return static::create(static::PUT, ...$responses);
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function post(): self
+    public static function post(Response ...$responses): self
     {
-        return static::create(static::POST);
+        return static::create(static::POST, ...$responses);
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function delete(): self
+    public static function delete(Response ...$responses): self
     {
-        return static::create(static::DELETE);
+        return static::create(static::DELETE, ...$responses);
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function head(): self
+    public static function head(Response ...$responses): self
     {
-        return static::create(static::HEAD);
+        return static::create(static::HEAD, ...$responses);
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function patch(): self
+    public static function patch(Response ...$responses): self
     {
-        return static::create(static::PATCH);
+        return static::create(static::PATCH, ...$responses);
     }
 
     /**
@@ -133,6 +144,11 @@ class Operation extends BaseObject
      */
     public function toArray(): array
     {
+        $responses = [];
+        foreach ($this->responses as $response) {
+            $responses[$response->getStatusCode()] = $response;
+        }
+
         return Arr::filter([
             'tags' => $this->tags,
             'summary' => $this->summary,
@@ -141,7 +157,7 @@ class Operation extends BaseObject
             'operationId' => $this->operationId,
             'parameters' => $this->parameters,
             'requestBody' => $this->requestBody,
-            'responses' => $this->responses,
+            'responses' => $responses,
             'deprecated' => $this->deprecated,
             'security' => $this->security,
             'servers' => $this->servers,
@@ -240,6 +256,17 @@ class Operation extends BaseObject
     public function requestBody(?RequestBody $requestBody): self
     {
         $this->requestBody = $requestBody;
+
+        return $this;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response ...$responses
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public function responses(Response ...$responses): self
+    {
+        $this->responses = $responses;
 
         return $this;
     }

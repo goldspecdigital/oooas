@@ -126,7 +126,7 @@ class Schema extends BaseObject
     protected $multipleOf;
 
     /**
-     * @var bool|null
+     * @var string[]|null
      */
     protected $required;
 
@@ -468,12 +468,12 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param bool $required
+     * @param string[] $required
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function required(bool $required = true): self
+    public function required(string ...$required): self
     {
-        $this->required = $required;
+        $this->required = $required ?: null;
 
         return $this;
     }

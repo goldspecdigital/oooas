@@ -11,6 +11,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
@@ -34,30 +35,33 @@ class ExampleTest extends TestCase
             ->description('For using the Core Example App API')
             ->contact($contact);
 
-        $listAudits = Operation::get()
+        $exampleObject = Schema::object()->properties(
+            Schema::string('id')->format(Schema::UUID),
+            Schema::string('created_at')->format(Schema::DATE_TIME)
+        )->required('id', 'created_at');
+        $exampleResponse = Response::create(
+            200,
+            'OK',
+            MediaType::json($exampleObject)
+        );
+
+        $listAudits = Operation::get($exampleResponse)
             ->tags('Audits')
             ->summary('List all audits')
             ->operationId('audits.index');
 
-        $createAudit = Operation::post()
+        $createAudit = Operation::post($exampleResponse)
             ->tags('Audits')
             ->summary('Create an audit')
             ->operationId('audits.store')
-            ->requestBody(
-                RequestBody::create(
-                    MediaType::json(
-                        Schema::object()->properties(
-                            Schema::string('id')->format(Schema::UUID),
-                            Schema::string('created_at')->format(Schema::DATE_TIME)
-                        )
-                    )
-                )
-            );
+            ->requestBody(RequestBody::create(
+                MediaType::json($exampleObject)
+            ));
 
         $auditId = Schema::string('audit')->format(Schema::UUID);
         $format = Schema::string('format')->enum('json', 'ics')->default('json');
         
-        $readAudit = Operation::get()
+        $readAudit = Operation::get($exampleResponse)
             ->tags('Audits')
             ->summary('View an audit')
             ->operationId('audits.show')
