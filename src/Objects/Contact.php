@@ -4,6 +4,11 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string $name
+ * @property string $url
+ * @property string $email
+ */
 class Contact extends BaseObject
 {
     /**

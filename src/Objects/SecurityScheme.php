@@ -4,6 +4,11 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string $name
+ * @property string $type
+ * @property array $flows
+ */
 class SecurityScheme extends BaseObject
 {
     const OAUTH2 = 'oauth2';

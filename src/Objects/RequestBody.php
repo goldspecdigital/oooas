@@ -4,6 +4,11 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string|null $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+ * @property bool|null $required
+ */
 class RequestBody extends BaseObject
 {
     /**

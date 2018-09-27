@@ -4,6 +4,11 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property int $statusCode
+ * @property string $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+ */
 class Response extends BaseObject
 {
     /**

@@ -2,6 +2,7 @@
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException;
 use JsonSerializable;
 
 abstract class BaseObject implements JsonSerializable
@@ -35,5 +36,19 @@ abstract class BaseObject implements JsonSerializable
     public function jsonSerialize(): array
     {
         return $this->toArray();
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException
+     */
+    public function __get(string $name)
+    {
+        if (isset($this->$name)) {
+            return $this->$name;
+        }
+
+        throw new PropertyDoesNotExistException();
     }
 }

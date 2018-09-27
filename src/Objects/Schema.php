@@ -4,6 +4,27 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string|null $format
+ * @property string $type
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $items
+ * @property int|null $maxItems
+ * @property int|null $minItems
+ * @property bool|null $uniqueItems
+ * @property string|null $pattern
+ * @property int|null $maxLength
+ * @property int|null $minLength
+ * @property int|null $maximum
+ * @property int|null $exclusiveMaximum
+ * @property int|null $minimum
+ * @property int|null $exclusiveMinimum
+ * @property int|null $multipleOf
+ * @property string[]|null $required
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $properties
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $additionalProperties
+ * @property int|null $maxProperties
+ * @property int|null $minProperties
+ */
 class Schema extends BaseObject
 {
     /*

@@ -4,6 +4,10 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string $url
+ * @property string|null $description
+ */
 class Server extends BaseObject
 {
     /**

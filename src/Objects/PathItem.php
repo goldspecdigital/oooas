@@ -4,6 +4,10 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string $route
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation[] $operations
+ */
 class PathItem extends BaseObject
 {
     /**

@@ -4,6 +4,10 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string $name
+ * @property string|null $url
+ */
 class License extends BaseObject
 {
     /**

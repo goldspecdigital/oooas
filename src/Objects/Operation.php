@@ -4,6 +4,20 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string $action
+ * @property string[]|null $tags
+ * @property string|null $summary
+ * @property string|null $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
+ * @property string|null $operationId
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter[]|null $parameters
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody|null $requestBody
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[]|null $responses
+ * @property bool|null $deprecated
+ * @property array|null $security;
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
+ */
 class Operation extends BaseObject
 {
     const GET = 'get';
@@ -63,6 +77,9 @@ class Operation extends BaseObject
      */
     protected $deprecated;
 
+    /**
+     * @var array|null
+     */
     protected $security;
 
     /**
@@ -298,6 +315,19 @@ class Operation extends BaseObject
         $instance = clone $this;
 
         $instance->deprecated = $deprecated;
+
+        return $instance;
+    }
+
+    /**
+     * @param array|null $security
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public function security(?array $security): self
+    {
+        $instance = clone $this;
+
+        $instance->security = $security;
 
         return $instance;
     }

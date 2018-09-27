@@ -4,6 +4,9 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $pathItems
+ */
 class Paths extends BaseObject
 {
     /**

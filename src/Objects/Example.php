@@ -4,6 +4,11 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string|null $summary
+ * @property string|null $description
+ * @property mixed $value
+ */
 class Example extends BaseObject
 {
     /**

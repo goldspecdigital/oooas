@@ -4,6 +4,15 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string $name
+ * @property string $in
+ * @property string|null $description
+ * @property bool|null $required
+ * @property bool|null $deprecated
+ * @property bool|null $allowEmptyValue
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+ */
 class Parameter extends BaseObject
 {
     const QUERY = 'query';

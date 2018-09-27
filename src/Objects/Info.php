@@ -4,6 +4,14 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string $title
+ * @property string|null $description
+ * @property string|null $termsOfService
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact|null $contact
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\License|null $license
+ * @property string $version
+ */
 class Info extends BaseObject
 {
     /**

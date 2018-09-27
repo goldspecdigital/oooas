@@ -4,6 +4,10 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string|null $description
+ * @property string $url
+ */
 class ExternalDocs extends BaseObject
 {
     /**
