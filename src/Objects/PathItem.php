@@ -37,7 +37,6 @@ class PathItem extends BaseObject
     public function toArray(): array
     {
         $operations = [];
-
         foreach ($this->operations as $operation) {
             $operations[$operation->getAction()] = $operation->toArray();
         }

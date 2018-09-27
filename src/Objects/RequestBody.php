@@ -12,7 +12,7 @@ class RequestBody extends BaseObject
     protected $description;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]
      */
     protected $content;
 
@@ -22,10 +22,10 @@ class RequestBody extends BaseObject
     protected $required;
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType $content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
-    public static function create(MediaType $content): self
+    public static function create(MediaType ...$content): self
     {
         $instance = new static();
 
@@ -39,9 +39,14 @@ class RequestBody extends BaseObject
      */
     public function toArray(): array
     {
+        $content = [];
+        foreach ($this->content ?? [] as $contentItem) {
+            $content[$contentItem->getMediaType()] = $contentItem;
+        }
+
         return Arr::filter([
             'description' => $this->description,
-            'content' => [$this->content->getMediaType() => $this->content],
+            'content' => $content ?: null,
             'required' => $this->required,
         ]);
     }
@@ -58,12 +63,12 @@ class RequestBody extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType $content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
-    public function content(MediaType $content): self
+    public function content(MediaType ...$content): self
     {
-        $this->content = $content;
+        $this->content = count($content) > 1 ? $content : null;
 
         return $this;
     }
