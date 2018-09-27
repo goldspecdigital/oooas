@@ -48,13 +48,17 @@ class Operation extends BaseObject
      */
     protected $parameters;
 
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody|null
+     */
     protected $requestBody;
+
     protected $responses;
 
     /**
-     * @var bool
+     * @var bool|null
      */
-    protected $deprecated = false;
+    protected $deprecated;
 
     protected $security;
 
@@ -74,6 +78,54 @@ class Operation extends BaseObject
         $instance->action = $action;
 
         return $instance;
+    }
+
+    /**
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function get(): self
+    {
+        return static::create(static::GET);
+    }
+
+    /**
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function put(): self
+    {
+        return static::create(static::PUT);
+    }
+
+    /**
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function post(): self
+    {
+        return static::create(static::POST);
+    }
+
+    /**
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function delete(): self
+    {
+        return static::create(static::DELETE);
+    }
+
+    /**
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function head(): self
+    {
+        return static::create(static::HEAD);
+    }
+
+    /**
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function patch(): self
+    {
+        return static::create(static::PATCH);
     }
 
     /**
@@ -116,10 +168,10 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag ...$tags
+     * @param string ...$tags
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public function tags(Tag ...$tags): self
+    public function tags(string ...$tags): self
     {
         $this->tags = $tags ?: null;
 
@@ -177,6 +229,17 @@ class Operation extends BaseObject
     public function parameters(Parameter ...$parameters): self
     {
         $this->parameters = $parameters ?: null;
+
+        return $this;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody|null $requestBody
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public function requestBody(?RequestBody $requestBody): self
+    {
+        $this->requestBody = $requestBody;
 
         return $this;
     }

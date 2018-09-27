@@ -27,19 +27,19 @@ class Parameter extends BaseObject
     protected $description;
 
     /**
-     * @var bool
+     * @var bool|null
      */
-    protected $required = false;
+    protected $required;
 
     /**
-     * @var bool
+     * @var bool|null
      */
-    protected $deprecated = false;
+    protected $deprecated;
 
     /**
-     * @var bool
+     * @var bool|null
      */
-    protected $allowEmptyValue = false;
+    protected $allowEmptyValue;
 
     /**
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema

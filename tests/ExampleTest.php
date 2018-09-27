@@ -5,10 +5,12 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Tests;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
@@ -18,6 +20,10 @@ class ExampleTest extends TestCase
 {
     public function test_example()
     {
+        $tags = [
+            Tag::create('Audits')->description('All the audits'),
+        ];
+
         $contact = Contact::create(
             'Ayup Digital',
             'https://ayup.agency',
@@ -28,19 +34,37 @@ class ExampleTest extends TestCase
             ->description('For using the Core Example App API')
             ->contact($contact);
 
-        $listAudits = Operation::create(Operation::GET)
+        $listAudits = Operation::get()
+            ->tags('Audits')
             ->summary('List all audits')
             ->operationId('audits.index');
 
-        $createAudit = Operation::create(Operation::POST)
+        $createAudit = Operation::post()
+            ->tags('Audits')
             ->summary('Create an audit')
-            ->operationId('audits.store');
+            ->operationId('audits.store')
+            ->requestBody(
+                RequestBody::create(
+                    MediaType::json(
+                        Schema::object()->properties(
+                            Schema::string('id')->format(Schema::UUID),
+                            Schema::string('created_at')->format(Schema::DATE_TIME)
+                        )
+                    )
+                )
+            );
 
-        $auditId = Schema::create(Schema::STRING, 'audit')->format(Schema::UUID);
+        $auditId = Schema::string('audit')->format(Schema::UUID);
+        $format = Schema::string('format')->enum('json', 'ics')->default('json');
         
-        $readAudit = Operation::create(Operation::GET)->summary('View an audit')
+        $readAudit = Operation::get()
+            ->tags('Audits')
+            ->summary('View an audit')
             ->operationId('audits.show')
-            ->parameters(Parameter::path('audit', $auditId)->required());
+            ->parameters(
+                Parameter::path('audit', $auditId)->required(),
+                Parameter::query('format', $format)->description('The format of the appointments')
+            );
 
         $paths = Paths::create(
             PathItem::create('/audits', $listAudits, $createAudit),
@@ -53,10 +77,6 @@ class ExampleTest extends TestCase
         ];
 
         $security = ['OAuth2' => []];
-
-        $tags = [
-            Tag::create('Audits')->description('All the audits'),
-        ];
 
         $externalDocs = ExternalDocs::create('https://github.com/RoyalBoroughKingston/cwk-api/wiki')
             ->description('GitHub Wiki');

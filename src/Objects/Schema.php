@@ -81,9 +81,9 @@ class Schema extends BaseObject
     protected $minItems;
 
     /**
-     * @var bool
+     * @var bool|null
      */
-    protected $uniqueItems = false;
+    protected $uniqueItems;
 
     /**
      * @var string|null
@@ -126,9 +126,9 @@ class Schema extends BaseObject
     protected $multipleOf;
 
     /**
-     * @var bool
+     * @var bool|null
      */
-    protected $required = false;
+    protected $required;
 
     /**
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null
@@ -169,9 +169,54 @@ class Schema extends BaseObject
      * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
+    public static function array(string $name = null): self
+    {
+        return static::create(static::ARRAY, $name);
+    }
+
+    /**
+     * @param string|null $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public static function boolean(string $name = null): self
+    {
+        return static::create(static::BOOLEAN, $name);
+    }
+
+    /**
+     * @param string|null $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public static function integer(string $name = null): self
+    {
+        return static::create(static::INTEGER, $name);
+    }
+
+    /**
+     * @param string|null $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public static function number(string $name = null): self
+    {
+        return static::create(static::NUMBER, $name);
+    }
+
+    /**
+     * @param string|null $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
     public static function object(string $name = null): self
     {
         return static::create(static::OBJECT, $name);
+    }
+
+    /**
+     * @param string|null $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public static function string(string $name = null): self
+    {
+        return static::create(static::STRING, $name);
     }
 
     /**

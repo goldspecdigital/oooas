@@ -29,6 +29,12 @@ class Paths extends BaseObject
      */
     public function toArray(): array
     {
-        return Arr::filter($this->pathItems);
+        $pathItems = [];
+
+        foreach ($this->pathItems as $index => $pathItem) {
+            $pathItems[$pathItem->getRoute()] = $pathItem;
+        }
+
+        return Arr::filter($pathItems);
     }
 }

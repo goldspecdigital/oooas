@@ -46,7 +46,7 @@ class OpenApi extends BaseObject
     public function toArray(): array
     {
         return Arr::filter([
-            'version' => $this->version,
+            'openapi' => $this->version,
             'info' => $this->info,
             'servers' => $this->servers,
             'paths' => $this->paths,
@@ -79,7 +79,7 @@ class OpenApi extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server ...$servers
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[] $servers
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
     public function servers(Server ...$servers): self

@@ -18,7 +18,7 @@ class PathItem extends BaseObject
 
     /**
      * @param string $route
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation ...$operations
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation[] $operations
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
      */
     public static function create(string $route, Operation ...$operations): self
@@ -42,7 +42,15 @@ class PathItem extends BaseObject
             $operations[$operation->getAction()] = $operation->toArray();
         }
 
-        return Arr::filter([$this->route => $operations]);
+        return Arr::filter($operations);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoute(): string
+    {
+        return $this->route;
     }
 
     /**
