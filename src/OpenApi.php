@@ -15,12 +15,36 @@ class OpenApi extends BaseObject
     const VERSION_3_0_0 = '3.0.0';
     const VERSION_3_0_1 = '3.0.1';
 
+    /**
+     * @var string
+     */
     protected $version;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
+     */
     protected $info;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null
+     */
     protected $servers;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths
+     */
     protected $paths;
+
     protected $security;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[]|null
+     */
     protected $tags;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null
+     */
     protected $externalDocs;
 
     /**
