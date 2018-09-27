@@ -297,6 +297,19 @@ class Schema extends BaseObject
     }
 
     /**
+     * @param string $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function name(string $name): self
+    {
+        $instance = clone $this;
+
+        $instance->name = $name;
+
+        return $instance;
+    }
+
+    /**
      * @param null|string $title
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
