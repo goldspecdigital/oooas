@@ -24,6 +24,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $additionalProperties
  * @property int|null $maxProperties
  * @property int|null $minProperties
+ * @property boolean|null $nullable
  */
 class Schema extends BaseObject
 {
@@ -172,6 +173,11 @@ class Schema extends BaseObject
     protected $minProperties;
 
     /**
+     * @var boolean|null
+     */
+    protected $nullable;
+
+    /**
      * @param string $type
      * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
@@ -279,6 +285,7 @@ class Schema extends BaseObject
             'additionalProperties' => $additionalProperties ?: null,
             'maxProperties' => $this->maxProperties,
             'minProperties' => $this->minProperties,
+            'nullable' => $this->nullable,
         ]);
     }
 
@@ -577,6 +584,19 @@ class Schema extends BaseObject
         $instance = clone $this;
 
         $instance->minProperties = $minProperties;
+
+        return $instance;
+    }
+
+    /**
+     * @param bool|null $nullable
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function nullable(?bool $nullable): self
+    {
+        $instance = clone $this;
+
+        $instance->nullable = $nullable;
 
         return $instance;
     }
