@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://svgshare.com/i/D7e.svg" style="width: 100%; max-width: 400px;">
+    <img src="https://svgshare.com/i/D7e.svg" width="400px">
 </p>
 
 <p align="center">
