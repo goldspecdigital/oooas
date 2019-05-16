@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
@@ -23,6 +25,19 @@ class Components extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme[] $securitySchemes
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     */
+    public function securitySchemes(SecurityScheme ...$securitySchemes): self
+    {
+        $instance = clone $this;
+
+        $instance->securitySchemes = $securitySchemes ?: null;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
@@ -35,18 +50,5 @@ class Components extends BaseObject
         return Arr::filter([
             'securitySchemes' => $securitySchemes,
         ]);
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme ...$securitySchemes
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
-     */
-    public function securitySchemes(SecurityScheme ...$securitySchemes): self
-    {
-        $instance = clone $this;
-
-        $instance->securitySchemes = $securitySchemes ?: null;
-
-        return $instance;
     }
 }

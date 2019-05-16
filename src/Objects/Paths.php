@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $pathItems
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null $pathItems
  */
 class Paths extends BaseObject
 {
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null
      */
     protected $pathItems;
 
@@ -22,7 +24,20 @@ class Paths extends BaseObject
     {
         $instance = new static();
 
-        $instance->pathItems = $pathItem;
+        $instance->pathItems = $pathItem ?: null;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $pathItem
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths
+     */
+    public function pathItems(PathItem ...$pathItem): self
+    {
+        $instance = clone $this;
+
+        $instance->pathItems = $pathItem ?: null;
 
         return $instance;
     }

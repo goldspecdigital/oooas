@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $name
+ * @property string|null $name
  * @property string|null $description
  */
 class Tag extends BaseObject
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
@@ -21,10 +23,10 @@ class Tag extends BaseObject
     protected $description;
 
     /**
-     * @param string $name
+     * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
-    public static function create(string $name): self
+    public static function create(string $name = null): self
     {
         $instance = new static();
 
@@ -34,21 +36,10 @@ class Tag extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'name' => $this->name,
-            'description' => $this->description,
-        ]);
-    }
-
-    /**
-     * @param string $name
+     * @param null|string $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
-    public function name(string $name): self
+    public function name(?string $name): self
     {
         $instance = clone $this;
 
@@ -68,5 +59,16 @@ class Tag extends BaseObject
         $instance->description = $description;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'name' => $this->name,
+            'description' => $this->description,
+        ]);
     }
 }

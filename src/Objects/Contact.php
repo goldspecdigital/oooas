@@ -1,43 +1,87 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $name
- * @property string $url
- * @property string $email
+ * @property string|null $name
+ * @property string|null $url
+ * @property string|null $email
  */
 class Contact extends BaseObject
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $url;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * @param string $name
-     * @param string $url
-     * @param string $email
+     * @param string|null $name
+     * @param string|null $url
+     * @param string|null $email
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
-    public static function create(string $name, string $url, string $email): self
-    {
+    public static function create(
+        string $name = null,
+        string $url = null,
+        string $email = null
+    ): self {
         $instance = new static();
 
         $instance->name = $name;
         $instance->url = $url;
+        $instance->email = $email;
+
+        return $instance;
+    }
+
+    /**
+     * @param null|string $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
+     */
+    public function name(?string $name): self
+    {
+        $instance = clone $this;
+
+        $instance->name = $name;
+
+        return $instance;
+    }
+
+    /**
+     * @param null|string $url
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
+     */
+    public function url(?string $url): self
+    {
+        $instance = clone $this;
+
+        $instance->url = $url;
+
+        return $instance;
+    }
+
+    /**
+     * @param null|string $email
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
+     */
+    public function email(?string $email): self
+    {
+        $instance = clone $this;
+
         $instance->email = $email;
 
         return $instance;
@@ -53,44 +97,5 @@ class Contact extends BaseObject
             'url' => $this->url,
             'email' => $this->email,
         ]);
-    }
-
-    /**
-     * @param string $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
-     */
-    public function name(string $name): self
-    {
-        $instance = clone $this;
-
-        $instance->name = $name;
-
-        return $instance;
-    }
-
-    /**
-     * @param string $url
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
-     */
-    public function url(string $url): self
-    {
-        $instance = clone $this;
-
-        $instance->url = $url;
-
-        return $instance;
-    }
-
-    /**
-     * @param string $email
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
-     */
-    public function email(string $email): self
-    {
-        $instance = clone $this;
-
-        $instance->email = $email;
-
-        return $instance;
     }
 }

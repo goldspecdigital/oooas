@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
  * @property string|null $format
- * @property string $type
+ * @property string|null $type
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $items
  * @property int|null $maxItems
  * @property int|null $minItems
@@ -25,7 +28,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property int|null $maxProperties
  * @property int|null $minProperties
  * @property boolean|null $nullable
- * @property mixed $example
+ * @property mixed|null $example
  */
 class Schema extends BaseObject
 {
@@ -84,7 +87,7 @@ class Schema extends BaseObject
     protected $format;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
 
@@ -179,16 +182,16 @@ class Schema extends BaseObject
     protected $nullable;
 
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $example;
 
     /**
-     * @param string $type
+     * @param string|null $type
      * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function create(string $type, string $name = null): self
+    public static function create(string $type = null, string $name = null): self
     {
         $instance = new static();
 
@@ -253,54 +256,10 @@ class Schema extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        $properties = [];
-        foreach ($this->properties ?? [] as $property) {
-            $properties[$property->name] = $property->toArray();
-        }
-
-        $additionalProperties = [];
-        foreach ($this->additionalProperties ?? [] as $additionalProperty) {
-            $additionalProperties[$additionalProperty->name] = $additionalProperty->toArray();
-        }
-
-        return Arr::filter([
-            'title' => $this->title,
-            'description' => $this->description,
-            'enum' => $this->enum,
-            'default' => $this->default,
-            'format' => $this->format,
-            'type' => $this->type,
-            'items' => $this->items ? ['allOf' => $this->items] : null,
-            'maxItems' => $this->maxItems,
-            'minItems' => $this->minItems,
-            'uniqueItems' => $this->uniqueItems,
-            'pattern' => $this->pattern,
-            'maxLength' => $this->maxLength,
-            'minLength' => $this->minLength,
-            'maximum' => $this->maximum,
-            'exclusiveMaximum' => $this->exclusiveMaximum,
-            'minimum' => $this->minimum,
-            'exclusiveMinimum' => $this->exclusiveMinimum,
-            'multipleOf' => $this->multipleOf,
-            'required' => $this->required,
-            'properties' => $properties ?: null,
-            'additionalProperties' => $additionalProperties ?: null,
-            'maxProperties' => $this->maxProperties,
-            'minProperties' => $this->minProperties,
-            'nullable' => $this->nullable,
-            'example' => $this->example,
-        ]);
-    }
-
-    /**
-     * @param string $name
+     * @param null|string $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function name(string $name): self
+    public function name(?string $name): self
     {
         $instance = clone $this;
 
@@ -349,7 +308,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param mixed $default
+     * @param null|mixed $default
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function default($default): self
@@ -375,10 +334,10 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param string $type
+     * @param null|string $type
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function type(string $type): self
+    public function type(?string $type): self
     {
         $instance = clone $this;
 
@@ -427,15 +386,15 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param bool $uniqueItems
+     * @param null|bool $uniqueItems
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function uniqueItems(bool $uniqueItems = true): self
+    public function uniqueItems(?bool $uniqueItems = true): self
     {
         $instance = clone $this;
 
         $instance->uniqueItems = $uniqueItems;
-        
+
         return $instance;
     }
 
@@ -544,11 +503,27 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param string[] $required
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|string[] $required
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
      */
-    public function required(string ...$required): self
+    public function required(...$required): self
     {
+        // Only allow Schema instances and strings.
+        foreach ($required as &$require) {
+            // If a Schema instance was passed in then extract it's name string.
+            if ($require instanceof Schema) {
+                $require = $require->name;
+                continue;
+            }
+
+            if (is_string($require)) {
+                continue;
+            }
+
+            throw new InvalidArgumentException();
+        }
+
         $instance = clone $this;
 
         $instance->required = $required ?: null;
@@ -622,7 +597,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param mixed $example
+     * @param null|mixed $example
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function example($example): self
@@ -632,5 +607,49 @@ class Schema extends BaseObject
         $instance->example = $example;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $properties = [];
+        foreach ($this->properties ?? [] as $property) {
+            $properties[$property->name] = $property->toArray();
+        }
+
+        $additionalProperties = [];
+        foreach ($this->additionalProperties ?? [] as $additionalProperty) {
+            $additionalProperties[$additionalProperty->name] = $additionalProperty->toArray();
+        }
+
+        return Arr::filter([
+            'title' => $this->title,
+            'description' => $this->description,
+            'enum' => $this->enum,
+            'default' => $this->default,
+            'format' => $this->format,
+            'type' => $this->type,
+            'items' => $this->items ? ['allOf' => $this->items] : null,
+            'maxItems' => $this->maxItems,
+            'minItems' => $this->minItems,
+            'uniqueItems' => $this->uniqueItems,
+            'pattern' => $this->pattern,
+            'maxLength' => $this->maxLength,
+            'minLength' => $this->minLength,
+            'maximum' => $this->maximum,
+            'exclusiveMaximum' => $this->exclusiveMaximum,
+            'minimum' => $this->minimum,
+            'exclusiveMinimum' => $this->exclusiveMinimum,
+            'multipleOf' => $this->multipleOf,
+            'required' => $this->required,
+            'properties' => $properties ?: null,
+            'additionalProperties' => $additionalProperties ?: null,
+            'maxProperties' => $this->maxProperties,
+            'minProperties' => $this->minProperties,
+            'nullable' => $this->nullable,
+            'example' => $this->example,
+        ]);
     }
 }
