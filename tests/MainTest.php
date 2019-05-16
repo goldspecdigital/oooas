@@ -23,9 +23,13 @@ use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 
 class MainTest extends TestCase
 {
-    public function test_example()
+    /** @test */
+    public function the_readme_example_works()
     {
-        $tag = Tag::create('Audits')->description('All the audits');
+        // Create a tag.
+        $tag = Tag::create()
+            ->name('Audits')
+            ->description('All the audits');
 
         // Factory creation method.
         $contact = Contact::create(
@@ -41,6 +45,7 @@ class MainTest extends TestCase
             ->description('For using the Example App API')
             ->contact($contact);
 
+        // Create a schema object to be used where a schema is accepted.
         $exampleObject = Schema::object()
             ->properties(
                 Schema::string('id')->format(Schema::UUID),
@@ -52,17 +57,19 @@ class MainTest extends TestCase
             )
             ->required('id', 'created_at');
 
-        $exampleResponse = Response::create(
-            200,
-            'OK',
-            MediaType::json($exampleObject)
-        );
+        // A response to be returned from a route.
+        $exampleResponse = Response::create()
+            ->statusCode(200)
+            ->description('OK')
+            ->content(MediaType::json($exampleObject));
 
+        // Create an operation for a route.
         $listAudits = Operation::get($exampleResponse)
             ->tags($tag)
             ->summary('List all audits')
             ->operationId('audits.index');
 
+        // Create an operation for a route.
         $createAudit = Operation::post($exampleResponse)
             ->tags($tag)
             ->summary('Create an audit')
@@ -71,33 +78,49 @@ class MainTest extends TestCase
                 MediaType::json($exampleObject)
             ));
 
-        $auditId = Schema::string('audit')
+        // Create parameter schemas.
+        $auditId = Schema::string()
+            ->name('audit')
             ->format(Schema::UUID);
-        $format = Schema::string('format')
+        $format = Schema::string()
+            ->name('format')
             ->enum('json', 'ics')
             ->default('json');
 
+        // Create an operation for a route.
         $readAudit = Operation::get($exampleResponse)
             ->tags($tag)
             ->summary('View an audit')
             ->operationId('audits.show')
             ->parameters(
-                Parameter::path('audit', $auditId)
+                Parameter::path()
+                    ->name('audit')
+                    ->schema($auditId)
                     ->required(),
-                Parameter::query('format', $format)
+                Parameter::query()
+                    ->name('format')
+                    ->schema($format)
                     ->description('The format of the appointments')
             );
 
+        // Specify the paths supported by the API.
         $paths = Paths::create(
-            PathItem::create('/audits', $listAudits, $createAudit),
-            PathItem::create('/audits/{audit}', $readAudit)
+        // Create a path along with it's operations.
+            PathItem::create()
+                ->route('/audits')
+                ->operations($listAudits, $createAudit),
+            PathItem::create()
+                ->route('/audits/{audit}')
+                ->operations($readAudit)
         );
 
+        // Specify the server endpoints.
         $servers = [
             Server::create('https://api.example.com/v1'),
             Server::create('https://api.example.com/v2'),
         ];
 
+        // Create a security scheme component.
         $components = Components::create()->securitySchemes(
             SecurityScheme::oauth2('OAuth2', [
                 'password' => [
@@ -106,12 +129,18 @@ class MainTest extends TestCase
             ])
         );
 
+        // Specify the security.
         $security = ['OAuth2' => []];
 
+        // Specify external documentatino for the API.
         $externalDocs = ExternalDocs::create('https://github.com/goldspecdigital/oooas')
             ->description('GitHub Wiki');
 
-        $openApi = OpenApi::create(OpenApi::VERSION_3_0_1, $info, $paths)
+        // Create the main OpenAPI object composed off everything created above.
+        $openApi = OpenApi::create()
+            ->version(OpenApi::VERSION_3_0_1)
+            ->info($info)
+            ->paths($paths)
             ->servers(...$servers)
             ->components($components)
             ->security($security)
