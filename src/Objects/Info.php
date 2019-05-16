@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $title
+ * @property string|null $title
  * @property string|null $description
  * @property string|null $termsOfService
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact|null $contact
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\License|null $license
- * @property string $version
+ * @property string|null $version
  */
 class Info extends BaseObject
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $title;
 
@@ -40,16 +42,16 @@ class Info extends BaseObject
     protected $license;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $version;
 
     /**
-     * @param string $title
-     * @param string $version
+     * @param string|null $title
+     * @param string|null $version
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
-    public static function create(string $title, string $version): self
+    public static function create(string $title = null, string $version = null): self
     {
         $instance = new static();
 
@@ -60,25 +62,10 @@ class Info extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'title' => $this->title,
-            'description' => $this->description,
-            'termsOfService' => $this->termsOfService,
-            'contact' => $this->contact,
-            'license' => $this->license,
-            'version' => $this->version,
-        ]);
-    }
-
-    /**
-     * @param string $title
+     * @param null|string $title
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
-    public function title(string $title): self
+    public function title(?string $title): self
     {
         $instance = clone $this;
 
@@ -140,15 +127,30 @@ class Info extends BaseObject
     }
 
     /**
-     * @param string $version
+     * @param null|string $version
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
-    public function version(string $version): self
+    public function version(?string $version): self
     {
         $instance = clone $this;
 
         $instance->version = $version;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'title' => $this->title,
+            'description' => $this->description,
+            'termsOfService' => $this->termsOfService,
+            'contact' => $this->contact,
+            'license' => $this->license,
+            'version' => $this->version,
+        ]);
     }
 }

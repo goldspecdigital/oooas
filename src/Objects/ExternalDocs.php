@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
  * @property string|null $description
- * @property string $url
+ * @property string|null $url
  */
 class ExternalDocs extends BaseObject
 {
@@ -21,27 +23,16 @@ class ExternalDocs extends BaseObject
     protected $url;
 
     /**
-     * @param string $url
+     * @param string|null $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
-    public static function create(string $url): self
+    public static function create(string $url = null): self
     {
         $instance = new static();
 
         $instance->url = $url;
 
         return $instance;
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'description' => $this->description,
-            'url' => $this->url,
-        ]);
     }
 
     /**
@@ -58,15 +49,26 @@ class ExternalDocs extends BaseObject
     }
 
     /**
-     * @param string $url
+     * @param null|string $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
-    public function url(string $url): self
+    public function url(?string $url): self
     {
         $instance = clone $this;
 
         $instance->url = $url;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'description' => $this->description,
+            'url' => $this->url,
+        ]);
     }
 }
