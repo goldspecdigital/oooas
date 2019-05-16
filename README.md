@@ -8,7 +8,7 @@
 
 ## Introduction
 
-An object oriented implementation in PHP for generating OpenAPI docs.
+An object oriented approach to generating OpenAPI docs, implemented in PHP.
 
 ## Installing
 
