@@ -23,28 +23,32 @@ class MainTest extends TestCase
 {
     public function test_example()
     {
-        $tags = [
-            Tag::create('Audits')->description('All the audits'),
-        ];
+        $tag = Tag::create('Audits')->description('All the audits');
 
+        // Factory creation method.
         $contact = Contact::create(
             'GoldSpec Digital',
             'https://goldspecdigital.com',
             'hello@goldspecdigital.com'
         );
 
-        $info = Info::create('API Specification', 'v1')
+        // Alternative method chaining creation method.
+        $info = Info::create()
+            ->title('API Specification')
+            ->version('v1')
             ->description('For using the Example App API')
             ->contact($contact);
 
-        $exampleObject = Schema::object()->properties(
-            Schema::string('id')->format(Schema::UUID),
-            Schema::string('created_at')->format(Schema::DATE_TIME),
-            Schema::integer('age')->example(60),
-            Schema::array('data')->items(
-                Schema::string('id')->format(Schema::UUID)
+        $exampleObject = Schema::object()
+            ->properties(
+                Schema::string('id')->format(Schema::UUID),
+                Schema::string('created_at')->format(Schema::DATE_TIME),
+                Schema::integer('age')->example(60),
+                Schema::array('data')->items(
+                    Schema::string('id')->format(Schema::UUID)
+                )
             )
-        )->required('id', 'created_at');
+            ->required('id', 'created_at');
 
         $exampleResponse = Response::create(
             200,
@@ -53,28 +57,33 @@ class MainTest extends TestCase
         );
 
         $listAudits = Operation::get($exampleResponse)
-            ->tags('Audits')
+            ->tags($tag)
             ->summary('List all audits')
             ->operationId('audits.index');
 
         $createAudit = Operation::post($exampleResponse)
-            ->tags('Audits')
+            ->tags($tag)
             ->summary('Create an audit')
             ->operationId('audits.store')
             ->requestBody(RequestBody::create(
                 MediaType::json($exampleObject)
             ));
 
-        $auditId = Schema::string('audit')->format(Schema::UUID);
-        $format = Schema::string('format')->enum('json', 'ics')->default('json');
+        $auditId = Schema::string('audit')
+            ->format(Schema::UUID);
+        $format = Schema::string('format')
+            ->enum('json', 'ics')
+            ->default('json');
 
         $readAudit = Operation::get($exampleResponse)
-            ->tags('Audits')
+            ->tags($tag)
             ->summary('View an audit')
             ->operationId('audits.show')
             ->parameters(
-                Parameter::path('audit', $auditId)->required(),
-                Parameter::query('format', $format)->description('The format of the appointments')
+                Parameter::path('audit', $auditId)
+                    ->required(),
+                Parameter::query('format', $format)
+                    ->description('The format of the appointments')
             );
 
         $paths = Paths::create(
@@ -88,7 +97,11 @@ class MainTest extends TestCase
         ];
 
         $components = Components::create()->securitySchemes(
-            SecurityScheme::oauth2('OAuth2', ['password' => ['tokenUrl' => 'https://api.example.com/oauth/authorize']])
+            SecurityScheme::oauth2('OAuth2', [
+                'password' => [
+                    'tokenUrl' => 'https://api.example.com/oauth/authorize',
+                ],
+            ])
         );
 
         $security = ['OAuth2' => []];
@@ -100,7 +113,7 @@ class MainTest extends TestCase
             ->servers(...$servers)
             ->components($components)
             ->security($security)
-            ->tags(...$tags)
+            ->tags($tag)
             ->externalDocs($externalDocs);
 
         $exampleResponse = file_get_contents(realpath(__DIR__) . '/storage/example_response.json');

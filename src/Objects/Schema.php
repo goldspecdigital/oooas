@@ -2,6 +2,7 @@
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -544,11 +545,27 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param string[] $required
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|string[] $required
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
      */
-    public function required(string ...$required): self
+    public function required(...$required): self
     {
+        // Only allow Schema instances and strings.
+        foreach ($required as &$require) {
+            // If a Schema instance was passed in then extract it's name string.
+            if ($require instanceof Schema) {
+                $require = $require->name;
+                continue;
+            }
+
+            if (is_string($require)) {
+                continue;
+            }
+
+            throw new InvalidArgumentException();
+        }
+
         $instance = clone $this;
 
         $instance->required = $required ?: null;

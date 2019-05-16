@@ -2,6 +2,7 @@
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -196,11 +197,27 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param string ...$tags
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[]|string[] $tags
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
      */
-    public function tags(string ...$tags): self
+    public function tags(...$tags): self
     {
+        // Only allow Tag instances and strings.
+        foreach ($tags as &$tag) {
+            // If a Tag instance was passed in then extract it's name string.
+            if ($tag instanceof Tag) {
+                $tag = $tag->name;
+                continue;
+            }
+
+            if (is_string($tag)) {
+                continue;
+            }
+
+            throw new InvalidArgumentException();
+        }
+
         $instance = clone $this;
 
         $instance->tags = $tags ?: null;
