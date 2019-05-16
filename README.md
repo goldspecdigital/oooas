@@ -1,14 +1,50 @@
 <p align="center">
-    <img src="https://svgshare.com/i/D7e.svg" width="400px">
+    <a href="https://github.com/goldspecdigital/oooas"><img 
+        alt="Object Orientated OpenAPI Specification"
+        src="https://svgshare.com/i/D7e.svg" width="400px"
+    ></a>
 </p>
 
 <p align="center">
-    <a href="https://travis-ci.com/goldspecdigital/oooas"><img src="https://travis-ci.com/goldspecdigital/oooas.svg?branch=master" alt="Build Status"></a>
+    <a href="https://github.com/goldspecdigital/oooas"><img 
+        alt="GitHub stars" 
+        src="https://img.shields.io/github/stars/goldspecdigital/oooas.svg?style=social"
+    ></a>
+</p>
+
+<p align="center">
+    <a href="https://github.com/goldspecdigital/oooas/tags"><img 
+        alt="GitHub tag (latest SemVer)" 
+        src="https://img.shields.io/github/tag/goldspecdigital/oooas.svg"
+    ></a>
+    <a href="https://travis-ci.com/goldspecdigital/oooas"><img 
+        alt="Build status"
+        src="https://travis-ci.com/goldspecdigital/oooas.svg?branch=master" 
+    ></a>
+    <a href="https://packagist.org/packages/goldspecdigital/oooas"><img 
+        alt="Packagist" 
+        src="https://img.shields.io/packagist/dt/goldspecdigital/oooas.svg"
+    ></a>
+    <img 
+        alt="PHP from Packagist" 
+        src="https://img.shields.io/packagist/php-v/goldspecdigital/oooas.svg"
+    >
+    <img 
+        alt="Dependency count"
+        src="https://img.shields.io/badge/dependencies-0-brightgreen.svg" 
+    >
+    <img 
+        alt="Packagist" 
+        src="https://img.shields.io/packagist/l/goldspecdigital/oooas.svg"
+    >
 </p>
 
 ## Introduction
 
-An object oriented approach to generating OpenAPI docs, implemented in PHP.
+An object oriented approach to generating OpenAPI docs, implemented in PHP. 
+
+You can build up your API spec using PHP classes, and then export the spec to 
+JSON (or YAML with the help of another package).
 
 ## Installing
 
@@ -22,112 +58,136 @@ composer require goldspecdigital/oooas
 See the code sample below for the most basic usage:
 
 ```php
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\{
+    Info, MediaType, Operation, Operation, PathItem, Paths, Response, Schema, Tag
+};
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 
-// Create a tag.
-$tag = Tag::create()
-    ->name('Audits')
-    ->description('Audit logs for all actions');
+// Create a tag for all the user endpoints.
+$usersTag = Tag::create()
+    ->name('Users')
+    ->description('All user related endpoints');
 
-// Factory creation method (optional parameters are required for the OpenAPI spec).
-$contact = Contact::create(
-    'GoldSpec Digital',
-    'https://goldspecdigital.com',
-    'hello@goldspecdigital.com'
-);
-
-/*
- * Alternative method chaining creation method (you can provide the required 
- * OpenAPI parameters later).
- */
+// Create the info section.
 $info = Info::create()
     ->title('API Specification')
     ->version('v1')
-    ->description('For using the Example App API')
-    ->contact($contact);
+    ->description('For using the Example App API');
     
-// Create a schema object to be used where a schema is accepted.
-$exampleObject = Schema::object()
+// Create the user schema.
+$userSchema = Schema::object()
     ->properties(
         Schema::string('id')->format(Schema::UUID),
-        Schema::string('created_at')->format(Schema::DATE_TIME),
-        Schema::integer('age')->example(60),
-        Schema::array('data')->items(
-            Schema::string('id')->format(Schema::UUID)
-        )
-    )
-    ->required('id', 'created_at');
+        Schema::string('name'),
+        Schema::integer('age')->example(23),
+        Schema::string('created_at')->format(Schema::DATE_TIME)
+    );
     
-// A response to be returned from a route.
-$exampleResponse = Response::create()
+// Create the user response.
+$userResponse = Response::create()
     ->statusCode(200)
     ->description('OK')
-    ->content(MediaType::json($exampleObject));
+    ->content(MediaType::json($userSchema));
     
-// Create an operation for a route.
-$listAudits = Operation::get()
-    ->responses($exampleResponse)
-    ->tags($tag)
-    ->summary('List all audits')
-    ->operationId('audits.index');
+// Create the operation for the route (i.e. GET, POST, etc.).
+$showUser = Operation::get()
+    ->responses($userResponse)
+    ->tags($usersTag)
+    ->summary('Get an individual user')
+    ->operationId('users.show');
     
-// Specify the paths supported by the API.
+// Define the /users path along with the supported operations.
+$userPaths = PathItem::create()
+    ->route('/users')
+    ->operations($showUser);
+    
+// Define all of the paths supported by the API.
 $paths = Paths::create()
-    ->pathItems(
-        // Create a path along with it's operations.
-        PathItem::create()
-            ->route('/audits')
-            ->operations($listAudits)
-    );
-
-// Specify the server endpoints.
-$servers = [
-    Server::create('https://api.example.com/v1'),
-];
-
-// Create a security scheme component.
-$components = Components::create()->securitySchemes(
-    SecurityScheme::oauth2('OAuth2', [
-        'password' => [
-            'tokenUrl' => 'https://api.example.com/oauth/authorize',
-        ],
-    ])
-);
-
-// Specify the security.
-$security = ['OAuth2' => []];
-
-// Specify external documentatino for the API.
-$externalDocs = ExternalDocs::create('https://github.com/goldspecdigital/oooas')
-    ->description('GitHub Wiki');
+    ->pathItems($userPaths);
     
 // Create the main OpenAPI object composed off everything created above.
 $openApi = OpenApi::create()
     ->version(OpenApi::VERSION_3_0_1)
     ->info($info)
     ->paths($paths)
-    ->servers(...$servers)
-    ->components($components)
-    ->security($security)
-    ->tags($tag)
-    ->externalDocs($externalDocs);
+    ->tags($usersTag);
     
 header('Content-Type: application/json');
 echo $openApi->toJson();
 ```
+
+### YAML output
+
+Using the same code above will output the following YAML:
+
+> In this example, the YAML may seem simpler to look at, however once the spec
+starts to increase in size - the ability to reuse objects and split them into
+separate files easily will be a massive help.
+
+```yaml
+---
+openapi: 3.0.1
+info:
+  title: API Specification
+  description: For using the Example App API
+  version: v1
+paths:
+  "/users":
+    get:
+      tags:
+      - Users
+      summary: Get an individual user
+      operationId: users.show
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    format: uuid
+                    type: string
+                  name:
+                    type: string
+                  age:
+                    type: integer
+                    example: 23
+                  created_at:
+                    format: date-time
+                    type: string
+tags:
+- name: Users
+  description: All user related endpoints
+```
+
+### Outputting as JSON or YAML
+
+Built in output to YAML has been omitted on purpose to keep this package
+dependency free. However, you can easily convert the array to a YAML string 
+using several open source packages. See below for an example of  outputting to 
+both JSON and YAML:
+
+```php
+use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
+use Symfony\Component\Yaml\Yaml;
+
+$openApi = OpenApi::create();
+
+$json = $openApi->toJson();
+$array = $openApi->toArray();
+$yaml = Yaml::dump($array);
+```
+
+## Guidance
+
+If you want to learn more about the OpenAPI schema, or if you would like a quick
+reference, then check out the [OpenAPI Map](https://openapi-map.apihandyman.io/?version=3.0) 
+project created by [Arnaud Lauret](http://apihandyman.io/).
+
+You can use this interactive tool to figure out what objects go where and how
+they relate to one another.
 
 ## Running the tests
 
