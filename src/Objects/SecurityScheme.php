@@ -5,37 +5,40 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $name
- * @property string $type
- * @property array $flows
+ * @property string|null $name
+ * @property string|null $type
+ * @property array|null $flows
  */
 class SecurityScheme extends BaseObject
 {
     const OAUTH2 = 'oauth2';
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
 
     /**
-     * @var array
+     * @var array|null
      */
     protected $flows;
 
     /**
-     * @param string $name
-     * @param string $type
-     * @param array $flows
+     * @param string|null $name
+     * @param string|null $type
+     * @param array|null $flows
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
      */
-    public static function create(string $name, string $type, array $flows): self
-    {
+    public static function create(
+        string $name = null,
+        string $type = null,
+        array $flows = null
+    ): self {
         $instance = new static();
 
         $instance->name = $name;

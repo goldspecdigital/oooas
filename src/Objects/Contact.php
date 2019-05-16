@@ -5,35 +5,38 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $name
- * @property string $url
- * @property string $email
+ * @property string|null $name
+ * @property string|null $url
+ * @property string|null $email
  */
 class Contact extends BaseObject
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $url;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * @param string $name
-     * @param string $url
-     * @param string $email
+     * @param string|null $name
+     * @param string|null $url
+     * @param string|null $email
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
-    public static function create(string $name, string $url, string $email): self
-    {
+    public static function create(
+        string $name = null,
+        string $url = null,
+        string $email = null
+    ): self {
         $instance = new static();
 
         $instance->name = $name;

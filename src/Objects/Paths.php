@@ -5,12 +5,12 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $pathItems
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null $pathItems
  */
 class Paths extends BaseObject
 {
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null
      */
     protected $pathItems;
 
@@ -22,7 +22,7 @@ class Paths extends BaseObject
     {
         $instance = new static();
 
-        $instance->pathItems = $pathItem;
+        $instance->pathItems = $pathItem ?: null;
 
         return $instance;
     }

@@ -6,7 +6,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
  * @property string|null $description
- * @property string $url
+ * @property string|null $url
  */
 class ExternalDocs extends BaseObject
 {
@@ -21,10 +21,10 @@ class ExternalDocs extends BaseObject
     protected $url;
 
     /**
-     * @param string $url
+     * @param string|null $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
-    public static function create(string $url): self
+    public static function create(string $url = null): self
     {
         $instance = new static();
 

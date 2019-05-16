@@ -5,13 +5,13 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $name
+ * @property string|null $name
  * @property string|null $description
  */
 class Tag extends BaseObject
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
@@ -21,10 +21,10 @@ class Tag extends BaseObject
     protected $description;
 
     /**
-     * @param string $name
+     * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
-    public static function create(string $name): self
+    public static function create(string $name = null): self
     {
         $instance = new static();
 

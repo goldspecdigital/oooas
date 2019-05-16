@@ -58,12 +58,15 @@ class OpenApi extends BaseObject
 
     /**
      * @param string $version
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Info $info
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths $paths
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
-    public static function create(string $version, Info $info, Paths $paths)
-    {
+    public static function create(
+        string $version = self::VERSION_3_0_1,
+        Info $info = null,
+        Paths $paths = null
+    ) {
         $instance = new static();
 
         $instance->version = $version;

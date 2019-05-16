@@ -6,7 +6,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
  * @property string|null $format
- * @property string $type
+ * @property string|null $type
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $items
  * @property int|null $maxItems
  * @property int|null $minItems
@@ -25,7 +25,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property int|null $maxProperties
  * @property int|null $minProperties
  * @property boolean|null $nullable
- * @property mixed $example
+ * @property mixed|null $example
  */
 class Schema extends BaseObject
 {
@@ -84,7 +84,7 @@ class Schema extends BaseObject
     protected $format;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
 
@@ -179,16 +179,16 @@ class Schema extends BaseObject
     protected $nullable;
 
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $example;
 
     /**
-     * @param string $type
+     * @param string|null $type
      * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function create(string $type, string $name = null): self
+    public static function create(string $type = null, string $name = null): self
     {
         $instance = new static();
 

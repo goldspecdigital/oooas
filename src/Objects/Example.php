@@ -7,7 +7,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 /**
  * @property string|null $summary
  * @property string|null $description
- * @property mixed $value
+ * @property mixed|null $value
  */
 class Example extends BaseObject
 {
@@ -22,15 +22,15 @@ class Example extends BaseObject
     protected $description;
 
     /**
-     * @var mixed
+     * @var mixed|null
      */
     protected $value;
 
     /**
-     * @param $value
+     * @param mixed|null $value
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
      */
-    public static function create($value): self
+    public static function create($value = null): self
     {
         $instance = new static();
 

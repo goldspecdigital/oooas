@@ -5,13 +5,13 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $name
+ * @property string|null $name
  * @property string|null $url
  */
 class License extends BaseObject
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
@@ -21,10 +21,10 @@ class License extends BaseObject
     protected $url;
 
     /**
-     * @param string $name
+     * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\License
      */
-    public static function create(string $name): self
+    public static function create(string $name = null): self
     {
         $instance = new static();
 

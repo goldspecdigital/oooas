@@ -5,8 +5,8 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $mediaType
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+ * @property string|null $mediaType
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example|null $example
  */
 class MediaType extends BaseObject
@@ -17,12 +17,12 @@ class MediaType extends BaseObject
     const TEXT_XML = 'text/xml';
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mediaType;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null
      */
     protected $schema;
 
@@ -32,11 +32,11 @@ class MediaType extends BaseObject
     protected $example;
 
     /**
-     * @param string $mediaType
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+     * @param string|null $mediaType
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function create(string $mediaType, Schema $schema): self
+    public static function create(string $mediaType = null, Schema $schema = null): self
     {
         $instance = new static();
 

@@ -5,13 +5,13 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $name
- * @property string $in
+ * @property string|null $name
+ * @property string|null $in
  * @property string|null $description
  * @property bool|null $required
  * @property bool|null $deprecated
  * @property bool|null $allowEmptyValue
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
  */
 class Parameter extends BaseObject
 {
@@ -21,12 +21,12 @@ class Parameter extends BaseObject
     const COOKIE = 'cookie';
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $in;
 
@@ -51,18 +51,21 @@ class Parameter extends BaseObject
     protected $allowEmptyValue;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null
      */
     protected $schema;
 
     /**
-     * @param string $name
-     * @param string $in
-     * @param $schema
+     * @param string|null $name
+     * @param string|null $in
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function create(string $name, string $in, Schema $schema): self
-    {
+    public static function create(
+        string $name = null,
+        string $in = null,
+        Schema $schema = null
+    ): self {
         $instance = new static();
 
         $instance->name = $name;

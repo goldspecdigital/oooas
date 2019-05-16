@@ -5,17 +5,17 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $title
+ * @property string|null $title
  * @property string|null $description
  * @property string|null $termsOfService
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact|null $contact
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\License|null $license
- * @property string $version
+ * @property string|null $version
  */
 class Info extends BaseObject
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $title;
 
@@ -40,16 +40,16 @@ class Info extends BaseObject
     protected $license;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $version;
 
     /**
-     * @param string $title
-     * @param string $version
+     * @param string|null $title
+     * @param string|null $version
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
-    public static function create(string $title, string $version): self
+    public static function create(string $title = null, string $version = null): self
     {
         $instance = new static();
 

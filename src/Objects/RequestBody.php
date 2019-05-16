@@ -6,7 +6,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
  * @property string|null $description
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]|null $content
  * @property bool|null $required
  */
 class RequestBody extends BaseObject
@@ -17,7 +17,7 @@ class RequestBody extends BaseObject
     protected $description;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]|null
      */
     protected $content;
 
@@ -34,7 +34,7 @@ class RequestBody extends BaseObject
     {
         $instance = new static();
 
-        $instance->content = $content;
+        $instance->content = $content ?: null;
 
         return $instance;
     }

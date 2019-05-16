@@ -5,40 +5,43 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property int $statusCode
- * @property string $description
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+ * @property int|null $statusCode
+ * @property string|null $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]|null $content
  */
 class Response extends BaseObject
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $statusCode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]|null
      */
     protected $content;
 
     /**
-     * @param int $statusCode
-     * @param string $description
+     * @param int|null $statusCode
+     * @param string|null $description
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function create(int $statusCode, string $description, MediaType ...$content): self
-    {
+    public static function create(
+        int $statusCode = null,
+        string $description = null,
+        MediaType ...$content
+    ): self {
         $instance = new static();
 
         $instance->statusCode = $statusCode;
         $instance->description = $description;
-        $instance->content = $content;
+        $instance->content = $content ?: null;
 
         return $instance;
     }

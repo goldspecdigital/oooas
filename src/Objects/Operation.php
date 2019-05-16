@@ -5,7 +5,7 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string $action
+ * @property string|null $action
  * @property string[]|null $tags
  * @property string|null $summary
  * @property string|null $description
@@ -29,7 +29,7 @@ class Operation extends BaseObject
     const PATCH = 'patch';
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $action;
 
@@ -89,16 +89,16 @@ class Operation extends BaseObject
     protected $servers;
 
     /**
-     * @param string $action
+     * @param string|null $action
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function create(string $action, Response ...$responses): self
+    public static function create(string $action = null, Response ...$responses): self
     {
         $instance = new static();
 
         $instance->action = $action;
-        $instance->responses = $responses;
+        $instance->responses = $responses ?: null;
 
         return $instance;
     }
