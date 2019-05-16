@@ -1,8 +1,8 @@
 # Only run on the following branches.
-# branches:
-#   only:
-#     - master
-#     - develop
+branches:
+  only:
+    - master
+    - develop
 
 # The language of the Travis CI container.
 language: php
