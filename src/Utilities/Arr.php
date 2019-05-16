@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Utilities;
 
 use GoldSpecDigital\ObjectOrientedOAS\Objects\BaseObject;
