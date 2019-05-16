@@ -19,7 +19,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 
-class ExampleTest extends TestCase
+class MainTest extends TestCase
 {
     public function test_example()
     {
@@ -28,13 +28,13 @@ class ExampleTest extends TestCase
         ];
 
         $contact = Contact::create(
-            'Ayup Digital',
-            'https://ayup.agency',
-            'info@ayup.agency'
+            'GoldSpec Digital',
+            'https://goldspecdigital.com',
+            'hello@goldspecdigital.com'
         );
 
-        $info = Info::create('Core API Specification', 'v1')
-            ->description('For using the Core Example App API')
+        $info = Info::create('API Specification', 'v1')
+            ->description('For using the Example App API')
             ->contact($contact);
 
         $exampleObject = Schema::object()->properties(
@@ -92,7 +92,7 @@ class ExampleTest extends TestCase
 
         $security = ['OAuth2' => []];
 
-        $externalDocs = ExternalDocs::create('https://github.com/RoyalBoroughKingston/cwk-api/wiki')
+        $externalDocs = ExternalDocs::create('https://github.com/goldspecdigital/oooas')
             ->description('GitHub Wiki');
 
         $openApi = OpenApi::create(OpenApi::VERSION_3_0_1, $info, $paths)
@@ -102,6 +102,11 @@ class ExampleTest extends TestCase
             ->tags(...$tags)
             ->externalDocs($externalDocs);
 
-        var_dump($openApi->toJson());
+        $exampleResponse = file_get_contents(realpath(__DIR__) . '/storage/example_response.json');
+
+        $this->assertEquals(
+            json_decode($exampleResponse, true),
+            $openApi->toArray()
+        );
     }
 }
