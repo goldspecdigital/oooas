@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/goldspecdigital/oooas/feature/remove-required-constructor-parameters/media/logo.svg">
+    <img src="https://svgshare.com/i/D7e.svg">
 </p>
 
 <p align="center">
