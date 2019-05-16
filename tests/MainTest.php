@@ -45,6 +45,7 @@ class MainTest extends TestCase
                 Schema::string('id')->format(Schema::UUID)
             )
         )->required('id', 'created_at');
+
         $exampleResponse = Response::create(
             200,
             'OK',
@@ -66,7 +67,7 @@ class MainTest extends TestCase
 
         $auditId = Schema::string('audit')->format(Schema::UUID);
         $format = Schema::string('format')->enum('json', 'ics')->default('json');
-        
+
         $readAudit = Operation::get($exampleResponse)
             ->tags('Audits')
             ->summary('View an audit')

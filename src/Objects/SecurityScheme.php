@@ -37,11 +37,11 @@ class SecurityScheme extends BaseObject
     public static function create(string $name, string $type, array $flows): self
     {
         $instance = new static();
-        
+
         $instance->name = $name;
         $instance->type = $type;
         $instance->flows = $flows;
-        
+
         return $instance;
     }
 

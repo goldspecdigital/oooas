@@ -435,7 +435,7 @@ class Schema extends BaseObject
         $instance = clone $this;
 
         $instance->uniqueItems = $uniqueItems;
-        
+
         return $instance;
     }
 

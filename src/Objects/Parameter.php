@@ -122,8 +122,8 @@ class Parameter extends BaseObject
             'in' => $this->in,
             'description' => $this->description,
             'required' => $this->required,
-            'deprecated ' => $this->deprecated ,
-            'allowEmptyValue ' => $this->allowEmptyValue ,
+            'deprecated ' => $this->deprecated,
+            'allowEmptyValue ' => $this->allowEmptyValue,
             'schema' => $this->schema,
         ]);
     }
