@@ -40,23 +40,6 @@ class RequestBody extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        $content = [];
-        foreach ($this->content ?? [] as $contentItem) {
-            $content[$contentItem->mediaType] = $contentItem;
-        }
-
-        return Arr::filter([
-            'description' => $this->description,
-            'content' => $content ?: null,
-            'required' => $this->required,
-        ]);
-    }
-
-    /**
      * @param null|string $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
@@ -77,21 +60,38 @@ class RequestBody extends BaseObject
     {
         $instance = clone $this;
 
-        $instance->content = count($content) > 1 ? $content : null;
+        $instance->content = $content ?: null;
 
         return $instance;
     }
 
     /**
-     * @param bool $required
+     * @param null|bool $required
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
-    public function required(bool $required = true): self
+    public function required(?bool $required = true): self
     {
         $instance = clone $this;
 
         $instance->required = $required;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $content = [];
+        foreach ($this->content ?? [] as $contentItem) {
+            $content[$contentItem->mediaType] = $contentItem;
+        }
+
+        return Arr::filter([
+            'description' => $this->description,
+            'content' => $content ?: null,
+            'required' => $this->required,
+        ]);
     }
 }

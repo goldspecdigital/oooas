@@ -159,35 +159,10 @@ class Operation extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        $responses = [];
-        foreach ($this->responses as $response) {
-            $responses[$response->statusCode] = $response;
-        }
-
-        return Arr::filter([
-            'tags' => $this->tags,
-            'summary' => $this->summary,
-            'description' => $this->description,
-            'externalDocs' => $this->externalDocs,
-            'operationId' => $this->operationId,
-            'parameters' => $this->parameters,
-            'requestBody' => $this->requestBody,
-            'responses' => $responses,
-            'deprecated' => $this->deprecated,
-            'security' => $this->security,
-            'servers' => $this->servers,
-        ]);
-    }
-
-    /**
-     * @param string $action
+     * @param null|string $action
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public function action(string $action): self
+    public function action(?string $action): self
     {
         $instance = clone $this;
 
@@ -278,7 +253,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter ...$parameters
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter[] $parameters
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function parameters(Parameter ...$parameters): self
@@ -304,7 +279,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response ...$responses
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function responses(Response ...$responses): self
@@ -317,10 +292,10 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param bool $deprecated
+     * @param null|bool $deprecated
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public function deprecated(bool $deprecated = true): self
+    public function deprecated(?bool $deprecated = true): self
     {
         $instance = clone $this;
 
@@ -343,7 +318,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server ...$servers
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[] $servers
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function servers(Server ...$servers): self
@@ -353,5 +328,30 @@ class Operation extends BaseObject
         $instance->servers = $servers ?: null;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $responses = [];
+        foreach ($this->responses as $response) {
+            $responses[$response->statusCode] = $response;
+        }
+
+        return Arr::filter([
+            'tags' => $this->tags,
+            'summary' => $this->summary,
+            'description' => $this->description,
+            'externalDocs' => $this->externalDocs,
+            'operationId' => $this->operationId,
+            'parameters' => $this->parameters,
+            'requestBody' => $this->requestBody,
+            'responses' => $responses,
+            'deprecated' => $this->deprecated,
+            'security' => $this->security,
+            'servers' => $this->servers,
+        ]);
     }
 }

@@ -34,21 +34,10 @@ class Server extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'url' => $this->url,
-            'description' => $this->description,
-        ]);
-    }
-
-    /**
-     * @param string $url
+     * @param null|string $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
      */
-    public function url(string $url): self
+    public function url(?string $url): self
     {
         $instance = clone $this;
 
@@ -68,5 +57,16 @@ class Server extends BaseObject
         $instance->description = $description;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'url' => $this->url,
+            'description' => $this->description,
+        ]);
     }
 }

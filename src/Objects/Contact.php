@@ -47,22 +47,10 @@ class Contact extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'name' => $this->name,
-            'url' => $this->url,
-            'email' => $this->email,
-        ]);
-    }
-
-    /**
-     * @param string $name
+     * @param null|string $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
-    public function name(string $name): self
+    public function name(?string $name): self
     {
         $instance = clone $this;
 
@@ -72,10 +60,10 @@ class Contact extends BaseObject
     }
 
     /**
-     * @param string $url
+     * @param null|string $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
-    public function url(string $url): self
+    public function url(?string $url): self
     {
         $instance = clone $this;
 
@@ -85,15 +73,27 @@ class Contact extends BaseObject
     }
 
     /**
-     * @param string $email
+     * @param null|string $email
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
-    public function email(string $email): self
+    public function email(?string $email): self
     {
         $instance = clone $this;
 
         $instance->email = $email;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'name' => $this->name,
+            'url' => $this->url,
+            'email' => $this->email,
+        ]);
     }
 }

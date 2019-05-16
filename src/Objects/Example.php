@@ -40,18 +40,6 @@ class Example extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'summary' => $this->summary,
-            'description' => $this->description,
-            'value' => $this->value,
-        ]);
-    }
-
-    /**
      * @param null|string $summary
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
      */
@@ -78,7 +66,7 @@ class Example extends BaseObject
     }
 
     /**
-     * @param mixed $value
+     * @param null|mixed $value
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
      */
     public function value($value): self
@@ -88,5 +76,17 @@ class Example extends BaseObject
         $instance->value = $value;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'summary' => $this->summary,
+            'description' => $this->description,
+            'value' => $this->value,
+        ]);
     }
 }

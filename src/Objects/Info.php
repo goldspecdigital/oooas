@@ -60,25 +60,10 @@ class Info extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'title' => $this->title,
-            'description' => $this->description,
-            'termsOfService' => $this->termsOfService,
-            'contact' => $this->contact,
-            'license' => $this->license,
-            'version' => $this->version,
-        ]);
-    }
-
-    /**
-     * @param string $title
+     * @param null|string $title
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
-    public function title(string $title): self
+    public function title(?string $title): self
     {
         $instance = clone $this;
 
@@ -140,15 +125,30 @@ class Info extends BaseObject
     }
 
     /**
-     * @param string $version
+     * @param null|string $version
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
-    public function version(string $version): self
+    public function version(?string $version): self
     {
         $instance = clone $this;
 
         $instance->version = $version;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'title' => $this->title,
+            'description' => $this->description,
+            'termsOfService' => $this->termsOfService,
+            'contact' => $this->contact,
+            'license' => $this->license,
+            'version' => $this->version,
+        ]);
     }
 }

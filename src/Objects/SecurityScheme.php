@@ -49,13 +49,52 @@ class SecurityScheme extends BaseObject
     }
 
     /**
-     * @param string $name
-     * @param array $flows
+     * @param string|null $name
+     * @param array|null $flows
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
      */
-    public static function oauth2(string $name, array $flows): self
+    public static function oauth2(string $name = null, array $flows = null): self
     {
         return static::create($name, static::OAUTH2, $flows);
+    }
+
+    /**
+     * @param null|string $name
+     * @return string
+     */
+    public function name(?string $name): string
+    {
+        $instance = clone $this;
+
+        $instance->name = $name;
+
+        return $instance;
+    }
+
+    /**
+     * @param null|string $type
+     * @return string
+     */
+    public function type(?string $type): string
+    {
+        $instance = clone $this;
+
+        $instance->type = $type;
+
+        return $instance;
+    }
+
+    /**
+     * @param null|array $flows
+     * @return string
+     */
+    public function flows(?array $flows): string
+    {
+        $instance = clone $this;
+
+        $instance->flows = $flows;
+
+        return $instance;
     }
 
     /**
@@ -67,44 +106,5 @@ class SecurityScheme extends BaseObject
             'type' => $this->type,
             'flows' => $this->flows,
         ]);
-    }
-
-    /**
-     * @param string $name
-     * @return string
-     */
-    public function name(string $name): string
-    {
-        $instance = clone $this;
-
-        $instance->name = $name;
-
-        return $instance;
-    }
-
-    /**
-     * @param string $type
-     * @return string
-     */
-    public function type(string $type): string
-    {
-        $instance = clone $this;
-
-        $instance->type = $type;
-
-        return $instance;
-    }
-
-    /**
-     * @param array $flows
-     * @return string
-     */
-    public function flows(array $flows): string
-    {
-        $instance = clone $this;
-
-        $instance->flows = $flows;
-
-        return $instance;
     }
 }

@@ -34,21 +34,10 @@ class Tag extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'name' => $this->name,
-            'description' => $this->description,
-        ]);
-    }
-
-    /**
-     * @param string $name
+     * @param null|string $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
-    public function name(string $name): self
+    public function name(?string $name): self
     {
         $instance = clone $this;
 
@@ -68,5 +57,16 @@ class Tag extends BaseObject
         $instance->description = $description;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'name' => $this->name,
+            'description' => $this->description,
+        ]);
     }
 }

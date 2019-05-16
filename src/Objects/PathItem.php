@@ -36,6 +36,32 @@ class PathItem extends BaseObject
     }
 
     /**
+     * @param null|string $route
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     */
+    public function route(?string $route): self
+    {
+        $instance = clone $this;
+
+        $instance->route = $route;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation[] $operations
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     */
+    public function operations(Operation ...$operations): self
+    {
+        $instance = clone $this;
+
+        $instance->operations = $operations ?: null;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
@@ -46,31 +72,5 @@ class PathItem extends BaseObject
         }
 
         return Arr::filter($operations);
-    }
-
-    /**
-     * @param string $route
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
-     */
-    public function route(string $route): self
-    {
-        $instance = clone $this;
-
-        $instance->route = $route;
-
-        return $instance;
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation ...$operations
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
-     */
-    public function operations(Operation ...$operations): self
-    {
-        $instance = clone $this;
-
-        $instance->operations = $operations;
-
-        return $instance;
     }
 }

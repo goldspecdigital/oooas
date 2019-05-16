@@ -34,17 +34,6 @@ class ExternalDocs extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'description' => $this->description,
-            'url' => $this->url,
-        ]);
-    }
-
-    /**
      * @param null|string $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
@@ -58,15 +47,26 @@ class ExternalDocs extends BaseObject
     }
 
     /**
-     * @param string $url
+     * @param null|string $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
-    public function url(string $url): self
+    public function url(?string $url): self
     {
         $instance = clone $this;
 
         $instance->url = $url;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'description' => $this->description,
+            'url' => $this->url,
+        ]);
     }
 }

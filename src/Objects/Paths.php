@@ -28,6 +28,19 @@ class Paths extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $pathItem
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths
+     */
+    public function pathItems(PathItem ...$pathItem): self
+    {
+        $instance = clone $this;
+
+        $instance->pathItems = $pathItem ?: null;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

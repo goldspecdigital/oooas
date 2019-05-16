@@ -34,21 +34,10 @@ class License extends BaseObject
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'name' => $this->name,
-            'url' => $this->url,
-        ]);
-    }
-
-    /**
-     * @param string $name
+     * @param null|string $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\License
      */
-    public function name(string $name): self
+    public function name(?string $name): self
     {
         $instance = clone $this;
 
@@ -68,5 +57,16 @@ class License extends BaseObject
         $instance->url = $url;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'name' => $this->name,
+            'url' => $this->url,
+        ]);
     }
 }

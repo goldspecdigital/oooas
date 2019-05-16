@@ -76,66 +76,50 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param string $name
-     * @param $schema
+     * @param string|null $name
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function query(string $name, $schema): self
+    public static function query(string $name = null, Schema $schema = null): self
     {
         return static::create($name, static::QUERY, $schema);
     }
 
     /**
-     * @param string $name
-     * @param $schema
+     * @param string|null $name
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function header(string $name, $schema): self
+    public static function header(string $name = null, Schema $schema = null): self
     {
         return static::create($name, static::HEADER, $schema);
     }
 
     /**
-     * @param string $name
-     * @param $schema
+     * @param string|null $name
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function path(string $name, $schema): self
+    public static function path(string $name = null, Schema $schema = null): self
     {
         return static::create($name, static::PATH, $schema);
     }
 
     /**
-     * @param string $name
-     * @param $schema
+     * @param string|null $name
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function cookie(string $name, $schema): self
+    public static function cookie(string $name = null, Schema $schema = null): self
     {
         return static::create($name, static::COOKIE, $schema);
     }
 
     /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return Arr::filter([
-            'name' => $this->name,
-            'in' => $this->in,
-            'description' => $this->description,
-            'required' => $this->required,
-            'deprecated ' => $this->deprecated,
-            'allowEmptyValue ' => $this->allowEmptyValue,
-            'schema' => $this->schema,
-        ]);
-    }
-
-    /**
-     * @param string $name
+     * @param null|string $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public function name(string $name): self
+    public function name(?string $name): self
     {
         $instance = clone $this;
 
@@ -145,10 +129,10 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param string $in
+     * @param null|string $in
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public function in(string $in): self
+    public function in(?string $in): self
     {
         $instance = clone $this;
 
@@ -171,10 +155,10 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param bool $required
+     * @param null|bool $required
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public function required(bool $required = true): self
+    public function required(?bool $required = true): self
     {
         $instance = clone $this;
 
@@ -184,10 +168,10 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param bool $deprecated
+     * @param null|bool $deprecated
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public function deprecated(bool $deprecated = true): self
+    public function deprecated(?bool $deprecated = true): self
     {
         $instance = clone $this;
 
@@ -197,10 +181,10 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param bool $allowEmptyValue
+     * @param null|bool $allowEmptyValue
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public function allowEmptyValue(bool $allowEmptyValue = true): self
+    public function allowEmptyValue(?bool $allowEmptyValue = true): self
     {
         $instance = clone $this;
 
@@ -210,15 +194,31 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+     * @param null|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public function schema(Schema $schema): self
+    public function schema(?Schema $schema): self
     {
         $instance = clone $this;
 
         $instance->schema = $schema;
 
         return $instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return Arr::filter([
+            'name' => $this->name,
+            'in' => $this->in,
+            'description' => $this->description,
+            'required' => $this->required,
+            'deprecated ' => $this->deprecated,
+            'allowEmptyValue ' => $this->allowEmptyValue,
+            'schema' => $this->schema,
+        ]);
     }
 }
