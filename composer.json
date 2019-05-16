@@ -3,7 +3,7 @@
   "description": "An object oriented implementation for generating OpenAPI docs.",
   "type": "library",
   "license": "MIT",
-  "keywords": ["php", "oas", "openapi"],
+  "keywords": ["php", "oas", "openapi", "swagger"],
   "homepage": "https://github.com/goldspecdigital/oooas",
   "authors": [
     {
