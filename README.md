@@ -1,7 +1,7 @@
 <p align="center">
     <a href="https://github.com/goldspecdigital/oooas"><img 
-        alt="Object Orientated OpenAPI Specification"
-        src="https://svgshare.com/i/D7e.svg" width="400px"
+        alt="Object Oriented OpenAPI Specification"
+        src="https://svgshare.com/i/D70.svg" width="400px"
     ></a>
 </p>
 
@@ -59,7 +59,7 @@ See the code sample below for the most basic usage:
 
 ```php
 use GoldSpecDigital\ObjectOrientedOAS\Objects\{
-    Info, MediaType, Operation, Operation, PathItem, Paths, Response, Schema, Tag
+    Info, MediaType, Operation, PathItem, Paths, Response, Schema, Tag
 };
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 
