@@ -59,7 +59,7 @@ See the code sample below for the most basic usage:
 
 ```php
 use GoldSpecDigital\ObjectOrientedOAS\Objects\{
-    Info, MediaType, Operation, Operation, PathItem, Paths, Response, Schema, Tag
+    Info, MediaType, Operation, PathItem, Paths, Response, Schema, Tag
 };
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 
