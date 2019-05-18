@@ -10,7 +10,9 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 /**
  * @property string|null $mediaType
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null $examples
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example|null $example
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding|null $encoding
  */
 class MediaType extends BaseObject
 {
@@ -36,6 +38,16 @@ class MediaType extends BaseObject
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Example|null
      */
     protected $example;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null
+     */
+    protected $examples;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding|null
+     */
+    protected $encoding;
 
     /**
      * @param string|null $mediaType
@@ -155,13 +167,46 @@ class MediaType extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null $examples
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     */
+    public function examples(Example ...$examples): self
+    {
+        $instance = clone $this;
+
+        $instance->examples = $examples ?: null;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding|null $encoding
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     */
+    public function encoding(?Encoding $encoding): self
+    {
+        $instance = clone $this;
+
+        $this->encoding = $encoding;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
     {
+        $examples = [];
+        foreach ($this->examples ?? [] as $example) {
+            $examples[$example->name] = $example->toArray();
+        }
+
         return Arr::filter([
             'schema' => $this->schema,
             'example' => $this->example,
+            'examples' => $examples ?: null,
+            'encoding' => $this->encoding,
         ]);
     }
 }

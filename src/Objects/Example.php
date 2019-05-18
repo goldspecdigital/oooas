@@ -7,6 +7,7 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
+ * @property string|null $name
  * @property string|null $summary
  * @property string|null $description
  * @property mixed|null $value
@@ -14,6 +15,11 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Example extends BaseObject
 {
+    /**
+     * @var string|null
+     */
+    protected $name;
+
     /**
      * @var string|null
      */
@@ -43,6 +49,19 @@ class Example extends BaseObject
         $instance = new static();
 
         $instance->value = $value;
+
+        return $instance;
+    }
+
+    /**
+     * @param string|null $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
+     */
+    public function name(?string $name): self
+    {
+        $instance = clone $this;
+
+        $instance->name = $name;
 
         return $instance;
     }
