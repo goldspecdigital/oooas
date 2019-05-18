@@ -187,7 +187,7 @@ class MediaType extends BaseObject
     {
         $instance = clone $this;
 
-        $this->encoding = $encoding;
+        $instance->encoding = $encoding;
 
         return $instance;
     }

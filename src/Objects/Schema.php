@@ -646,7 +646,7 @@ class Schema extends BaseObject implements SchemaContract
     {
         $instance = clone $this;
 
-        $this->discriminator = $discriminator;
+        $instance->discriminator = $discriminator;
 
         return $instance;
     }
