@@ -36,6 +36,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator|null $discriminator
  * @property bool|null $readOnly
  * @property bool|null $writeOnly
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml|null $xml
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
  * @property mixed|null $example
  * @property bool|null $deprecated
@@ -205,6 +206,11 @@ class Schema extends BaseObject
      * @var bool|null
      */
     protected $writeOnly;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml|null
+     */
+    protected $xml;
 
     /**
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null
@@ -671,6 +677,19 @@ class Schema extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml|null $xml
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function xml(?Xml $xml): self
+    {
+        $instance = clone $this;
+
+        $instance->xml = $xml;
+
+        return $instance;
+    }
+
+    /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
@@ -752,6 +771,7 @@ class Schema extends BaseObject
             'discriminator' => $this->discriminator,
             'readOnly' => $this->readOnly,
             'writeOnly' => $this->writeOnly,
+            'xml' => $this->xml,
             'externalDocs' => $this->externalDocs,
             'example' => $this->example,
             'deprecated' => $this->deprecated,
