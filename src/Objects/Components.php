@@ -7,16 +7,10 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $schemas
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme[]|null $securitySchemes
  */
 class Components extends BaseObject
 {
-    /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null
-     */
-    protected $schemas;
-
     /**
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme[]|null
      */
@@ -28,19 +22,6 @@ class Components extends BaseObject
     public static function create(): self
     {
         return new static();
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $schemas
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
-     */
-    public function schemas(Schema ...$schemas): self
-    {
-        $instance = clone $this;
-
-        $instance->schemas = $schemas ?: null;
-
-        return $instance;
     }
 
     /**
@@ -61,18 +42,12 @@ class Components extends BaseObject
      */
     public function toArray(): array
     {
-        $schemas = [];
-        foreach ($this->schemas ?? [] as $schema) {
-            $schemas[$schema->name] = $schema;
-        }
-
         $securitySchemes = [];
         foreach ($this->securitySchemes ?? [] as $securityScheme) {
             $securitySchemes[$securityScheme->name] = $securityScheme;
         }
 
         return Arr::filter([
-            'schemas' => $schemas ?: null,
             'securitySchemes' => $securitySchemes ?: null,
         ]);
     }
