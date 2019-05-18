@@ -77,7 +77,7 @@ class OpenApi extends BaseObject
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
     public static function create(
-        string $openapi = self::VERSION_3_0_1,
+        string $openapi = null,
         Info $info = null,
         PathItem ...$paths
     ) {
