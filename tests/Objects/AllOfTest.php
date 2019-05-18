@@ -23,10 +23,10 @@ class AllOfTest extends TestCase
         $this->assertEquals([
             'allOf' => [
                 [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 [
-                    'type' => 'integer'
+                    'type' => 'integer',
                 ],
             ],
         ], $allOf->toArray());
@@ -48,10 +48,10 @@ class AllOfTest extends TestCase
             'schema' => [
                 'allOf' => [
                     [
-                        'type' => 'string'
+                        'type' => 'string',
                     ],
                     [
-                        'type' => 'integer'
+                        'type' => 'integer',
                     ],
                 ],
             ],

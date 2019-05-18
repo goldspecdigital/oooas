@@ -23,10 +23,10 @@ class AnyOfTest extends TestCase
         $this->assertEquals([
             'anyOf' => [
                 [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 [
-                    'type' => 'integer'
+                    'type' => 'integer',
                 ],
             ],
         ], $anyOf->toArray());
@@ -48,10 +48,10 @@ class AnyOfTest extends TestCase
             'schema' => [
                 'anyOf' => [
                     [
-                        'type' => 'string'
+                        'type' => 'string',
                     ],
                     [
-                        'type' => 'integer'
+                        'type' => 'integer',
                     ],
                 ],
             ],

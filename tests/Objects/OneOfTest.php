@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Tests\Objects;
 
-use GoldSpecDigital\ObjectOrientedOAS\Objects\OneOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\OneOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use GoldSpecDigital\ObjectOrientedOAS\Tests\TestCase;
 
@@ -23,10 +23,10 @@ class OneOfTest extends TestCase
         $this->assertEquals([
             'oneOf' => [
                 [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 [
-                    'type' => 'integer'
+                    'type' => 'integer',
                 ],
             ],
         ], $oneOf->toArray());
@@ -48,10 +48,10 @@ class OneOfTest extends TestCase
             'schema' => [
                 'oneOf' => [
                     [
-                        'type' => 'string'
+                        'type' => 'string',
                     ],
                     [
-                        'type' => 'integer'
+                        'type' => 'integer',
                     ],
                 ],
             ],
