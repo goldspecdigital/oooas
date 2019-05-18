@@ -13,18 +13,28 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
+/**
+ * @property string|null $version
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Components|null $components
+ * @property array[]|null $security
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[]|null $tags
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
+ */
 class OpenApi extends BaseObject
 {
     const VERSION_3_0_0 = '3.0.0';
     const VERSION_3_0_1 = '3.0.1';
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $version;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null
      */
     protected $info;
 
@@ -34,7 +44,7 @@ class OpenApi extends BaseObject
     protected $servers;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null
      */
     protected $paths;
 
@@ -79,6 +89,110 @@ class OpenApi extends BaseObject
     }
 
     /**
+     * @param string|null $version
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function version(?string $version): self
+    {
+        $instance = clone $this;
+
+        $instance->version = $version;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function info(?Info $info): self
+    {
+        $instance = clone $this;
+
+        $instance->info = $info;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[] $servers
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function servers(Server ...$servers): self
+    {
+        $instance = clone $this;
+
+        $instance->servers = $servers ?: null;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function paths(?Paths $paths): self
+    {
+        $instance = clone $this;
+
+        $instance->paths = $paths;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Components|null $components
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function components(?Components $components): self
+    {
+        $instance = clone $this;
+
+        $instance->components = $components;
+
+        return $instance;
+    }
+
+    /**
+     * @param array ...$security
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function security(array ...$security): self
+    {
+        $instance = clone $this;
+
+        $instance->security = $security ?: null;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag ...$tags
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function tags(Tag ...$tags): self
+    {
+        $instance = clone $this;
+
+        $instance->tags = $tags ?: null;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function externalDocs(?ExternalDocs $externalDocs): self
+    {
+        $instance = clone $this;
+
+        $instance->externalDocs = $externalDocs;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
@@ -93,93 +207,5 @@ class OpenApi extends BaseObject
             'tags' => $this->tags,
             'externalDocs' => $this->externalDocs,
         ]);
-    }
-
-    /**
-     * @param string $version
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public function version(string $version): self
-    {
-        $this->version = $version;
-
-        return $this;
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public function info(?Info $info): self
-    {
-        $this->info = $info;
-
-        return $this;
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[] $servers
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public function servers(Server ...$servers): self
-    {
-        $this->servers = $servers ?: null;
-
-        return $this;
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public function paths(?Paths $paths): self
-    {
-        $this->paths = $paths;
-
-        return $this;
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Components|null $components
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public function components(?Components $components): self
-    {
-        $this->components = $components;
-
-        return $this;
-    }
-
-    /**
-     * @param array ...$security
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public function security(array ...$security): self
-    {
-        $this->security = $security ?: null;
-
-        return $this;
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag ...$tags
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public function tags(Tag ...$tags): self
-    {
-        $this->tags = $tags ?: null;
-
-        return $this;
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public function externalDocs(?ExternalDocs $externalDocs): self
-    {
-        $this->externalDocs = $externalDocs;
-
-        return $this;
     }
 }
