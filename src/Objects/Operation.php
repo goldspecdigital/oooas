@@ -349,7 +349,7 @@ class Operation extends BaseObject
     {
         $responses = [];
         foreach ($this->responses ?? [] as $response) {
-            $responses[$response->statusCode] = $response;
+            $responses[$response->statusCode ?? 'default'] = $response;
         }
 
         return Arr::filter([

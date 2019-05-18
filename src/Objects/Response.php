@@ -9,7 +9,9 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 /**
  * @property int|null $statusCode
  * @property string|null $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Header[]|null $headers
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]|null $content
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Link[]|null $links
  */
 class Response extends BaseObject
 {
@@ -24,9 +26,19 @@ class Response extends BaseObject
     protected $description;
 
     /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Header[]|null
+     */
+    protected $headers;
+
+    /**
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]|null
      */
     protected $content;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Link[]|null
+     */
+    protected $links;
 
     /**
      * @param int|null $statusCode
@@ -174,6 +186,19 @@ class Response extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Header[] $headers
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public function headers(Header ...$headers): self
+    {
+        $instance = clone $this;
+
+        $instance->headers = $headers ?: null;
+
+        return $instance;
+    }
+
+    /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
@@ -187,18 +212,43 @@ class Response extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Link[] $links
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public function links(Link ...$links): self
+    {
+        $instance = clone $this;
+
+        $instance->links = $links ?: null;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
     {
+        $headers = [];
+        foreach ($this->headers ?? [] as $header) {
+            $headers[$header->name] = $header;
+        }
+
         $content = [];
         foreach ($this->content ?? [] as $contentItem) {
             $content[$contentItem->mediaType] = $contentItem;
         }
 
+        $links = [];
+        foreach ($this->links ?? [] as $link) {
+            $links[$link->name] = $link;
+        }
+
         return Arr::filter([
             'description' => $this->description,
+            'headers' => $headers ?: null,
             'content' => $content ?: null,
+            'links' => $links ?: null,
         ]);
     }
 }
