@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -104,13 +105,13 @@ class Parameter extends BaseObject
     /**
      * @param string|null $name
      * @param string|null $in
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public static function create(
         string $name = null,
         string $in = null,
-        Schema $schema = null
+        SchemaContract $schema = null
     ): self {
         $instance = new static();
 
@@ -123,40 +124,40 @@ class Parameter extends BaseObject
 
     /**
      * @param string|null $name
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function query(string $name = null, Schema $schema = null): self
+    public static function query(string $name = null, SchemaContract $schema = null): self
     {
         return static::create($name, static::QUERY, $schema);
     }
 
     /**
      * @param string|null $name
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function header(string $name = null, Schema $schema = null): self
+    public static function header(string $name = null, SchemaContract $schema = null): self
     {
         return static::create($name, static::HEADER, $schema);
     }
 
     /**
      * @param string|null $name
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function path(string $name = null, Schema $schema = null): self
+    public static function path(string $name = null, SchemaContract $schema = null): self
     {
         return static::create($name, static::PATH, $schema);
     }
 
     /**
      * @param string|null $name
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function cookie(string $name = null, Schema $schema = null): self
+    public static function cookie(string $name = null, SchemaContract $schema = null): self
     {
         return static::create($name, static::COOKIE, $schema);
     }
@@ -279,10 +280,10 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public function schema(?Schema $schema): self
+    public function schema(?SchemaContract $schema): self
     {
         $instance = clone $this;
 

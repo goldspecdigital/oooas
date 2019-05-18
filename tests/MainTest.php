@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Tests;
 
+use GoldSpecDigital\ObjectOrientedOAS\Objects\AllOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
@@ -52,7 +53,9 @@ class MainTest extends TestCase
                 Schema::string('created_at')->format(Schema::DATE_TIME),
                 Schema::integer('age')->example(60),
                 Schema::array('data')->items(
-                    Schema::string('id')->format(Schema::UUID)
+                    AllOf::create(
+                        Schema::string('id')->format(Schema::UUID)
+                    )
                 )
             )
             ->required('id', 'created_at');
@@ -105,7 +108,7 @@ class MainTest extends TestCase
 
         // Specify the paths supported by the API.
         $paths = Paths::create(
-        // Create a path along with it's operations.
+            // Create a path along with it's operations.
             PathItem::create()
                 ->route('/audits')
                 ->operations($listAudits, $createAudit),

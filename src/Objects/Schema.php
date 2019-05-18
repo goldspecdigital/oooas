@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
 use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
@@ -29,7 +30,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property int|null $multipleOf
  * @property string[]|null $required
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $properties
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $additionalProperties
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $additionalProperties
  * @property int|null $maxProperties
  * @property int|null $minProperties
  * @property boolean|null $nullable
@@ -41,7 +42,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property mixed|null $example
  * @property bool|null $deprecated
  */
-class Schema extends BaseObject
+class Schema extends BaseObject implements SchemaContract
 {
     /*
      * Types.
@@ -173,7 +174,7 @@ class Schema extends BaseObject
     protected $properties;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null
      */
     protected $additionalProperties;
 
@@ -388,10 +389,10 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $items
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract $items
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function items(Schema $items): self
+    public function items(SchemaContract $items): self
     {
         $instance = clone $this;
 
@@ -586,14 +587,14 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $additionalProperties
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $additionalProperties
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function additionalProperties(Schema ...$additionalProperties): self
+    public function additionalProperties(?Schema $additionalProperties): self
     {
         $instance = clone $this;
 
-        $instance->additionalProperties = $additionalProperties ?: null;
+        $instance->additionalProperties = $additionalProperties;
 
         return $instance;
     }
@@ -738,11 +739,6 @@ class Schema extends BaseObject
             $properties[$property->name] = $property->toArray();
         }
 
-        $additionalProperties = [];
-        foreach ($this->additionalProperties ?? [] as $additionalProperty) {
-            $additionalProperties[$additionalProperty->name] = $additionalProperty->toArray();
-        }
-
         return Arr::filter([
             'title' => $this->title,
             'description' => $this->description,
@@ -764,7 +760,7 @@ class Schema extends BaseObject
             'multipleOf' => $this->multipleOf,
             'required' => $this->required,
             'properties' => $properties ?: null,
-            'additionalProperties' => $additionalProperties ?: null,
+            'additionalProperties' => $this->additionalProperties,
             'maxProperties' => $this->maxProperties,
             'minProperties' => $this->minProperties,
             'nullable' => $this->nullable,

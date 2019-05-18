@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -38,10 +39,10 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $mediaType
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function create(string $mediaType = null, Schema $schema = null): self
+    public static function create(string $mediaType = null, SchemaContract $schema = null): self
     {
         $instance = new static();
 
@@ -52,64 +53,64 @@ class MediaType extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function json(Schema $schema = null): self
+    public static function json(SchemaContract $schema = null): self
     {
         return static::create(static::APPLICATION_JSON, $schema);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function pdf(Schema $schema = null): self
+    public static function pdf(SchemaContract $schema = null): self
     {
         return static::create(static::APPLICATION_PDF, $schema);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function jpeg(Schema $schema = null): self
+    public static function jpeg(SchemaContract $schema = null): self
     {
         return static::create(static::IMAGE_JPEG, $schema);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function png(Schema $schema = null): self
+    public static function png(SchemaContract $schema = null): self
     {
         return static::create(static::IMAGE_PNG, $schema);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function calendar(Schema $schema = null): self
+    public static function calendar(SchemaContract $schema = null): self
     {
         return static::create(static::TEXT_CALENDAR, $schema);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function plainText(Schema $schema = null): self
+    public static function plainText(SchemaContract $schema = null): self
     {
         return static::create(static::TEXT_PLAIN, $schema);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function xml(Schema $schema = null): self
+    public static function xml(SchemaContract $schema = null): self
     {
         return static::create(static::TEXT_XML, $schema);
     }
@@ -128,10 +129,10 @@ class MediaType extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public function schema(?Schema $schema): self
+    public function schema(?SchemaContract $schema): self
     {
         $instance = clone $this;
 
