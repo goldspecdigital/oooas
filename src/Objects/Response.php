@@ -49,6 +49,105 @@ class Response extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function ok(MediaType ...$content): self
+    {
+        return static::create(200, 'OK', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function created(MediaType ...$content): self
+    {
+        return static::create(201, 'Created', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function movedPermanently(MediaType ...$content): self
+    {
+        return static::create(301, 'Moved Permanently', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function movedTemporarily(MediaType ...$content): self
+    {
+        return static::create(302, 'Moved Temporarily', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function badRequest(MediaType ...$content): self
+    {
+        return static::create(400, 'Bad Request', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function unauthorized(MediaType ...$content): self
+    {
+        return static::create(401, 'Unauthorized', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function forbidden(MediaType ...$content): self
+    {
+        return static::create(403, 'Forbidden', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function notFound(MediaType ...$content): self
+    {
+        return static::create(404, 'Not Found', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function unprocessableEntity(MediaType ...$content): self
+    {
+        return static::create(422, 'Unprocessable Entity', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function tooManyRequests(MediaType ...$content): self
+    {
+        return static::create(429, 'Too Many Requests', ...$content);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     */
+    public static function internalServerError(MediaType ...$content): self
+    {
+        return static::create(500, 'Internal Server Error', ...$content);
+    }
+
+    /**
      * @param null|int $statusCode
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
