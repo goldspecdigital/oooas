@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
-/**
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $schemas
- */
-class AllOf extends Composition
+class AllOf extends SchemaComposition
 {
     /**
      * @return string

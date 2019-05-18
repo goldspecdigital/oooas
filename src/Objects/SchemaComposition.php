@@ -10,7 +10,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 /**
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $schemas
  */
-abstract class Composition extends BaseObject implements SchemaContract
+abstract class SchemaComposition extends BaseObject implements SchemaContract
 {
     /**
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null
@@ -19,7 +19,7 @@ abstract class Composition extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $schemas
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Composition
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SchemaComposition
      */
     public static function create(Schema ...$schemas): self
     {
@@ -32,7 +32,7 @@ abstract class Composition extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $schemas
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Composition
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SchemaComposition
      */
     public function schemas(Schema ...$schemas): self
     {
