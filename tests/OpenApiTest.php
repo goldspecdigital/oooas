@@ -81,7 +81,7 @@ class OpenApiTest extends TestCase
     }
 
     /** @test */
-    public function it_works()
+    public function all_properties_works()
     {
         // Create a tag.
         $tag = Tag::create()
