@@ -14,6 +14,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
+ * @property string|null $openapi
  * @property string|null $version
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
@@ -31,7 +32,7 @@ class OpenApi extends BaseObject
     /**
      * @var string|null
      */
-    protected $version;
+    protected $openapi;
 
     /**
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null
@@ -69,21 +70,34 @@ class OpenApi extends BaseObject
     protected $externalDocs;
 
     /**
-     * @param string $version
+     * @param string $openapi
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
     public static function create(
-        string $version = self::VERSION_3_0_1,
+        string $openapi = self::VERSION_3_0_1,
         Info $info = null,
         Paths $paths = null
     ) {
         $instance = new static();
 
-        $instance->version = $version;
+        $instance->openapi = $openapi;
         $instance->info = $info;
         $instance->paths = $paths;
+
+        return $instance;
+    }
+
+    /**
+     * @param string|null $openapi
+     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     */
+    public function openapi(?string $openapi): self
+    {
+        $instance = clone $this;
+
+        $instance->openapi = $openapi;
 
         return $instance;
     }
@@ -94,11 +108,7 @@ class OpenApi extends BaseObject
      */
     public function version(?string $version): self
     {
-        $instance = clone $this;
-
-        $instance->version = $version;
-
-        return $instance;
+        return $this->openapi($version);
     }
 
     /**
@@ -198,7 +208,7 @@ class OpenApi extends BaseObject
     public function toArray(): array
     {
         return Arr::filter([
-            'openapi' => $this->version,
+            'openapi' => $this->openapi,
             'info' => $this->info,
             'servers' => $this->servers,
             'paths' => $this->paths,
@@ -207,5 +217,20 @@ class OpenApi extends BaseObject
             'tags' => $this->tags,
             'externalDocs' => $this->externalDocs,
         ]);
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException
+     */
+    public function __get(string $name)
+    {
+        // Allow the use of version as an alias of openapi.
+        if ($name === 'version') {
+            return $this->openapi;
+        }
+
+        return parent::__get($name);
     }
 }
