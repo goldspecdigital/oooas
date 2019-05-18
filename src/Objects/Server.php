@@ -9,6 +9,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 /**
  * @property string|null $url
  * @property string|null $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable[]|null $variables
  */
 class Server extends BaseObject
 {
@@ -21,6 +22,11 @@ class Server extends BaseObject
      * @var string|null
      */
     protected $description;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable[]|null
+     */
+    protected $variables;
 
     /**
      * @param string|null $url
@@ -62,13 +68,32 @@ class Server extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable[] $variables
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
+     */
+    public function variables(ServerVariable ...$variables): self
+    {
+        $instance = clone $this;
+
+        $instance->variables = $variables ?: null;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
     {
+        $variables = [];
+        foreach ($this->variables ?? [] as $variable) {
+            $variables[$variable->name] = $variable->toArray();
+        }
+
         return Arr::filter([
             'url' => $this->url,
             'description' => $this->description,
+            'variables' => $variables ?: null,
         ]);
     }
 }

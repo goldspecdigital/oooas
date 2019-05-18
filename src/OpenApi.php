@@ -164,7 +164,7 @@ class OpenApi extends BaseObject
     }
 
     /**
-     * @param array ...$security
+     * @param array[] $security
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
     public function security(array ...$security): self
@@ -177,7 +177,7 @@ class OpenApi extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag ...$tags
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[] $tags
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
     public function tags(Tag ...$tags): self

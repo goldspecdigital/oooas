@@ -295,10 +295,10 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param mixed[] $enum
+     * @param string[] $enum
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function enum(...$enum): self
+    public function enum(string ...$enum): self
     {
         $instance = clone $this;
 

@@ -49,7 +49,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function ok(MediaType ...$content): self
@@ -58,7 +58,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function created(MediaType ...$content): self
@@ -67,7 +67,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function movedPermanently(MediaType ...$content): self
@@ -76,7 +76,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function movedTemporarily(MediaType ...$content): self
@@ -85,7 +85,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function badRequest(MediaType ...$content): self
@@ -94,7 +94,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function unauthorized(MediaType ...$content): self
@@ -103,7 +103,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function forbidden(MediaType ...$content): self
@@ -112,7 +112,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function notFound(MediaType ...$content): self
@@ -121,7 +121,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function unprocessableEntity(MediaType ...$content): self
@@ -130,7 +130,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function tooManyRequests(MediaType ...$content): self
@@ -139,7 +139,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType ...$content
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public static function internalServerError(MediaType ...$content): self
