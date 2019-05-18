@@ -62,9 +62,9 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $name
-     * @return string
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
      */
-    public function name(?string $name): string
+    public function name(?string $name): self
     {
         $instance = clone $this;
 
@@ -75,9 +75,9 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $type
-     * @return string
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
      */
-    public function type(?string $type): string
+    public function type(?string $type): self
     {
         $instance = clone $this;
 
@@ -88,9 +88,9 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param array|null $flows
-     * @return string
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
      */
-    public function flows(?array $flows): string
+    public function flows(?array $flows): self
     {
         $instance = clone $this;
 
