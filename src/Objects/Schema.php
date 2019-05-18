@@ -12,7 +12,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property string|null $name
  * @property string|null $title
  * @property string|null $description
- * @property string[]|null $enum
+ * @property mixed[]|null $enum
  * @property mixed|null $default
  * @property string|null $format
  * @property string|null $type
@@ -84,7 +84,7 @@ class Schema extends BaseObject implements SchemaContract
     protected $description;
 
     /**
-     * @var string[]|null
+     * @var mixed[]|null
      */
     protected $enum;
 
@@ -337,10 +337,10 @@ class Schema extends BaseObject implements SchemaContract
     }
 
     /**
-     * @param string[] $enum
+     * @param mixed[] $enum
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function enum(string ...$enum): self
+    public function enum(...$enum): self
     {
         $instance = clone $this;
 
@@ -409,7 +409,7 @@ class Schema extends BaseObject implements SchemaContract
     {
         $instance = clone $this;
 
-        $instance->maximum = $maxItems;
+        $instance->maxItems = $maxItems;
 
         return $instance;
     }
@@ -422,7 +422,7 @@ class Schema extends BaseObject implements SchemaContract
     {
         $instance = clone $this;
 
-        $instance->maximum = $minItems;
+        $instance->minItems = $minItems;
 
         return $instance;
     }
@@ -694,7 +694,7 @@ class Schema extends BaseObject implements SchemaContract
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    protected function externalDocs(?ExternalDocs $externalDocs): self
+    public function externalDocs(?ExternalDocs $externalDocs): self
     {
         $instance = clone $this;
 
