@@ -59,7 +59,7 @@ See the code sample below for the most basic usage:
 
 ```php
 use GoldSpecDigital\ObjectOrientedOAS\Objects\{
-    Info, MediaType, Operation, PathItem, Paths, Response, Schema, Tag
+    Info, MediaType, Operation, PathItem, Response, Schema, Tag
 };
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 
@@ -97,19 +97,15 @@ $showUser = Operation::get()
     ->operationId('users.show');
     
 // Define the /users path along with the supported operations.
-$userPaths = PathItem::create()
+$usersPath = PathItem::create()
     ->route('/users')
     ->operations($showUser);
-    
-// Define all of the paths supported by the API.
-$paths = Paths::create()
-    ->pathItems($userPaths);
     
 // Create the main OpenAPI object composed off everything created above.
 $openApi = OpenApi::create()
     ->version(OpenApi::VERSION_3_0_1)
     ->info($info)
-    ->paths($paths)
+    ->paths($usersPath)
     ->tags($usersTag);
     
 header('Content-Type: application/json');

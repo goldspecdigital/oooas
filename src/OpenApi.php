@@ -9,7 +9,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
@@ -74,19 +73,19 @@ class OpenApi extends BaseObject
     /**
      * @param string $openapi
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null $paths
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
     public static function create(
         string $openapi = self::VERSION_3_0_1,
         Info $info = null,
-        Paths $paths = null
+        PathItem ...$paths
     ) {
         $instance = new static();
 
         $instance->openapi = $openapi;
         $instance->info = $info;
-        $instance->paths = $paths;
+        $instance->paths = $paths ?: null;
 
         return $instance;
     }

@@ -13,7 +13,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
-use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
@@ -25,6 +24,62 @@ use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 
 class OpenApiTest extends TestCase
 {
+    /** @test */
+    public function the_readme_example_works()
+    {
+        // Create a tag for all the user endpoints.
+        $usersTag = Tag::create()
+            ->name('Users')
+            ->description('All user related endpoints');
+
+        // Create the info section.
+        $info = Info::create()
+            ->title('API Specification')
+            ->version('v1')
+            ->description('For using the Example App API');
+
+        // Create the user schema.
+        $userSchema = Schema::object()
+            ->properties(
+                Schema::string('id')->format(Schema::UUID),
+                Schema::string('name'),
+                Schema::integer('age')->example(23),
+                Schema::string('created_at')->format(Schema::DATE_TIME)
+            );
+
+        // Create the user response.
+        $userResponse = Response::create()
+            ->statusCode(200)
+            ->description('OK')
+            ->content(MediaType::json($userSchema));
+
+        // Create the operation for the route (i.e. GET, POST, etc.).
+        $showUser = Operation::get()
+            ->responses($userResponse)
+            ->tags($usersTag)
+            ->summary('Get an individual user')
+            ->operationId('users.show');
+
+        // Define the /users path along with the supported operations.
+        $usersPath = PathItem::create()
+            ->route('/users')
+            ->operations($showUser);
+
+        // Create the main OpenAPI object composed off everything created above.
+        $openApi = OpenApi::create()
+            ->version(OpenApi::VERSION_3_0_1)
+            ->info($info)
+            ->paths($usersPath)
+            ->tags($usersTag);
+
+        $readmeExample = file_get_contents(realpath(__DIR__) . '/storage/readme_example.json');
+
+        $this->assertEquals(
+            json_decode($readmeExample, true),
+            $openApi->toArray()
+        );
+    }
+
     /** @test */
     public function it_works()
     {
@@ -115,7 +170,7 @@ class OpenApiTest extends TestCase
                 ->operations($listAudits, $createAudit),
             PathItem::create()
                 ->route('/audits/{audit}')
-                ->operations($readAudit)
+                ->operations($readAudit),
         ];
 
         // Specify the server endpoints.
@@ -156,62 +211,6 @@ class OpenApiTest extends TestCase
 
         $this->assertEquals(
             json_decode($exampleResponse, true),
-            $openApi->toArray()
-        );
-    }
-
-    /** @test */
-    public function the_readme_example_works()
-    {
-        // Create a tag for all the user endpoints.
-        $usersTag = Tag::create()
-            ->name('Users')
-            ->description('All user related endpoints');
-
-        // Create the info section.
-        $info = Info::create()
-            ->title('API Specification')
-            ->version('v1')
-            ->description('For using the Example App API');
-
-        // Create the user schema.
-        $userSchema = Schema::object()
-            ->properties(
-                Schema::string('id')->format(Schema::UUID),
-                Schema::string('name'),
-                Schema::integer('age')->example(23),
-                Schema::string('created_at')->format(Schema::DATE_TIME)
-            );
-
-        // Create the user response.
-        $userResponse = Response::create()
-            ->statusCode(200)
-            ->description('OK')
-            ->content(MediaType::json($userSchema));
-
-        // Create the operation for the route (i.e. GET, POST, etc.).
-        $showUser = Operation::get()
-            ->responses($userResponse)
-            ->tags($usersTag)
-            ->summary('Get an individual user')
-            ->operationId('users.show');
-
-        // Define the /users path along with the supported operations.
-        $usersPath = PathItem::create()
-            ->route('/users')
-            ->operations($showUser);
-
-        // Create the main OpenAPI object composed off everything created above.
-        $openApi = OpenApi::create()
-            ->version(OpenApi::VERSION_3_0_1)
-            ->info($info)
-            ->paths($usersPath)
-            ->tags($usersTag);
-
-        $readmeExample = file_get_contents(realpath(__DIR__) . '/storage/readme_example.json');
-
-        $this->assertEquals(
-            json_decode($readmeExample, true),
             $openApi->toArray()
         );
     }
