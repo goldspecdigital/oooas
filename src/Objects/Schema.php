@@ -8,6 +8,11 @@ use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
+ * @property string|null $name
+ * @property string|null $title
+ * @property string|null $description
+ * @property string[]|null $enum
+ * @property mixed|null $default
  * @property string|null $format
  * @property string|null $type
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $items
@@ -28,7 +33,12 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property int|null $maxProperties
  * @property int|null $minProperties
  * @property boolean|null $nullable
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator|null $discriminator
+ * @property bool|null $readOnly
+ * @property bool|null $writeOnly
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
  * @property mixed|null $example
+ * @property bool|null $deprecated
  */
 class Schema extends BaseObject
 {
@@ -57,7 +67,7 @@ class Schema extends BaseObject
     const UUID = 'uuid';
 
     /**
-     * @var string|null;
+     * @var string|null
      */
     protected $name;
 
@@ -92,7 +102,7 @@ class Schema extends BaseObject
     protected $type;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null
      */
     protected $items;
 
@@ -182,9 +192,34 @@ class Schema extends BaseObject
     protected $nullable;
 
     /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator|null
+     */
+    protected $discriminator;
+
+    /**
+     * @var bool|null
+     */
+    protected $readOnly;
+
+    /**
+     * @var bool|null
+     */
+    protected $writeOnly;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null
+     */
+    protected $externalDocs;
+
+    /**
      * @var mixed|null
      */
     protected $example;
+
+    /**
+     * @var bool|null
+     */
+    protected $deprecated;
 
     /**
      * @param string|null $type
@@ -347,14 +382,14 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $items
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $items
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function items(Schema ...$items): self
+    public function items(Schema $items): self
     {
         $instance = clone $this;
 
-        $instance->items = $items ?: null;
+        $instance->items = $items;
 
         return $instance;
     }
@@ -597,6 +632,58 @@ class Schema extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator|null $discriminator
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function discriminator(?Discriminator $discriminator): self
+    {
+        $instance = clone $this;
+
+        $this->discriminator = $discriminator;
+
+        return $instance;
+    }
+
+    /**
+     * @param bool|null $readOnly
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function readOnly(?bool $readOnly = true): self
+    {
+        $instance = clone $this;
+
+        $instance->readOnly = $readOnly;
+
+        return $instance;
+    }
+
+    /**
+     * @param bool|null $writeOnly
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function writeOnly(?bool $writeOnly = true): self
+    {
+        $instance = clone $this;
+
+        $instance->writeOnly = $writeOnly;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    protected function externalDocs(?ExternalDocs $externalDocs): self
+    {
+        $instance = clone $this;
+
+        $instance->externalDocs = $externalDocs;
+
+        return $instance;
+    }
+
+    /**
      * @param mixed|null $example
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
@@ -605,6 +692,19 @@ class Schema extends BaseObject
         $instance = clone $this;
 
         $instance->example = $example;
+
+        return $instance;
+    }
+
+    /**
+     * @param bool|null $deprecated
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function deprecated(?bool $deprecated = true): self
+    {
+        $instance = clone $this;
+
+        $instance->deprecated = $deprecated;
 
         return $instance;
     }
@@ -631,7 +731,7 @@ class Schema extends BaseObject
             'default' => $this->default,
             'format' => $this->format,
             'type' => $this->type,
-            'items' => $this->items ? ['allOf' => $this->items] : null,
+            'items' => $this->items,
             'maxItems' => $this->maxItems,
             'minItems' => $this->minItems,
             'uniqueItems' => $this->uniqueItems,
@@ -649,7 +749,12 @@ class Schema extends BaseObject
             'maxProperties' => $this->maxProperties,
             'minProperties' => $this->minProperties,
             'nullable' => $this->nullable,
+            'discriminator' => $this->discriminator,
+            'readOnly' => $this->readOnly,
+            'writeOnly' => $this->writeOnly,
+            'externalDocs' => $this->externalDocs,
             'example' => $this->example,
+            'deprecated' => $this->deprecated,
         ]);
     }
 }
