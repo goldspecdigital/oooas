@@ -256,7 +256,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $name
+     * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function name(?string $name): self
@@ -269,7 +269,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $title
+     * @param string|null $title
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function title(?string $title): self
@@ -282,7 +282,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function description(?string $description): self
@@ -308,7 +308,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|mixed $default
+     * @param mixed|null $default
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function default($default): self
@@ -321,7 +321,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $format
+     * @param string|null $format
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function format(?string $format): self
@@ -334,7 +334,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $type
+     * @param string|null $type
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function type(?string $type): self
@@ -386,7 +386,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|bool $uniqueItems
+     * @param bool|null $uniqueItems
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function uniqueItems(?bool $uniqueItems = true): self
@@ -399,7 +399,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $pattern
+     * @param string|null $pattern
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function pattern(?string $pattern): self
@@ -597,7 +597,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|mixed $example
+     * @param mixed|null $example
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function example($example): self

@@ -62,7 +62,7 @@ class PathItem extends BaseObject
     }
 
     /**
-     * @param null|string $route
+     * @param string|null $route
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
      */
     public function route(?string $route): self
@@ -75,7 +75,7 @@ class PathItem extends BaseObject
     }
 
     /**
-     * @param null|string $summary
+     * @param string|null $summary
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
      */
     public function summary(?string $summary): self
@@ -88,7 +88,7 @@ class PathItem extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
      */
     public function description(?string $description): self

@@ -36,7 +36,7 @@ class ExternalDocs extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
     public function description(?string $description): self
@@ -49,7 +49,7 @@ class ExternalDocs extends BaseObject
     }
 
     /**
-     * @param null|string $url
+     * @param string|null $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
     public function url(?string $url): self

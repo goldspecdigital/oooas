@@ -162,7 +162,7 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param null|string $name
+     * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public function name(?string $name): self
@@ -175,7 +175,7 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param null|string $in
+     * @param string|null $in
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public function in(?string $in): self
@@ -188,7 +188,7 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public function description(?string $description): self
@@ -201,7 +201,7 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param null|bool $required
+     * @param bool|null $required
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public function required(?bool $required = true): self
@@ -214,7 +214,7 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param null|bool $deprecated
+     * @param bool|null $deprecated
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public function deprecated(?bool $deprecated = true): self
@@ -227,7 +227,7 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param null|bool $allowEmptyValue
+     * @param bool|null $allowEmptyValue
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public function allowEmptyValue(?bool $allowEmptyValue = true): self
@@ -279,7 +279,7 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param null|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public function schema(?Schema $schema): self
@@ -292,7 +292,7 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param null|mixed $example
+     * @param mixed|null $example
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public function example($example): self
@@ -305,7 +305,7 @@ class Parameter extends BaseObject
     }
 
     /**
-     * @param null|\GoldSpecDigital\ObjectOrientedOAS\Objects\Example[] $examples
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null $examples
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
     public function examples(Example ...$examples): self

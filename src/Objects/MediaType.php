@@ -115,7 +115,7 @@ class MediaType extends BaseObject
     }
 
     /**
-     * @param null|string $mediaType
+     * @param string|null $mediaType
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
     public function mediaType(?string $mediaType): self
@@ -128,7 +128,7 @@ class MediaType extends BaseObject
     }
 
     /**
-     * @param null|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
     public function schema(?Schema $schema): self

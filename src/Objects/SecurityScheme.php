@@ -61,7 +61,7 @@ class SecurityScheme extends BaseObject
     }
 
     /**
-     * @param null|string $name
+     * @param string|null $name
      * @return string
      */
     public function name(?string $name): string
@@ -74,7 +74,7 @@ class SecurityScheme extends BaseObject
     }
 
     /**
-     * @param null|string $type
+     * @param string|null $type
      * @return string
      */
     public function type(?string $type): string
@@ -87,7 +87,7 @@ class SecurityScheme extends BaseObject
     }
 
     /**
-     * @param null|array $flows
+     * @param array|null $flows
      * @return string
      */
     public function flows(?array $flows): string

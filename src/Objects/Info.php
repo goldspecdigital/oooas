@@ -62,7 +62,7 @@ class Info extends BaseObject
     }
 
     /**
-     * @param null|string $title
+     * @param string|null $title
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
     public function title(?string $title): self
@@ -75,7 +75,7 @@ class Info extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
     public function description(?string $description): self
@@ -88,7 +88,7 @@ class Info extends BaseObject
     }
 
     /**
-     * @param null|string $termsOfService
+     * @param string|null $termsOfService
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
     public function termsOfService(?string $termsOfService): self
@@ -127,7 +127,7 @@ class Info extends BaseObject
     }
 
     /**
-     * @param null|string $version
+     * @param string|null $version
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
     public function version(?string $version): self

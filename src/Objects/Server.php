@@ -42,7 +42,7 @@ class Server extends BaseObject
     }
 
     /**
-     * @param null|string $url
+     * @param string|null $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
      */
     public function url(?string $url): self
@@ -55,7 +55,7 @@ class Server extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
      */
     public function description(?string $description): self

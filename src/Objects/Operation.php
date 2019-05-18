@@ -161,7 +161,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param null|string $action
+     * @param string|null $action
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function action(?string $action): self
@@ -203,7 +203,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param null|string $summary
+     * @param string|null $summary
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function summary(?string $summary): self
@@ -216,7 +216,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function description(?string $description): self
@@ -242,7 +242,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param null|string $operationId
+     * @param string|null $operationId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function operationId(?string $operationId): self
@@ -294,7 +294,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param null|bool $deprecated
+     * @param bool|null $deprecated
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function deprecated(?bool $deprecated = true): self

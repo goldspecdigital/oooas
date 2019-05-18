@@ -148,7 +148,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param null|int $statusCode
+     * @param int|null $statusCode
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public function statusCode(?int $statusCode): self
@@ -161,7 +161,7 @@ class Response extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
     public function description(?string $description): self

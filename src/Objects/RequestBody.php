@@ -42,7 +42,7 @@ class RequestBody extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
     public function description(?string $description): self
@@ -68,7 +68,7 @@ class RequestBody extends BaseObject
     }
 
     /**
-     * @param null|bool $required
+     * @param bool|null $required
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
     public function required(?bool $required = true): self

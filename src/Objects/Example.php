@@ -48,7 +48,7 @@ class Example extends BaseObject
     }
 
     /**
-     * @param null|string $summary
+     * @param string|null $summary
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
      */
     public function summary(?string $summary): self
@@ -61,7 +61,7 @@ class Example extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
      */
     public function description(?string $description): self
@@ -74,7 +74,7 @@ class Example extends BaseObject
     }
 
     /**
-     * @param null|mixed $value
+     * @param mixed|null $value
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
      */
     public function value($value): self
@@ -87,7 +87,7 @@ class Example extends BaseObject
     }
 
     /**
-     * @param null|string $externalValue
+     * @param string|null $externalValue
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
      */
     public function externalValue(?string $externalValue): self
