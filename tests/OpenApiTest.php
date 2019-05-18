@@ -23,7 +23,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 
-class MainTest extends TestCase
+class OpenApiTest extends TestCase
 {
     /** @test */
     public function it_works()
