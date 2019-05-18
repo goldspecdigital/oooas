@@ -9,6 +9,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 /**
  * @property string|null $name
  * @property string|null $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
  */
 class Tag extends BaseObject
 {
@@ -21,6 +22,11 @@ class Tag extends BaseObject
      * @var string|null
      */
     protected $description;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null
+     */
+    protected $externalDocs;
 
     /**
      * @param string|null $name
@@ -62,6 +68,19 @@ class Tag extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
+     */
+    public function externalDocs(?ExternalDocs $externalDocs): self
+    {
+        $instance = clone $this;
+
+        $instance->externalDocs = $externalDocs;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
@@ -69,6 +88,7 @@ class Tag extends BaseObject
         return Arr::filter([
             'name' => $this->name,
             'description' => $this->description,
+            'externalDocs' => $this->externalDocs,
         ]);
     }
 }

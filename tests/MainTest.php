@@ -17,6 +17,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
@@ -133,7 +134,8 @@ class MainTest extends TestCase
         );
 
         // Specify the security.
-        $security = ['OAuth2' => []];
+        $security = SecurityRequirement::create()
+            ->name('OAuth2');
 
         // Specify external documentatino for the API.
         $externalDocs = ExternalDocs::create('https://github.com/goldspecdigital/oooas')

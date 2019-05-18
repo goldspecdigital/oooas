@@ -9,6 +9,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
@@ -20,7 +21,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Components|null $components
- * @property array[]|null $security
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null $security
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[]|null $tags
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
  */
@@ -55,7 +56,7 @@ class OpenApi extends BaseObject
     protected $components;
 
     /**
-     * @var array[]|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null
      */
     protected $security;
 
@@ -164,10 +165,10 @@ class OpenApi extends BaseObject
     }
 
     /**
-     * @param array[] $security
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[] $security
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
-    public function security(array ...$security): self
+    public function security(SecurityRequirement ...$security): self
     {
         $instance = clone $this;
 
