@@ -12,7 +12,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null $examples
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example|null $example
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding|null $encoding
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding[]|null $encoding
  */
 class MediaType extends BaseObject
 {
@@ -45,7 +45,7 @@ class MediaType extends BaseObject
     protected $examples;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding[]|null
      */
     protected $encoding;
 
@@ -180,14 +180,14 @@ class MediaType extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding|null $encoding
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding[] $encoding
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public function encoding(?Encoding $encoding): self
+    public function encoding(Encoding ...$encoding): self
     {
         $instance = clone $this;
 
-        $instance->encoding = $encoding;
+        $instance->encoding = $encoding ?: null;
 
         return $instance;
     }
@@ -202,11 +202,16 @@ class MediaType extends BaseObject
             $examples[$example->name] = $example->toArray();
         }
 
+        $encodings = [];
+        foreach ($this->encoding ?? [] as $encoding) {
+            $encodings[$encoding->name] = $encoding->toArray();
+        }
+
         return Arr::filter([
             'schema' => $this->schema,
             'example' => $this->example,
             'examples' => $examples ?: null,
-            'encoding' => $this->encoding,
+            'encoding' => $encodings ?: null,
         ]);
     }
 }

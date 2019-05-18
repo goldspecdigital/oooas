@@ -7,6 +7,7 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
+ * @package string|null $name
  * @package string|null $contentType
  * @package \GoldSpecDigital\ObjectOrientedOAS\Objects\Header[]|null $headers
  * @package string|null $style
@@ -15,6 +16,11 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Encoding extends BaseObject
 {
+    /**
+     * @var string|null
+     */
+    protected $name;
+
     /**
      * @var string|null
      */
@@ -46,6 +52,19 @@ class Encoding extends BaseObject
     public static function create(): self
     {
         $instance = new static();
+
+        return $instance;
+    }
+
+    /**
+     * @param string|null $name
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding
+     */
+    public function name(?string $name): self
+    {
+        $instance = clone $this;
+
+        $instance->name = $name;
 
         return $instance;
     }
