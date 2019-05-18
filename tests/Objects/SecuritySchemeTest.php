@@ -9,19 +9,23 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme;
 use GoldSpecDigital\ObjectOrientedOAS\Tests\TestCase;
 
-class ComponentsTest extends TestCase
+class SecuritySchemeTest extends TestCase
 {
     /** @test */
     public function create_with_all_parameters_works()
     {
         $oauthFlow = OAuthFlow::create()
-            ->flow(OAuthFlow::FLOW_IMPLICIT)
-            ->authorizationUrl('http://example.org/api/oauth/dialog');
+            ->flow(OAuthFlow::FLOW_CLIENT_CREDENTIALS);
 
         $securityScheme = SecurityScheme::create()
-            ->objectId('OAuth2')
             ->type(SecurityScheme::TYPE_OAUTH2)
-            ->flows($oauthFlow);
+            ->description('Standard auth')
+            ->objectId('OAuth2')
+            ->in(SecurityScheme::IN_HEADER)
+            ->scheme('basic')
+            ->bearerFormat('JWT')
+            ->flows($oauthFlow)
+            ->openIdConnectUrl('https://goldspecdigital.com');
 
         $components = Components::create()
             ->securitySchemes($securityScheme);
@@ -30,11 +34,14 @@ class ComponentsTest extends TestCase
             'securitySchemes' => [
                 'OAuth2' => [
                     'type' => 'oauth2',
+                    'description' => 'Standard auth',
+                    'in' => 'header',
+                    'scheme' => 'basic',
+                    'bearerFormat' => 'JWT',
                     'flows' => [
-                        'implicit' => [
-                            'authorizationUrl' => 'http://example.org/api/oauth/dialog',
-                        ],
+                        'clientCredentials' => [],
                     ],
+                    'openIdConnectUrl' => 'https://goldspecdigital.com',
                 ],
             ],
         ], $components->toArray());

@@ -44,7 +44,7 @@ class Components extends BaseObject
     {
         $securitySchemes = [];
         foreach ($this->securitySchemes ?? [] as $securityScheme) {
-            $securitySchemes[$securityScheme->name] = $securityScheme;
+            $securitySchemes[$securityScheme->objectId] = $securityScheme;
         }
 
         return Arr::filter([

@@ -10,6 +10,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
@@ -180,12 +181,14 @@ class OpenApiTest extends TestCase
         ];
 
         // Create a security scheme component.
+        $authFlow = OAuthFlow::create()
+            ->flow(OAuthFlow::FLOW_PASSWORD)
+            ->tokenUrl('https://api.example.com/oauth/authorize');
+
         $components = Components::create()->securitySchemes(
-            SecurityScheme::oauth2('OAuth2', [
-                'password' => [
-                    'tokenUrl' => 'https://api.example.com/oauth/authorize',
-                ],
-            ])
+            SecurityScheme::oauth2()
+                ->objectId('OAuth2')
+                ->flows($authFlow)
         );
 
         // Specify the security.
