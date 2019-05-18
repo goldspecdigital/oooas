@@ -18,7 +18,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody|null $requestBody
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[]|null $responses
  * @property bool|null $deprecated
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement|null $security;
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement|null $security
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
  */
 class Operation extends BaseObject

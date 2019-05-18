@@ -47,7 +47,7 @@ abstract class BaseObject implements JsonSerializable
      */
     public function __get(string $name)
     {
-        if (isset($this->$name)) {
+        if (property_exists($this, $name)) {
             return $this->$name;
         }
 
