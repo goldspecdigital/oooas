@@ -18,10 +18,10 @@ class Not extends BaseObject implements SchemaContract
     protected $schema;
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Not
      */
-    public static function create(Schema $schema): self
+    public static function create(Schema $schema = null): self
     {
         $instance = new static();
 
@@ -31,10 +31,10 @@ class Not extends BaseObject implements SchemaContract
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Not
      */
-    public function schema(Schema $schema): self
+    public function schema(?Schema $schema): self
     {
         $instance = clone $this;
 
