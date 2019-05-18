@@ -4,26 +4,77 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Tests\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Example;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Header;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Link;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use GoldSpecDigital\ObjectOrientedOAS\Tests\TestCase;
 
 class ResponseTest extends TestCase
 {
     /** @test */
-    public function create_with_required_parameters_works()
+    public function create_with_all_parameters_works()
     {
-        $response = Response::create(
-            200,
-            'OK',
-            MediaType::json()
-        );
+        $header = Header::create()
+            ->name('HeaderName')
+            ->description('Lorem ipsum')
+            ->required()
+            ->deprecated()
+            ->allowEmptyValue()
+            ->style(Header::SIMPLE)
+            ->explode()
+            ->allowReserved()
+            ->schema(Schema::string())
+            ->example('Example String')
+            ->examples(
+                Example::create('Example value')
+                    ->name('ExampleName')
+            )
+            ->content(MediaType::json());
+
+        $link = Link::create()
+            ->name('MyLink');
+
+        $response = Response::create()
+            ->statusCode(200)
+            ->description('OK')
+            ->headers($header)
+            ->content(MediaType::json())
+            ->links($link);
 
         $this->assertEquals(
             [
                 'description' => 'OK',
+                'headers' => [
+                    'HeaderName' => [
+                        'description' => 'Lorem ipsum',
+                        'required' => true,
+                        'deprecated' => true,
+                        'allowEmptyValue' => true,
+                        'style' => 'simple',
+                        'explode' => true,
+                        'allowReserved' => true,
+                        'schema' => [
+                            'type' => 'string',
+                        ],
+                        'example' => 'Example String',
+                        'examples' => [
+                            'ExampleName' => [
+                                'value' => 'Example value',
+                            ],
+                        ],
+                        'content' => [
+                            'application/json' => [],
+                        ],
+                    ],
+                ],
                 'content' => [
                     'application/json' => [],
+                ],
+                'links' => [
+                    'MyLink' => [],
                 ],
             ],
             $response->toArray()

@@ -11,15 +11,26 @@ use GoldSpecDigital\ObjectOrientedOAS\Tests\TestCase;
 class ServerTestTest extends TestCase
 {
     /** @test */
-    public function create_with_required_parameters_works()
+    public function create_with_all_parameters_works()
     {
-        $server = Server::create()
-            ->url('https://api.example.con/v1');
+        $serverVariable = ServerVariable::create()
+            ->name('ServerVariableName')
+            ->default('Default value');
 
-        $this->assertEquals(
-            ['url' => 'https://api.example.con/v1'],
-            $server->toArray()
-        );
+        $server = Server::create()
+            ->url('https://api.example.con/v1')
+            ->description('Core API')
+            ->variables($serverVariable);
+
+        $this->assertEquals([
+            'url' => 'https://api.example.con/v1',
+            'description' => 'Core API',
+            'variables' => [
+                'ServerVariableName' => [
+                    'default' => 'Default value',
+                ],
+            ],
+        ], $server->toArray());
     }
 
     /** @test */

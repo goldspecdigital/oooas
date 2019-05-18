@@ -102,7 +102,6 @@ class Link extends BaseObject
     public function toArray(): array
     {
         return Arr::filter([
-            'name' => $this->name,
             'href' => $this->href,
             'operationId' => $this->operationId,
             'description' => $this->description,

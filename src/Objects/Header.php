@@ -93,17 +93,13 @@ class Header extends BaseObject
 
     /**
      * @param string|null $name
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Header
      */
-    public static function create(
-        string $name = null,
-        SchemaContract $schema = null
-    ): self {
+    public static function create(string $name = null): self
+    {
         $instance = new static();
 
         $instance->name = $name;
-        $instance->schema = $schema;
 
         return $instance;
     }
@@ -320,7 +316,6 @@ class Header extends BaseObject
         }
 
         return Arr::filter([
-            'name' => $this->name,
             'description' => $this->description,
             'required' => $this->required,
             'deprecated' => $this->deprecated,
