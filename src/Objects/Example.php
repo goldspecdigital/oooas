@@ -10,6 +10,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property string|null $summary
  * @property string|null $description
  * @property mixed|null $value
+ * @property string|null $externalValue
  */
 class Example extends BaseObject
 {
@@ -27,6 +28,11 @@ class Example extends BaseObject
      * @var mixed|null
      */
     protected $value;
+
+    /**
+     * @var string|null
+     */
+    protected $externalValue;
 
     /**
      * @param mixed|null $value
@@ -81,6 +87,19 @@ class Example extends BaseObject
     }
 
     /**
+     * @param null|string $externalValue
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
+     */
+    public function externalValue(?string $externalValue): self
+    {
+        $instance = clone $this;
+
+        $instance->externalValue = $externalValue;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
@@ -89,6 +108,7 @@ class Example extends BaseObject
             'summary' => $this->summary,
             'description' => $this->description,
             'value' => $this->value,
+            'externalValue' => $this->externalValue,
         ]);
     }
 }

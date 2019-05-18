@@ -8,7 +8,11 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
  * @property string|null $route
+ * @property string|null $summary
+ * @property string|null $description
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation[]|null $operations
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter[]|null $parameters
  */
 class PathItem extends BaseObject
 {
@@ -18,9 +22,29 @@ class PathItem extends BaseObject
     protected $route;
 
     /**
+     * @var string|null
+     */
+    protected $summary;
+
+    /**
+     * @var string|null
+     */
+    protected $description;
+
+    /**
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation[]|null
      */
     protected $operations;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null
+     */
+    protected $servers;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter[]|null
+     */
+    protected $parameters;
 
     /**
      * @param string|null $route
@@ -51,6 +75,32 @@ class PathItem extends BaseObject
     }
 
     /**
+     * @param null|string $summary
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     */
+    public function summary(?string $summary): self
+    {
+        $instance = clone $this;
+
+        $instance->summary = $summary;
+
+        return $instance;
+    }
+
+    /**
+     * @param null|string $description
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     */
+    public function description(?string $description): self
+    {
+        $instance = clone $this;
+
+        $instance->description = $description;
+
+        return $instance;
+    }
+
+    /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation[] $operations
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
      */
@@ -59,6 +109,32 @@ class PathItem extends BaseObject
         $instance = clone $this;
 
         $instance->operations = $operations ?: null;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[] $servers
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     */
+    public function servers(Server ...$servers): self
+    {
+        $instance = clone $this;
+
+        $instance->servers = $servers ?: null;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter[] $parameters
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     */
+    public function parameters(Parameter ...$parameters): self
+    {
+        $instance = clone $this;
+
+        $instance->parameters = $parameters ?: null;
 
         return $instance;
     }
@@ -73,6 +149,13 @@ class PathItem extends BaseObject
             $operations[$operation->action] = $operation->toArray();
         }
 
-        return Arr::filter($operations);
+        return Arr::filter(
+            array_merge($operations, [
+                'summary' => $this->summary,
+                'description' => $this->description,
+                'servers' => $this->servers,
+                'parameters' => $this->parameters,
+            ])
+        );
     }
 }
