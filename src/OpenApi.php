@@ -8,6 +8,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\BaseObject;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Paths;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
@@ -19,7 +20,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property string|null $version
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null $paths
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Components|null $components
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null $security
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[]|null $tags
@@ -46,7 +47,7 @@ class OpenApi extends BaseObject
     protected $servers;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null
      */
     protected $paths;
 
@@ -139,14 +140,14 @@ class OpenApi extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Paths|null $paths
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $paths
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
-    public function paths(?Paths $paths): self
+    public function paths(PathItem ...$paths): self
     {
         $instance = clone $this;
 
-        $instance->paths = $paths;
+        $instance->paths = $paths ?: null;
 
         return $instance;
     }
@@ -208,11 +209,16 @@ class OpenApi extends BaseObject
      */
     public function toArray(): array
     {
+        $paths = [];
+        foreach ($this->paths ?? [] as $path) {
+            $paths[$path->route] = $path;
+        }
+
         return Arr::filter([
             'openapi' => $this->openapi,
             'info' => $this->info,
             'servers' => $this->servers,
-            'paths' => $this->paths,
+            'paths' => $paths ?: null,
             'components' => $this->components,
             'security' => $this->security,
             'tags' => $this->tags,

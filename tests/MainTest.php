@@ -108,7 +108,7 @@ class MainTest extends TestCase
             );
 
         // Specify the paths supported by the API.
-        $paths = Paths::create(
+        $paths = [
             // Create a path along with it's operations.
             PathItem::create()
                 ->route('/audits')
@@ -116,7 +116,7 @@ class MainTest extends TestCase
             PathItem::create()
                 ->route('/audits/{audit}')
                 ->operations($readAudit)
-        );
+        ];
 
         // Specify the server endpoints.
         $servers = [
@@ -145,7 +145,7 @@ class MainTest extends TestCase
         $openApi = OpenApi::create()
             ->version(OpenApi::VERSION_3_0_1)
             ->info($info)
-            ->paths($paths)
+            ->paths(...$paths)
             ->servers(...$servers)
             ->components($components)
             ->security($security)
@@ -197,19 +197,15 @@ class MainTest extends TestCase
             ->operationId('users.show');
 
         // Define the /users path along with the supported operations.
-        $userPaths = PathItem::create()
+        $usersPath = PathItem::create()
             ->route('/users')
             ->operations($showUser);
-
-        // Define all of the paths supported by the API.
-        $paths = Paths::create()
-            ->pathItems($userPaths);
 
         // Create the main OpenAPI object composed off everything created above.
         $openApi = OpenApi::create()
             ->version(OpenApi::VERSION_3_0_1)
             ->info($info)
-            ->paths($paths)
+            ->paths($usersPath)
             ->tags($usersTag);
 
         $readmeExample = file_get_contents(realpath(__DIR__) . '/storage/readme_example.json');
