@@ -48,7 +48,7 @@ class Paths extends BaseObject
     public function toArray(): array
     {
         $pathItems = [];
-        foreach ($this->pathItems as $pathItem) {
+        foreach ($this->pathItems ?? [] as $pathItem) {
             $pathItems[$pathItem->route] = $pathItem;
         }
 

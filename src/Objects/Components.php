@@ -43,12 +43,12 @@ class Components extends BaseObject
     public function toArray(): array
     {
         $securitySchemes = [];
-        foreach ($this->securitySchemes as $securityScheme) {
+        foreach ($this->securitySchemes ?? [] as $securityScheme) {
             $securitySchemes[$securityScheme->name] = $securityScheme;
         }
 
         return Arr::filter([
-            'securitySchemes' => $securitySchemes,
+            'securitySchemes' => $securitySchemes ?: null,
         ]);
     }
 }

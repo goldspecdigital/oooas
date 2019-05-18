@@ -145,7 +145,7 @@ class PathItem extends BaseObject
     public function toArray(): array
     {
         $operations = [];
-        foreach ($this->operations as $operation) {
+        foreach ($this->operations ?? [] as $operation) {
             $operations[$operation->action] = $operation->toArray();
         }
 
@@ -153,8 +153,8 @@ class PathItem extends BaseObject
             array_merge($operations, [
                 'summary' => $this->summary,
                 'description' => $this->description,
-                'servers' => $this->servers,
-                'parameters' => $this->parameters,
+                'servers' => $this->servers ?: null,
+                'parameters' => $this->parameters ?: null,
             ])
         );
     }

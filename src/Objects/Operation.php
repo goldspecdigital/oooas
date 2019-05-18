@@ -18,7 +18,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody|null $requestBody
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[]|null $responses
  * @property bool|null $deprecated
- * @property array|null $security;
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement|null $security;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
  */
 class Operation extends BaseObject
@@ -30,6 +30,7 @@ class Operation extends BaseObject
     const OPTIONS = 'options';
     const HEAD = 'head';
     const PATCH = 'patch';
+    const TRACE = 'trace';
 
     /**
      * @var string|null
@@ -82,7 +83,7 @@ class Operation extends BaseObject
     protected $deprecated;
 
     /**
-     * @var array|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement|null
      */
     protected $security;
 
@@ -158,6 +159,15 @@ class Operation extends BaseObject
     public static function patch(Response ...$responses): self
     {
         return static::create(static::PATCH, ...$responses);
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function trace(Response ...$responses): self
+    {
+        return static::create(static::TRACE, ...$responses);
     }
 
     /**
@@ -307,10 +317,10 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param array|null $security
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement|null $security
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public function security(?array $security): self
+    public function security(?SecurityRequirement $security): self
     {
         $instance = clone $this;
 
@@ -338,7 +348,7 @@ class Operation extends BaseObject
     public function toArray(): array
     {
         $responses = [];
-        foreach ($this->responses as $response) {
+        foreach ($this->responses ?? [] as $response) {
             $responses[$response->statusCode] = $response;
         }
 
@@ -350,7 +360,7 @@ class Operation extends BaseObject
             'operationId' => $this->operationId,
             'parameters' => $this->parameters,
             'requestBody' => $this->requestBody,
-            'responses' => $responses,
+            'responses' => $responses ?: null,
             'deprecated' => $this->deprecated,
             'security' => $this->security,
             'servers' => $this->servers,
