@@ -105,7 +105,7 @@ $usersPath = PathItem::create()
     
 // Create the main OpenAPI object composed off everything created above.
 $openApi = OpenApi::create()
-    ->openapi(OpenApi::OPENAPI_3_0_1)
+    ->openapi(OpenApi::OPENAPI_3_0_2)
     ->info($info)
     ->paths($usersPath)
     ->tags($usersTag);

@@ -28,6 +28,7 @@ class OpenApi extends BaseObject
 {
     const OPENAPI_3_0_0 = '3.0.0';
     const OPENAPI_3_0_1 = '3.0.1';
+    const OPENAPI_3_0_2 = '3.0.2';
 
     /**
      * @var string|null
