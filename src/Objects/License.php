@@ -23,20 +23,16 @@ class License extends BaseObject
     protected $url;
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\License
      */
-    public static function create(string $name = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->name = $name;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param null|string $name
+     * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\License
      */
     public function name(?string $name): self
@@ -49,7 +45,7 @@ class License extends BaseObject
     }
 
     /**
-     * @param null|string $url
+     * @param string|null $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\License
      */
     public function url(?string $url): self

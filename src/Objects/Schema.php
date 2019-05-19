@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
 use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
+ * @property string|null $title
+ * @property string|null $description
+ * @property mixed[]|null $enum
+ * @property mixed|null $default
  * @property string|null $format
  * @property string|null $type
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $items
@@ -24,42 +29,37 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property int|null $multipleOf
  * @property string[]|null $required
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $properties
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $additionalProperties
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $additionalProperties
  * @property int|null $maxProperties
  * @property int|null $minProperties
  * @property boolean|null $nullable
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator|null $discriminator
+ * @property bool|null $readOnly
+ * @property bool|null $writeOnly
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml|null $xml
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
  * @property mixed|null $example
+ * @property bool|null $deprecated
  */
-class Schema extends BaseObject
+class Schema extends BaseObject implements SchemaContract
 {
-    /*
-     * Types.
-     */
-    const ARRAY = 'array';
-    const BOOLEAN = 'boolean';
-    const INTEGER = 'integer';
-    const NUMBER = 'number';
-    const OBJECT = 'object';
-    const STRING = 'string';
+    const TYPE_ARRAY = 'array';
+    const TYPE_BOOLEAN = 'boolean';
+    const TYPE_INTEGER = 'integer';
+    const TYPE_NUMBER = 'number';
+    const TYPE_OBJECT = 'object';
+    const TYPE_STRING = 'string';
 
-    /*
-     * Formats.
-     */
-    const INT32 = 'int32';
-    const INT64 = 'int64';
-    const FLOAT = 'float';
-    const DOUBLE = 'double';
-    const BYTE = 'byte';
-    const BINARY = 'binary';
-    const DATE = 'date';
-    const DATE_TIME = 'date-time';
-    const PASSWORD = 'password';
-    const UUID = 'uuid';
-
-    /**
-     * @var string|null;
-     */
-    protected $name;
+    const FORMAT_INT32 = 'int32';
+    const FORMAT_INT64 = 'int64';
+    const FORMAT_FLOAT = 'float';
+    const FORMAT_DOUBLE = 'double';
+    const FORMAT_BYTE = 'byte';
+    const FORMAT_BINARY = 'binary';
+    const FORMAT_DATE = 'date';
+    const FORMAT_DATE_TIME = 'date-time';
+    const FORMAT_PASSWORD = 'password';
+    const FORMAT_UUID = 'uuid';
 
     /**
      * @var string|null
@@ -72,7 +72,7 @@ class Schema extends BaseObject
     protected $description;
 
     /**
-     * @var string[]|null
+     * @var mixed[]|null
      */
     protected $enum;
 
@@ -92,7 +92,7 @@ class Schema extends BaseObject
     protected $type;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null
      */
     protected $items;
 
@@ -162,7 +162,7 @@ class Schema extends BaseObject
     protected $properties;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null
      */
     protected $additionalProperties;
 
@@ -182,94 +182,105 @@ class Schema extends BaseObject
     protected $nullable;
 
     /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator|null
+     */
+    protected $discriminator;
+
+    /**
+     * @var bool|null
+     */
+    protected $readOnly;
+
+    /**
+     * @var bool|null
+     */
+    protected $writeOnly;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml|null
+     */
+    protected $xml;
+
+    /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null
+     */
+    protected $externalDocs;
+
+    /**
      * @var mixed|null
      */
     protected $example;
 
     /**
-     * @param string|null $type
-     * @param string|null $name
+     * @var bool|null
+     */
+    protected $deprecated;
+
+    /**
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function create(string $type = null, string $name = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->type = $type;
-        $instance->name = $name;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function array(string $name = null): self
+    public static function array(string $objectId = null): self
     {
-        return static::create(static::ARRAY, $name);
+        return static::create($objectId)->type(static::TYPE_ARRAY);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function boolean(string $name = null): self
+    public static function boolean(string $objectId = null): self
     {
-        return static::create(static::BOOLEAN, $name);
+        return static::create($objectId)->type(static::TYPE_BOOLEAN);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function integer(string $name = null): self
+    public static function integer(string $objectId = null): self
     {
-        return static::create(static::INTEGER, $name);
+        return static::create($objectId)->type(static::TYPE_INTEGER);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function number(string $name = null): self
+    public static function number(string $objectId = null): self
     {
-        return static::create(static::NUMBER, $name);
+        return static::create($objectId)->type(static::TYPE_NUMBER);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function object(string $name = null): self
+    public static function object(string $objectId = null): self
     {
-        return static::create(static::OBJECT, $name);
+        return static::create($objectId)->type(static::TYPE_OBJECT);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function string(string $name = null): self
+    public static function string(string $objectId = null): self
     {
-        return static::create(static::STRING, $name);
+        return static::create($objectId)->type(static::TYPE_STRING);
     }
 
     /**
-     * @param null|string $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
-     */
-    public function name(?string $name): self
-    {
-        $instance = clone $this;
-
-        $instance->name = $name;
-
-        return $instance;
-    }
-
-    /**
-     * @param null|string $title
+     * @param string|null $title
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function title(?string $title): self
@@ -282,7 +293,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function description(?string $description): self
@@ -308,7 +319,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|mixed $default
+     * @param mixed|null $default
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function default($default): self
@@ -321,7 +332,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $format
+     * @param string|null $format
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function format(?string $format): self
@@ -334,7 +345,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $type
+     * @param string|null $type
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function type(?string $type): self
@@ -347,14 +358,14 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $items
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract $items
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function items(Schema ...$items): self
+    public function items(SchemaContract $items): self
     {
         $instance = clone $this;
 
-        $instance->items = $items ?: null;
+        $instance->items = $items;
 
         return $instance;
     }
@@ -367,7 +378,7 @@ class Schema extends BaseObject
     {
         $instance = clone $this;
 
-        $instance->maximum = $maxItems;
+        $instance->maxItems = $maxItems;
 
         return $instance;
     }
@@ -380,13 +391,13 @@ class Schema extends BaseObject
     {
         $instance = clone $this;
 
-        $instance->maximum = $minItems;
+        $instance->minItems = $minItems;
 
         return $instance;
     }
 
     /**
-     * @param null|bool $uniqueItems
+     * @param bool|null $uniqueItems
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function uniqueItems(?bool $uniqueItems = true): self
@@ -399,7 +410,7 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|string $pattern
+     * @param string|null $pattern
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function pattern(?string $pattern): self
@@ -513,7 +524,7 @@ class Schema extends BaseObject
         foreach ($required as &$require) {
             // If a Schema instance was passed in then extract it's name string.
             if ($require instanceof Schema) {
-                $require = $require->name;
+                $require = $require->objectId;
                 continue;
             }
 
@@ -545,14 +556,14 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $additionalProperties
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $additionalProperties
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function additionalProperties(Schema ...$additionalProperties): self
+    public function additionalProperties(?Schema $additionalProperties): self
     {
         $instance = clone $this;
 
-        $instance->additionalProperties = $additionalProperties ?: null;
+        $instance->additionalProperties = $additionalProperties;
 
         return $instance;
     }
@@ -597,7 +608,72 @@ class Schema extends BaseObject
     }
 
     /**
-     * @param null|mixed $example
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator|null $discriminator
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function discriminator(?Discriminator $discriminator): self
+    {
+        $instance = clone $this;
+
+        $instance->discriminator = $discriminator;
+
+        return $instance;
+    }
+
+    /**
+     * @param bool|null $readOnly
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function readOnly(?bool $readOnly = true): self
+    {
+        $instance = clone $this;
+
+        $instance->readOnly = $readOnly;
+
+        return $instance;
+    }
+
+    /**
+     * @param bool|null $writeOnly
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function writeOnly(?bool $writeOnly = true): self
+    {
+        $instance = clone $this;
+
+        $instance->writeOnly = $writeOnly;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml|null $xml
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function xml(?Xml $xml): self
+    {
+        $instance = clone $this;
+
+        $instance->xml = $xml;
+
+        return $instance;
+    }
+
+    /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function externalDocs(?ExternalDocs $externalDocs): self
+    {
+        $instance = clone $this;
+
+        $instance->externalDocs = $externalDocs;
+
+        return $instance;
+    }
+
+    /**
+     * @param mixed|null $example
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function example($example): self
@@ -610,18 +686,26 @@ class Schema extends BaseObject
     }
 
     /**
+     * @param bool|null $deprecated
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     */
+    public function deprecated(?bool $deprecated = true): self
+    {
+        $instance = clone $this;
+
+        $instance->deprecated = $deprecated;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
     {
         $properties = [];
         foreach ($this->properties ?? [] as $property) {
-            $properties[$property->name] = $property->toArray();
-        }
-
-        $additionalProperties = [];
-        foreach ($this->additionalProperties ?? [] as $additionalProperty) {
-            $additionalProperties[$additionalProperty->name] = $additionalProperty->toArray();
+            $properties[$property->objectId] = $property->toArray();
         }
 
         return Arr::filter([
@@ -631,7 +715,7 @@ class Schema extends BaseObject
             'default' => $this->default,
             'format' => $this->format,
             'type' => $this->type,
-            'items' => $this->items ? ['allOf' => $this->items] : null,
+            'items' => $this->items,
             'maxItems' => $this->maxItems,
             'minItems' => $this->minItems,
             'uniqueItems' => $this->uniqueItems,
@@ -645,11 +729,17 @@ class Schema extends BaseObject
             'multipleOf' => $this->multipleOf,
             'required' => $this->required,
             'properties' => $properties ?: null,
-            'additionalProperties' => $additionalProperties ?: null,
+            'additionalProperties' => $this->additionalProperties,
             'maxProperties' => $this->maxProperties,
             'minProperties' => $this->minProperties,
             'nullable' => $this->nullable,
+            'discriminator' => $this->discriminator,
+            'readOnly' => $this->readOnly,
+            'writeOnly' => $this->writeOnly,
+            'xml' => $this->xml,
+            'externalDocs' => $this->externalDocs,
             'example' => $this->example,
+            'deprecated' => $this->deprecated,
         ]);
     }
 }

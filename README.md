@@ -41,10 +41,14 @@
 
 ## Introduction
 
-An object oriented approach to generating OpenAPI docs, implemented in PHP. 
+An object oriented approach to generating OpenAPI specs, implemented in PHP. 
 
-You can build up your API spec using PHP classes, and then export the spec to 
-JSON (or YAML with the help of another package).
+You can build up your API spec using immutable PHP classes, and then export the 
+spec to JSON (or YAML with the help of another package).
+
+This package is **dependency free** and makes heavy use of **PHP 7 features**, 
+mainly being **type hints** and enabling **strict types**. This should make your 
+life a lot easier when working with a good IDE that can use this information.
 
 ## Installing
 
@@ -59,7 +63,7 @@ See the code sample below for the most basic usage:
 
 ```php
 use GoldSpecDigital\ObjectOrientedOAS\Objects\{
-    Info, MediaType, Operation, PathItem, Paths, Response, Schema, Tag
+    Info, MediaType, Operation, PathItem, Response, Schema, Tag
 };
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 
@@ -77,17 +81,19 @@ $info = Info::create()
 // Create the user schema.
 $userSchema = Schema::object()
     ->properties(
-        Schema::string('id')->format(Schema::UUID),
+        Schema::string('id')->format(Schema::FORMAT_UUID),
         Schema::string('name'),
         Schema::integer('age')->example(23),
-        Schema::string('created_at')->format(Schema::DATE_TIME)
+        Schema::string('created_at')->format(Schema::FORMAT_DATE_TIME)
     );
     
 // Create the user response.
 $userResponse = Response::create()
     ->statusCode(200)
     ->description('OK')
-    ->content(MediaType::json($userSchema));
+    ->content(
+        MediaType::json()->schema($userSchema)
+    );
     
 // Create the operation for the route (i.e. GET, POST, etc.).
 $showUser = Operation::get()
@@ -97,19 +103,15 @@ $showUser = Operation::get()
     ->operationId('users.show');
     
 // Define the /users path along with the supported operations.
-$userPaths = PathItem::create()
+$usersPath = PathItem::create()
     ->route('/users')
     ->operations($showUser);
     
-// Define all of the paths supported by the API.
-$paths = Paths::create()
-    ->pathItems($userPaths);
-    
 // Create the main OpenAPI object composed off everything created above.
 $openApi = OpenApi::create()
-    ->version(OpenApi::VERSION_3_0_1)
+    ->openapi(OpenApi::OPENAPI_3_0_2)
     ->info($info)
-    ->paths($paths)
+    ->paths($usersPath)
     ->tags($usersTag);
     
 header('Content-Type: application/json');
@@ -126,7 +128,7 @@ separate files easily will be a massive help.
 
 ```yaml
 ---
-openapi: 3.0.1
+openapi: 3.0.2
 info:
   title: API Specification
   description: For using the Example App API
@@ -182,12 +184,123 @@ $yaml = Yaml::dump($array);
 
 ## Guidance
 
-If you want to learn more about the OpenAPI schema, or if you would like a quick
-reference, then check out the [OpenAPI Map](https://openapi-map.apihandyman.io/?version=3.0) 
-project created by [Arnaud Lauret](http://apihandyman.io/).
+If you want to learn more about the OpenAPI schema, then have a look at the 
+official [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
+
+Alternatively, if you would like a quick reference, then check out the 
+[OpenAPI Map](https://openapi-map.apihandyman.io/?version=3.0) project created 
+by [Arnaud Lauret](http://apihandyman.io/).
 
 You can use this interactive tool to figure out what objects go where and how
 they relate to one another.
+
+## Usage
+
+### Setting and unsetting properties
+
+Each object has setter methods for it's supported properties. Most of these 
+methods allow `null` values which will need to be explicitly passed (see the 
+next example for how to unset using variadic setter methods). This will have the 
+effect of unsetting the property:
+
+```php
+$info = Info::create()
+    ->title('Example API');
+
+$openApi = OpenAPI::create()
+    ->info($info);
+// $openApi->toJson() -> '{"info": {"title": "Example API"}}'
+
+$openApi = $openApi->info(null);
+// $openApi->toJson() -> '{}'
+```
+
+For variadic setter methods, if you call the method and don't supply any
+parameters, then this will have the effect of unsetting the property:
+
+```php
+$path = PathItem::create()
+    ->route('/users');
+
+$openApi = OpenAPI::create()
+    ->paths($path);
+// $openApi->toJson() -> '{"paths": {"/users": []}}'
+
+$openApi = $openApi->paths();
+// $openApi->toJson() -> '{}'
+```
+
+### Retrieving properties
+
+You can easily retrieve a property using a magic getter. These have been
+implemented for all properties for every object. DocBlocks have been provided
+to give better auto-completion in IDEs:
+
+```php
+$info = Info::create()->title('Example API');
+
+// $info->title => 'Example API'
+```
+
+### Object ID
+
+Every object has an optional `$objectId` property which is a `string` and can 
+either be set in the class constructor or the preferred `create()` method. This 
+property is used when a parent object needs to use a name for the children.
+
+An example of this in use is when a schema object is composed of other schema
+properties:
+
+```php
+$schema = Schema::create()
+    ->type(Schema::TYPE_OBJECT)
+    ->properties(
+        Schema::create('username')->type(Schema::TYPE_STRING),
+        Schema::create('age')->type(Schema::TYPE_INTEGER)
+    );
+    
+$schema->toJson();
+/* 
+{
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    }
+  }
+} 
+*/
+``` 
+
+If an object contains any helper creation methods, then these methods also allow
+you to specify the `$objectId` property as a parameter. The code sample below is
+functionally identical to the one above:
+
+```php
+$schema = Schema::object()
+    ->properties(
+        Schema::string('username'),
+        Schema::integer('age')
+    );
+    
+$schema->toJson();
+/* 
+{
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    }
+  }
+} 
+*/
+``` 
 
 ## Running the tests
 
