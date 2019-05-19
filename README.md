@@ -87,7 +87,9 @@ $userSchema = Schema::object()
 $userResponse = Response::create()
     ->statusCode(200)
     ->description('OK')
-    ->content(MediaType::json($userSchema));
+    ->content(
+        MediaType::json()->schema($userSchema)
+    );
     
 // Create the operation for the route (i.e. GET, POST, etc.).
 $showUser = Operation::get()

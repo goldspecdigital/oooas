@@ -52,7 +52,9 @@ class OpenApiTest extends TestCase
         $userResponse = Response::create()
             ->statusCode(200)
             ->description('OK')
-            ->content(MediaType::json()->schema($userSchema));
+            ->content(
+                MediaType::json()->schema($userSchema)
+            );
 
         // Create the operation for the route (i.e. GET, POST, etc.).
         $showUser = Operation::get()
