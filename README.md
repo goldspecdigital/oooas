@@ -207,7 +207,7 @@ effect of unsetting the property:
 $info = Info::create()
     ->title('Example API');
 
-$openApi = OpenAPI::create()
+$openApi = OpenApi::create()
     ->info($info);
 // $openApi->toJson() -> '{"info": {"title": "Example API"}}'
 
@@ -222,7 +222,7 @@ parameters, then this will have the effect of unsetting the property:
 $path = PathItem::create()
     ->route('/users');
 
-$openApi = OpenAPI::create()
+$openApi = OpenApi::create()
     ->paths($path);
 // $openApi->toJson() -> '{"paths": {"/users": []}}'
 
@@ -239,7 +239,7 @@ to give better auto-completion in IDEs:
 ```php
 $info = Info::create()->title('Example API');
 
-// $info->title => 'Example API'
+// $info->title -> 'Example API'
 ```
 
 ### Object ID
