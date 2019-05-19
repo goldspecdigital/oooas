@@ -19,10 +19,10 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class SecurityScheme extends BaseObject
 {
-    const TYPE_API_KEY= 'apiKey';
-    const TYPE_HTTP= 'http';
+    const TYPE_API_KEY = 'apiKey';
+    const TYPE_HTTP = 'http';
     const TYPE_OAUTH2 = 'oauth2';
-    const TYPE_OPEN_ID_CONNECT= 'openIdConnect';
+    const TYPE_OPEN_ID_CONNECT = 'openIdConnect';
 
     const IN_QUERY = 'query';
     const IN_HEADER = 'header';
