@@ -41,10 +41,14 @@
 
 ## Introduction
 
-An object oriented approach to generating OpenAPI docs, implemented in PHP. 
+An object oriented approach to generating OpenAPI specs, implemented in PHP. 
 
 You can build up your API spec using PHP classes, and then export the spec to 
 JSON (or YAML with the help of another package).
+
+This package is **dependency free** and makes heavy use of **PHP 7 features**, 
+mainly being **type hints** and enabling **strict types**. This should make your 
+life a lot easier when working with a good IDE that can use this information.
 
 ## Installing
 
@@ -124,7 +128,7 @@ separate files easily will be a massive help.
 
 ```yaml
 ---
-openapi: 3.0.1
+openapi: 3.0.2
 info:
   title: API Specification
   description: For using the Example App API
@@ -180,12 +184,107 @@ $yaml = Yaml::dump($array);
 
 ## Guidance
 
-If you want to learn more about the OpenAPI schema, or if you would like a quick
-reference, then check out the [OpenAPI Map](https://openapi-map.apihandyman.io/?version=3.0) 
-project created by [Arnaud Lauret](http://apihandyman.io/).
+If you want to learn more about the OpenAPI schema, then have a look at the 
+official [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
+
+Alternatively, if you would like a quick reference, then check out the 
+[OpenAPI Map](https://openapi-map.apihandyman.io/?version=3.0) project created 
+by [Arnaud Lauret](http://apihandyman.io/).
 
 You can use this interactive tool to figure out what objects go where and how
 they relate to one another.
+
+## Usage
+
+### Setting and unsetting properties
+
+Each object has setter methods for it's supported properties. These methods all
+allow `null` values which must be explicitly passed. This will have the effect
+of removing the property from the output:
+
+```php
+$info = Info::create()
+    ->title('Example API');
+
+$openApi = OpenAPI::create()
+    ->info($info);
+// $openApi->toJson() -> '{"info": {"title": "Example API"}}'
+
+$openApi = $openApi->info(null);
+// $openApi->toJson() -> '{}'
+```
+
+### Retrieving properties
+
+You can easily retrieve a property using a magic getter. These have been
+implemented for all properties for every object. DocBlocks have been provided
+to give better auto-completion in IDEs:
+
+```php
+$info = Info::create()->title('Example API');
+
+// $info->title => 'Example API'
+```
+
+### Object ID
+
+Every object has an optional `$objectId` property which is a `string` and can 
+either be set in the class constructor or the preferred `create()` method. This 
+property is used when a parent object needs to use a name for the children.
+
+An example of this in use is when a schema object is composed of other schema
+properties:
+
+```php
+$schema = Schema::create()
+    ->type(Schema::TYPE_OBJECT)
+    ->properties(
+        Schema::create('username')->type(Schema::TYPE_STRING),
+        Schema::create('age')->type(Schema::TYPE_INTEGER)
+    );
+    
+$schema->toJson();
+/* 
+{
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    }
+  }
+} 
+*/
+``` 
+
+If an object contains any helper creation methods, then these methods also allow
+you to specify the `$objectId` property as a parameter. The code sample below is
+functionally identical to the one above:
+
+```php
+$schema = Schema::object()
+    ->properties(
+        Schema::string('username'),
+        Schema::integer('age')
+    );
+    
+$schema->toJson();
+/* 
+{
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    }
+  }
+} 
+*/
+``` 
 
 ## Running the tests
 
