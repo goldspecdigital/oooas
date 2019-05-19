@@ -17,7 +17,7 @@ class MediaTypeTest extends TestCase
     public function create_with_all_parameters_works()
     {
         $mediaType = MediaType::create()
-            ->mediaType(MediaType::APPLICATION_JSON)
+            ->mediaType(MediaType::MEDIA_TYPE_APPLICATION_JSON)
             ->schema(Schema::object())
             ->examples(Example::create()->name('ExampleName'))
             ->example(Example::create())

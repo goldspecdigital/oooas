@@ -16,7 +16,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
  * @property string|null $openapi
- * @property string|null $version
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null $paths
@@ -27,8 +26,8 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class OpenApi extends BaseObject
 {
-    const VERSION_3_0_0 = '3.0.0';
-    const VERSION_3_0_1 = '3.0.1';
+    const OPENAPI_3_0_0 = '3.0.0';
+    const OPENAPI_3_0_1 = '3.0.1';
 
     /**
      * @var string|null
@@ -101,15 +100,6 @@ class OpenApi extends BaseObject
         $instance->openapi = $openapi;
 
         return $instance;
-    }
-
-    /**
-     * @param string|null $version
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public function version(?string $version): self
-    {
-        return $this->openapi($version);
     }
 
     /**
@@ -223,20 +213,5 @@ class OpenApi extends BaseObject
             'tags' => $this->tags,
             'externalDocs' => $this->externalDocs,
         ]);
-    }
-
-    /**
-     * @param string $name
-     * @return mixed
-     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException
-     */
-    public function __get(string $name)
-    {
-        // Allow the use of version as an alias of openapi.
-        if ($name === 'version') {
-            return $this->openapi;
-        }
-
-        return parent::__get($name);
     }
 }

@@ -42,10 +42,10 @@ class OpenApiTest extends TestCase
         // Create the user schema.
         $userSchema = Schema::object()
             ->properties(
-                Schema::string('id')->format(Schema::UUID),
+                Schema::string('id')->format(Schema::FORMAT_UUID),
                 Schema::string('name'),
                 Schema::integer('age')->example(23),
-                Schema::string('created_at')->format(Schema::DATE_TIME)
+                Schema::string('created_at')->format(Schema::FORMAT_DATE_TIME)
             );
 
         // Create the user response.
@@ -68,7 +68,7 @@ class OpenApiTest extends TestCase
 
         // Create the main OpenAPI object composed off everything created above.
         $openApi = OpenApi::create()
-            ->version(OpenApi::VERSION_3_0_1)
+            ->openapi(OpenApi::OPENAPI_3_0_1)
             ->info($info)
             ->paths($usersPath)
             ->tags($usersTag);
@@ -106,12 +106,12 @@ class OpenApiTest extends TestCase
         // Create a schema object to be used where a schema is accepted.
         $exampleObject = Schema::object()
             ->properties(
-                Schema::string('id')->format(Schema::UUID),
-                Schema::string('created_at')->format(Schema::DATE_TIME),
+                Schema::string('id')->format(Schema::FORMAT_UUID),
+                Schema::string('created_at')->format(Schema::FORMAT_DATE_TIME),
                 Schema::integer('age')->example(60),
                 Schema::array('data')->items(
                     AllOf::create(
-                        Schema::string('id')->format(Schema::UUID)
+                        Schema::string('id')->format(Schema::FORMAT_UUID)
                     )
                 )
             )
@@ -141,7 +141,7 @@ class OpenApiTest extends TestCase
         // Create parameter schemas.
         $auditId = Schema::string()
             ->name('audit')
-            ->format(Schema::UUID);
+            ->format(Schema::FORMAT_UUID);
         $format = Schema::string()
             ->name('format')
             ->enum('json', 'ics')
@@ -201,7 +201,7 @@ class OpenApiTest extends TestCase
 
         // Create the main OpenAPI object composed off everything created above.
         $openApi = OpenApi::create()
-            ->version(OpenApi::VERSION_3_0_1)
+            ->openapi(OpenApi::OPENAPI_3_0_1)
             ->info($info)
             ->paths(...$paths)
             ->servers(...$servers)

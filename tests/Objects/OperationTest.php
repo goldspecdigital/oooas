@@ -21,7 +21,7 @@ class OperationTest extends TestCase
     public function create_with_all_parameters_works()
     {
         $operation = Operation::create()
-            ->action(Operation::GET)
+            ->action(Operation::ACTION_GET)
             ->tags(Tag::create()->name('Users'))
             ->summary('Lorem ipsum')
             ->description('Dolar sit amet')

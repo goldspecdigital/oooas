@@ -22,7 +22,7 @@ class EncodingTest extends TestCase
             ->required()
             ->deprecated()
             ->allowEmptyValue()
-            ->style(Header::SIMPLE)
+            ->style(Header::STYLE_SIMPLE)
             ->explode()
             ->allowReserved()
             ->schema(Schema::string())

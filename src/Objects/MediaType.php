@@ -16,13 +16,13 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class MediaType extends BaseObject
 {
-    const APPLICATION_JSON = 'application/json';
-    const APPLICATION_PDF = 'application/pdf';
-    const IMAGE_JPEG = 'image/jpeg';
-    const IMAGE_PNG = 'image/png';
-    const TEXT_CALENDAR = 'text/calendar';
-    const TEXT_PLAIN = 'text/plain';
-    const TEXT_XML = 'text/xml';
+    const MEDIA_TYPE_APPLICATION_JSON = 'application/json';
+    const MEDIA_TYPE_APPLICATION_PDF = 'application/pdf';
+    const MEDIA_TYPE_IMAGE_JPEG = 'image/jpeg';
+    const MEDIA_TYPE_IMAGE_PNG = 'image/png';
+    const MEDIA_TYPE_TEXT_CALENDAR = 'text/calendar';
+    const MEDIA_TYPE_TEXT_PLAIN = 'text/plain';
+    const MEDIA_TYPE_TEXT_XML = 'text/xml';
 
     /**
      * @var string|null
@@ -70,7 +70,7 @@ class MediaType extends BaseObject
      */
     public static function json(SchemaContract $schema = null): self
     {
-        return static::create(static::APPLICATION_JSON, $schema);
+        return static::create(static::MEDIA_TYPE_APPLICATION_JSON, $schema);
     }
 
     /**
@@ -79,7 +79,7 @@ class MediaType extends BaseObject
      */
     public static function pdf(SchemaContract $schema = null): self
     {
-        return static::create(static::APPLICATION_PDF, $schema);
+        return static::create(static::MEDIA_TYPE_APPLICATION_PDF, $schema);
     }
 
     /**
@@ -88,7 +88,7 @@ class MediaType extends BaseObject
      */
     public static function jpeg(SchemaContract $schema = null): self
     {
-        return static::create(static::IMAGE_JPEG, $schema);
+        return static::create(static::MEDIA_TYPE_IMAGE_JPEG, $schema);
     }
 
     /**
@@ -97,7 +97,7 @@ class MediaType extends BaseObject
      */
     public static function png(SchemaContract $schema = null): self
     {
-        return static::create(static::IMAGE_PNG, $schema);
+        return static::create(static::MEDIA_TYPE_IMAGE_PNG, $schema);
     }
 
     /**
@@ -106,7 +106,7 @@ class MediaType extends BaseObject
      */
     public static function calendar(SchemaContract $schema = null): self
     {
-        return static::create(static::TEXT_CALENDAR, $schema);
+        return static::create(static::MEDIA_TYPE_TEXT_CALENDAR, $schema);
     }
 
     /**
@@ -115,7 +115,7 @@ class MediaType extends BaseObject
      */
     public static function plainText(SchemaContract $schema = null): self
     {
-        return static::create(static::TEXT_PLAIN, $schema);
+        return static::create(static::MEDIA_TYPE_TEXT_PLAIN, $schema);
     }
 
     /**
@@ -124,7 +124,7 @@ class MediaType extends BaseObject
      */
     public static function xml(SchemaContract $schema = null): self
     {
-        return static::create(static::TEXT_XML, $schema);
+        return static::create(static::MEDIA_TYPE_TEXT_XML, $schema);
     }
 
     /**

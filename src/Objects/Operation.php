@@ -23,14 +23,14 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Operation extends BaseObject
 {
-    const GET = 'get';
-    const PUT = 'put';
-    const POST = 'post';
-    const DELETE = 'delete';
-    const OPTIONS = 'options';
-    const HEAD = 'head';
-    const PATCH = 'patch';
-    const TRACE = 'trace';
+    const ACTION_GET = 'get';
+    const ACTION_PUT = 'put';
+    const ACTION_POST = 'post';
+    const ACTION_DELETE = 'delete';
+    const ACTION_OPTIONS = 'options';
+    const ACTION_HEAD = 'head';
+    const ACTION_PATCH = 'patch';
+    const ACTION_TRACE = 'trace';
 
     /**
      * @var string|null
@@ -113,7 +113,7 @@ class Operation extends BaseObject
      */
     public static function get(Response ...$responses): self
     {
-        return static::create(static::GET, ...$responses);
+        return static::create(static::ACTION_GET, ...$responses);
     }
 
     /**
@@ -122,7 +122,7 @@ class Operation extends BaseObject
      */
     public static function put(Response ...$responses): self
     {
-        return static::create(static::PUT, ...$responses);
+        return static::create(static::ACTION_PUT, ...$responses);
     }
 
     /**
@@ -131,7 +131,7 @@ class Operation extends BaseObject
      */
     public static function post(Response ...$responses): self
     {
-        return static::create(static::POST, ...$responses);
+        return static::create(static::ACTION_POST, ...$responses);
     }
 
     /**
@@ -140,7 +140,7 @@ class Operation extends BaseObject
      */
     public static function delete(Response ...$responses): self
     {
-        return static::create(static::DELETE, ...$responses);
+        return static::create(static::ACTION_DELETE, ...$responses);
     }
 
     /**
@@ -149,7 +149,7 @@ class Operation extends BaseObject
      */
     public static function head(Response ...$responses): self
     {
-        return static::create(static::HEAD, ...$responses);
+        return static::create(static::ACTION_HEAD, ...$responses);
     }
 
     /**
@@ -158,7 +158,7 @@ class Operation extends BaseObject
      */
     public static function patch(Response ...$responses): self
     {
-        return static::create(static::PATCH, ...$responses);
+        return static::create(static::ACTION_PATCH, ...$responses);
     }
 
     /**
@@ -167,7 +167,7 @@ class Operation extends BaseObject
      */
     public static function trace(Response ...$responses): self
     {
-        return static::create(static::TRACE, ...$responses);
+        return static::create(static::ACTION_TRACE, ...$responses);
     }
 
     /**

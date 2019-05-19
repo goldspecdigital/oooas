@@ -44,29 +44,23 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Schema extends BaseObject implements SchemaContract
 {
-    /*
-     * Types.
-     */
-    const ARRAY = 'array';
-    const BOOLEAN = 'boolean';
-    const INTEGER = 'integer';
-    const NUMBER = 'number';
-    const OBJECT = 'object';
-    const STRING = 'string';
+    const TYPE_ARRAY = 'array';
+    const TYPE_BOOLEAN = 'boolean';
+    const TYPE_INTEGER = 'integer';
+    const TYPE_NUMBER = 'number';
+    const TYPE_OBJECT = 'object';
+    const TYPE_STRING = 'string';
 
-    /*
-     * Formats.
-     */
-    const INT32 = 'int32';
-    const INT64 = 'int64';
-    const FLOAT = 'float';
-    const DOUBLE = 'double';
-    const BYTE = 'byte';
-    const BINARY = 'binary';
-    const DATE = 'date';
-    const DATE_TIME = 'date-time';
-    const PASSWORD = 'password';
-    const UUID = 'uuid';
+    const FORMAT_INT32 = 'int32';
+    const FORMAT_INT64 = 'int64';
+    const FORMAT_FLOAT = 'float';
+    const FORMAT_DOUBLE = 'double';
+    const FORMAT_BYTE = 'byte';
+    const FORMAT_BINARY = 'binary';
+    const FORMAT_DATE = 'date';
+    const FORMAT_DATE_TIME = 'date-time';
+    const FORMAT_PASSWORD = 'password';
+    const FORMAT_UUID = 'uuid';
 
     /**
      * @var string|null
@@ -249,7 +243,7 @@ class Schema extends BaseObject implements SchemaContract
      */
     public static function array(string $name = null): self
     {
-        return static::create(static::ARRAY, $name);
+        return static::create(static::TYPE_ARRAY, $name);
     }
 
     /**
@@ -258,7 +252,7 @@ class Schema extends BaseObject implements SchemaContract
      */
     public static function boolean(string $name = null): self
     {
-        return static::create(static::BOOLEAN, $name);
+        return static::create(static::TYPE_BOOLEAN, $name);
     }
 
     /**
@@ -267,7 +261,7 @@ class Schema extends BaseObject implements SchemaContract
      */
     public static function integer(string $name = null): self
     {
-        return static::create(static::INTEGER, $name);
+        return static::create(static::TYPE_INTEGER, $name);
     }
 
     /**
@@ -276,7 +270,7 @@ class Schema extends BaseObject implements SchemaContract
      */
     public static function number(string $name = null): self
     {
-        return static::create(static::NUMBER, $name);
+        return static::create(static::TYPE_NUMBER, $name);
     }
 
     /**
@@ -285,7 +279,7 @@ class Schema extends BaseObject implements SchemaContract
      */
     public static function object(string $name = null): self
     {
-        return static::create(static::OBJECT, $name);
+        return static::create(static::TYPE_OBJECT, $name);
     }
 
     /**
@@ -294,7 +288,7 @@ class Schema extends BaseObject implements SchemaContract
      */
     public static function string(string $name = null): self
     {
-        return static::create(static::STRING, $name);
+        return static::create(static::TYPE_STRING, $name);
     }
 
     /**

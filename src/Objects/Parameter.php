@@ -24,18 +24,18 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Parameter extends BaseObject
 {
-    const QUERY = 'query';
-    const HEADER = 'header';
-    const PATH = 'path';
-    const COOKIE = 'cookie';
+    const IN_QUERY = 'query';
+    const IN_HEADER = 'header';
+    const IN_PATH = 'path';
+    const IN_COOKIE = 'cookie';
 
-    const MATRIX = 'matrix';
-    const LABEL = 'label';
-    const FORM = 'form';
-    const SIMPLE = 'simple';
-    const SPACE_DELIMITED = 'spaceDelimited';
-    const PIPE_DELIMITED = 'pipeDelimited';
-    const DEEP_OBJECT = 'deepObject';
+    const STYLE_MATRIX = 'matrix';
+    const STYLE_LABEL = 'label';
+    const STYLE_FORM = 'form';
+    const STYLE_SIMPLE = 'simple';
+    const STYLE_SPACE_DELIMITED = 'spaceDelimited';
+    const STYLE_PIPE_DELIMITED = 'pipeDelimited';
+    const STYLE_DEEP_OBJECT = 'deepObject';
 
     /**
      * @var string|null
@@ -129,7 +129,7 @@ class Parameter extends BaseObject
      */
     public static function query(string $name = null, SchemaContract $schema = null): self
     {
-        return static::create($name, static::QUERY, $schema);
+        return static::create($name, static::IN_QUERY, $schema);
     }
 
     /**
@@ -139,7 +139,7 @@ class Parameter extends BaseObject
      */
     public static function header(string $name = null, SchemaContract $schema = null): self
     {
-        return static::create($name, static::HEADER, $schema);
+        return static::create($name, static::IN_HEADER, $schema);
     }
 
     /**
@@ -149,7 +149,7 @@ class Parameter extends BaseObject
      */
     public static function path(string $name = null, SchemaContract $schema = null): self
     {
-        return static::create($name, static::PATH, $schema);
+        return static::create($name, static::IN_PATH, $schema);
     }
 
     /**
@@ -159,7 +159,7 @@ class Parameter extends BaseObject
      */
     public static function cookie(string $name = null, SchemaContract $schema = null): self
     {
-        return static::create($name, static::COOKIE, $schema);
+        return static::create($name, static::IN_COOKIE, $schema);
     }
 
     /**

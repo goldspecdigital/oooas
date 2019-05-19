@@ -23,13 +23,13 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Header extends BaseObject
 {
-    const MATRIX = 'matrix';
-    const LABEL = 'label';
-    const FORM = 'form';
-    const SIMPLE = 'simple';
-    const SPACE_DELIMITED = 'spaceDelimited';
-    const PIPE_DELIMITED = 'pipeDelimited';
-    const DEEP_OBJECT = 'deepObject';
+    const STYLE_MATRIX = 'matrix';
+    const STYLE_LABEL = 'label';
+    const STYLE_FORM = 'form';
+    const STYLE_SIMPLE = 'simple';
+    const STYLE_SPACE_DELIMITED = 'spaceDelimited';
+    const STYLE_PIPE_DELIMITED = 'pipeDelimited';
+    const STYLE_DEEP_OBJECT = 'deepObject';
 
     /**
      * @var string|null
@@ -102,46 +102,6 @@ class Header extends BaseObject
         $instance->name = $name;
 
         return $instance;
-    }
-
-    /**
-     * @param string|null $name
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Header
-     */
-    public static function query(string $name = null, SchemaContract $schema = null): self
-    {
-        return static::create($name, static::QUERY, $schema);
-    }
-
-    /**
-     * @param string|null $name
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Header
-     */
-    public static function header(string $name = null, SchemaContract $schema = null): self
-    {
-        return static::create($name, static::HEADER, $schema);
-    }
-
-    /**
-     * @param string|null $name
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Header
-     */
-    public static function path(string $name = null, SchemaContract $schema = null): self
-    {
-        return static::create($name, static::PATH, $schema);
-    }
-
-    /**
-     * @param string|null $name
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Header
-     */
-    public static function cookie(string $name = null, SchemaContract $schema = null): self
-    {
-        return static::create($name, static::COOKIE, $schema);
     }
 
     /**

@@ -77,10 +77,10 @@ $info = Info::create()
 // Create the user schema.
 $userSchema = Schema::object()
     ->properties(
-        Schema::string('id')->format(Schema::UUID),
+        Schema::string('id')->format(Schema::FORMAT_UUID),
         Schema::string('name'),
         Schema::integer('age')->example(23),
-        Schema::string('created_at')->format(Schema::DATE_TIME)
+        Schema::string('created_at')->format(Schema::FORMAT_DATE_TIME)
     );
     
 // Create the user response.
@@ -103,7 +103,7 @@ $usersPath = PathItem::create()
     
 // Create the main OpenAPI object composed off everything created above.
 $openApi = OpenApi::create()
-    ->version(OpenApi::VERSION_3_0_1)
+    ->openapi(OpenApi::OPENAPI_3_0_1)
     ->info($info)
     ->paths($usersPath)
     ->tags($usersTag);
