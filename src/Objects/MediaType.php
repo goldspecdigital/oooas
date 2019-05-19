@@ -50,81 +50,82 @@ class MediaType extends BaseObject
     protected $encoding;
 
     /**
-     * @param string|null $mediaType
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function create(string $mediaType = null, SchemaContract $schema = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->mediaType = $mediaType;
-        $instance->schema = $schema;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function json(SchemaContract $schema = null): self
+    public static function json(string $objectId = null): self
     {
-        return static::create(static::MEDIA_TYPE_APPLICATION_JSON, $schema);
+        return static::create($objectId)
+            ->mediaType(static::MEDIA_TYPE_APPLICATION_JSON);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function pdf(SchemaContract $schema = null): self
+    public static function pdf(string $objectId = null): self
     {
-        return static::create(static::MEDIA_TYPE_APPLICATION_PDF, $schema);
+        return static::create($objectId)
+            ->mediaType(static::MEDIA_TYPE_APPLICATION_PDF);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function jpeg(SchemaContract $schema = null): self
+    public static function jpeg(string $objectId = null): self
     {
-        return static::create(static::MEDIA_TYPE_IMAGE_JPEG, $schema);
+        return static::create($objectId)
+            ->mediaType(static::MEDIA_TYPE_IMAGE_JPEG);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function png(SchemaContract $schema = null): self
+    public static function png(string $objectId = null): self
     {
-        return static::create(static::MEDIA_TYPE_IMAGE_PNG, $schema);
+        return static::create($objectId)
+            ->mediaType(static::MEDIA_TYPE_IMAGE_PNG);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function calendar(SchemaContract $schema = null): self
+    public static function calendar(string $objectId = null): self
     {
-        return static::create(static::MEDIA_TYPE_TEXT_CALENDAR, $schema);
+        return static::create($objectId)
+            ->mediaType(static::MEDIA_TYPE_TEXT_CALENDAR);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function plainText(SchemaContract $schema = null): self
+    public static function plainText(string $objectId = null): self
     {
-        return static::create(static::MEDIA_TYPE_TEXT_PLAIN, $schema);
+        return static::create($objectId)
+            ->mediaType(static::MEDIA_TYPE_TEXT_PLAIN);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function xml(SchemaContract $schema = null): self
+    public static function xml(string $objectId = null): self
     {
-        return static::create(static::MEDIA_TYPE_TEXT_XML, $schema);
+        return static::create($objectId)
+            ->mediaType(static::MEDIA_TYPE_TEXT_XML);
     }
 
     /**
@@ -199,12 +200,12 @@ class MediaType extends BaseObject
     {
         $examples = [];
         foreach ($this->examples ?? [] as $example) {
-            $examples[$example->name] = $example->toArray();
+            $examples[$example->objectId] = $example->toArray();
         }
 
         $encodings = [];
         foreach ($this->encoding ?? [] as $encoding) {
-            $encodings[$encoding->name] = $encoding->toArray();
+            $encodings[$encoding->objectId] = $encoding->toArray();
         }
 
         return Arr::filter([

@@ -13,8 +13,7 @@ class ServerVariableTest extends TestCase
     /** @test */
     public function create_with_all_parameters_works()
     {
-        $serverVariable = ServerVariable::create()
-            ->name('ServerVariableName')
+        $serverVariable = ServerVariable::create('ServerVariableName')
             ->enum('Earth', 'Mars', 'Saturn')
             ->default('Earth')
             ->description('The planet the server is running on');

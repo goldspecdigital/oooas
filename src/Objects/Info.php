@@ -47,18 +47,12 @@ class Info extends BaseObject
     protected $version;
 
     /**
-     * @param string|null $title
-     * @param string|null $version
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
      */
-    public static function create(string $title = null, string $version = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->title = $title;
-        $instance->version = $version;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

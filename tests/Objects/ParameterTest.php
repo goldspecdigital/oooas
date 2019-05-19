@@ -28,7 +28,7 @@ class ParameterTest extends TestCase
             ->allowReserved()
             ->schema(Schema::string())
             ->example(Example::create())
-            ->examples(Example::create()->name('ExampleName'))
+            ->examples(Example::create('ExampleName'))
             ->content(MediaType::json());
 
         $operation = Operation::create()

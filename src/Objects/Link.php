@@ -7,18 +7,12 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string|null $name
  * @property string|null $href
  * @property string|null $operationId
  * @property string|null $description
  */
 class Link extends BaseObject
 {
-    /**
-     * @var string|null
-     */
-    protected $name;
-
     /**
      * @var string|null
      */
@@ -35,26 +29,12 @@ class Link extends BaseObject
     protected $description;
 
     /**
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
      */
-    public static function create(): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        return $instance;
-    }
-
-    /**
-     * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
-     */
-    public function name(?string $name): self
-    {
-        $instance = clone $this;
-
-        $instance->name = $name;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

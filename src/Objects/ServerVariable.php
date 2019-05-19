@@ -7,18 +7,12 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string|null $name
  * @property string[]|null $enum
  * @property string|null $default
  * @property string|null $description
  */
 class ServerVariable extends BaseObject
 {
-    /**
-     * @var string|null
-     */
-    protected $name;
-
     /**
      * @var string[]|null
      */
@@ -35,33 +29,12 @@ class ServerVariable extends BaseObject
     protected $description;
 
     /**
-     * @param string|null $name
-     * @param string|null $default
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable
      */
-    public static function create(
-        string $name = null,
-        string $default = null
-    ): self {
-        $instance = new static();
-
-        $instance->name = $name;
-        $instance->default = $default;
-
-        return $instance;
-    }
-
-    /**
-     * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable
-     */
-    public function name(?string $name): self
+    public static function create(string $objectId = null): self
     {
-        $instance = clone $this;
-
-        $instance->name = $name;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

@@ -31,7 +31,7 @@ class OperationTest extends TestCase
             ->requestBody(RequestBody::create())
             ->responses(Response::create())
             ->deprecated()
-            ->security(SecurityRequirement::create()->name('OAuth2'))
+            ->security(SecurityRequirement::create('OAuth2'))
             ->servers(Server::create());
 
         $pathItem = PathItem::create()

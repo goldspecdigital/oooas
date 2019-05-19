@@ -29,23 +29,12 @@ class Contact extends BaseObject
     protected $email;
 
     /**
-     * @param string|null $name
-     * @param string|null $url
-     * @param string|null $email
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
-    public static function create(
-        string $name = null,
-        string $url = null,
-        string $email = null
-    ): self {
-        $instance = new static();
-
-        $instance->name = $name;
-        $instance->url = $url;
-        $instance->email = $email;
-
-        return $instance;
+    public static function create(string $objectId = null): self
+    {
+        return new static($objectId);
     }
 
     /**

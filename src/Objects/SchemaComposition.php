@@ -18,16 +18,12 @@ abstract class SchemaComposition extends BaseObject implements SchemaContract
     protected $schemas;
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $schemas
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SchemaComposition
      */
-    public static function create(Schema ...$schemas): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->schemas = $schemas ?: null;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

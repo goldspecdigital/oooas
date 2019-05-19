@@ -24,16 +24,12 @@ class Discriminator extends BaseObject
     protected $mapping;
 
     /**
-     * @param string|null $propertyName
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator
      */
-    public static function create(string $propertyName = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->propertyName = $propertyName;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

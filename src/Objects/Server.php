@@ -29,16 +29,12 @@ class Server extends BaseObject
     protected $variables;
 
     /**
-     * @param string|null $url
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
      */
-    public static function create(string $url = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->url = $url;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
@@ -87,7 +83,7 @@ class Server extends BaseObject
     {
         $variables = [];
         foreach ($this->variables ?? [] as $variable) {
-            $variables[$variable->name] = $variable->toArray();
+            $variables[$variable->objectId] = $variable->toArray();
         }
 
         return Arr::filter([

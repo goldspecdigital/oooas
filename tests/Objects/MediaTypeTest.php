@@ -19,9 +19,9 @@ class MediaTypeTest extends TestCase
         $mediaType = MediaType::create()
             ->mediaType(MediaType::MEDIA_TYPE_APPLICATION_JSON)
             ->schema(Schema::object())
-            ->examples(Example::create()->name('ExampleName'))
+            ->examples(Example::create('ExampleName'))
             ->example(Example::create())
-            ->encoding(Encoding::create()->name('EncodingName'));
+            ->encoding(Encoding::create('EncodingName'));
 
         $response = Response::create()
             ->content($mediaType);

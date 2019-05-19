@@ -47,13 +47,12 @@ class OAuthFlow extends BaseObject
     protected $scopes;
 
     /**
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
      */
-    public static function create(): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

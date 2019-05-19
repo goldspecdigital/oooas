@@ -13,8 +13,7 @@ class ServerTestTest extends TestCase
     /** @test */
     public function create_with_all_parameters_works()
     {
-        $serverVariable = ServerVariable::create()
-            ->name('ServerVariableName')
+        $serverVariable = ServerVariable::create('ServerVariableName')
             ->default('Default value');
 
         $server = Server::create()
@@ -36,8 +35,7 @@ class ServerTestTest extends TestCase
     /** @test */
     public function variables_are_supported()
     {
-        $serverVariable = ServerVariable::create()
-            ->name('username')
+        $serverVariable = ServerVariable::create('username')
             ->default('demo');
 
         $server = Server::create()

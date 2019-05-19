@@ -204,8 +204,7 @@ class SchemaTest extends TestCase
     /** @test */
     public function create_object_with_all_parameters_works()
     {
-        $property = Schema::string()
-            ->name('id')
+        $property = Schema::string('id')
             ->format(Schema::FORMAT_UUID);
 
         $schema = Schema::create()
@@ -215,7 +214,7 @@ class SchemaTest extends TestCase
             ->type(Schema::TYPE_OBJECT)
             ->required($property)
             ->properties($property)
-            ->additionalProperties(Schema::integer()->name('age'))
+            ->additionalProperties(Schema::integer('age'))
             ->maxProperties(10)
             ->minProperties(1)
             ->nullable()

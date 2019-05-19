@@ -7,7 +7,6 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string|null $objectId
  * @property string|null $type
  * @property string|null $description
  * @property string|null $name
@@ -27,11 +26,6 @@ class SecurityScheme extends BaseObject
     const IN_QUERY = 'query';
     const IN_HEADER = 'header';
     const IN_COOKIE = 'cookie';
-
-    /**
-     * @var string|null
-     */
-    protected $objectId;
 
     /**
      * @var string|null
@@ -74,38 +68,21 @@ class SecurityScheme extends BaseObject
     protected $openIdConnectUrl;
 
     /**
-     * @param string|null $name
-     * @param string|null $type
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
      */
-    public static function create(
-        string $name = null,
-        string $type = null
-    ): self {
-        $instance = new static();
-
-        $instance->name = $name;
-        $instance->type = $type;
-
-        return $instance;
-    }
-
-    public function objectId(?string $objectId): self
+    public static function create(string $objectId = null): self
     {
-        $instance = clone $this;
-
-        $instance->objectId = $objectId;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
      */
-    public static function oauth2(string $name = null): self
+    public static function oauth2(string $objectId = null): self
     {
-        return static::create($name, static::TYPE_OAUTH2);
+        return static::create($objectId)->type(static::TYPE_OAUTH2);
     }
 
     /**

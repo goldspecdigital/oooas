@@ -8,7 +8,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string|null $name
  * @property string|null $description
  * @property bool|null $required
  * @property bool|null $deprecated
@@ -19,7 +18,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
  * @property mixed|null $example
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null $examples
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType|null $content
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]|null $content
  */
 class Header extends BaseObject
 {
@@ -30,11 +29,6 @@ class Header extends BaseObject
     const STYLE_SPACE_DELIMITED = 'spaceDelimited';
     const STYLE_PIPE_DELIMITED = 'pipeDelimited';
     const STYLE_DEEP_OBJECT = 'deepObject';
-
-    /**
-     * @var string|null
-     */
-    protected $name;
 
     /**
      * @var string|null
@@ -87,34 +81,17 @@ class Header extends BaseObject
     protected $examples;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]|null
      */
     protected $content;
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Header
      */
-    public static function create(string $name = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->name = $name;
-
-        return $instance;
-    }
-
-    /**
-     * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Header
-     */
-    public function name(?string $name): self
-    {
-        $instance = clone $this;
-
-        $instance->name = $name;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
@@ -267,7 +244,7 @@ class Header extends BaseObject
     {
         $examples = [];
         foreach ($this->examples ?? [] as $example) {
-            $examples[$example->name] = $example->toArray();
+            $examples[$example->objectId] = $example->toArray();
         }
 
         $content = [];

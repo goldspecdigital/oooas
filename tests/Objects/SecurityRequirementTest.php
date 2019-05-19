@@ -16,8 +16,7 @@ class SecurityRequirementTest extends TestCase
     {
         $securityScheme = SecurityScheme::create();
 
-        $securityRequirement = SecurityRequirement::create()
-            ->name('OAuth2')
+        $securityRequirement = SecurityRequirement::create('OAuth2')
             ->securitySchemes($securityScheme);
 
         $openApi = OpenApi::create()

@@ -29,16 +29,12 @@ class RequestBody extends BaseObject
     protected $required;
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
-    public static function create(MediaType ...$content): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->content = $content ?: null;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

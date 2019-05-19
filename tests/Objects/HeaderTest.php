@@ -16,8 +16,7 @@ class HeaderTest extends TestCase
     /** @test */
     public function create_with_all_parameters_works()
     {
-        $header = Header::create()
-            ->name('HeaderName')
+        $header = Header::create('HeaderName')
             ->description('Lorem ipsum')
             ->required()
             ->deprecated()
@@ -27,7 +26,7 @@ class HeaderTest extends TestCase
             ->allowReserved()
             ->schema(Schema::object())
             ->example('Example value')
-            ->examples(Example::create()->name('ExampleName'))
+            ->examples(Example::create('ExampleName'))
             ->content(MediaType::json());
 
         $response = Response::create()

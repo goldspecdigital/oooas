@@ -93,81 +93,75 @@ class Operation extends BaseObject
     protected $servers;
 
     /**
-     * @param string|null $action
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function create(string $action = null, Response ...$responses): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->action = $action;
-        $instance->responses = $responses ?: null;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function get(Response ...$responses): self
+    public static function get(string $objectId = null): self
     {
-        return static::create(static::ACTION_GET, ...$responses);
+        return static::create($objectId)->action(static::ACTION_GET);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function put(Response ...$responses): self
+    public static function put(string $objectId = null): self
     {
-        return static::create(static::ACTION_PUT, ...$responses);
+        return static::create($objectId)->action(static::ACTION_PUT);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function post(Response ...$responses): self
+    public static function post(string $objectId = null): self
     {
-        return static::create(static::ACTION_POST, ...$responses);
+        return static::create($objectId)->action(static::ACTION_POST);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function delete(Response ...$responses): self
+    public static function delete(string $objectId = null): self
     {
-        return static::create(static::ACTION_DELETE, ...$responses);
+        return static::create($objectId)->action(static::ACTION_DELETE);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function head(Response ...$responses): self
+    public static function head(string $objectId = null): self
     {
-        return static::create(static::ACTION_HEAD, ...$responses);
+        return static::create($objectId)->action(static::ACTION_HEAD);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function patch(Response ...$responses): self
+    public static function patch(string $objectId = null): self
     {
-        return static::create(static::ACTION_PATCH, ...$responses);
+        return static::create($objectId)->action(static::ACTION_PATCH);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function trace(Response ...$responses): self
+    public static function trace(string $objectId = null): self
     {
-        return static::create(static::ACTION_TRACE, ...$responses);
+        return static::create($objectId)->action(static::ACTION_TRACE);
     }
 
     /**

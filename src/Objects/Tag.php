@@ -29,16 +29,12 @@ class Tag extends BaseObject
     protected $externalDocs;
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
-    public static function create(string $name = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->name = $name;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

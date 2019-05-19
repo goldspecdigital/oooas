@@ -8,45 +8,22 @@ use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @package string|null $name
  * @package string[]|null $securitySchemes
  */
 class SecurityRequirement extends BaseObject
 {
-    /**
-     * @var string|null
-     */
-    protected $name;
-
     /**
      * @var string[]|null
      */
     protected $securitySchemes;
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement
      */
-    public static function create(string $name = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->name = $name;
-
-        return $instance;
-    }
-
-    /**
-     * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement
-     */
-    public function name(?string $name): self
-    {
-        $instance = clone $this;
-
-        $instance->name = $name;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
@@ -83,7 +60,7 @@ class SecurityRequirement extends BaseObject
     public function toArray(): array
     {
         return Arr::filter([
-            $this->name => $this->securitySchemes ?? [],
+            $this->objectId => $this->securitySchemes ?? [],
         ]);
     }
 }

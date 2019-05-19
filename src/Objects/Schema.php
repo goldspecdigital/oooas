@@ -9,7 +9,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string|null $name
  * @property string|null $title
  * @property string|null $description
  * @property mixed[]|null $enum
@@ -61,11 +60,6 @@ class Schema extends BaseObject implements SchemaContract
     const FORMAT_DATE_TIME = 'date-time';
     const FORMAT_PASSWORD = 'password';
     const FORMAT_UUID = 'uuid';
-
-    /**
-     * @var string|null
-     */
-    protected $name;
 
     /**
      * @var string|null
@@ -223,85 +217,66 @@ class Schema extends BaseObject implements SchemaContract
     protected $deprecated;
 
     /**
-     * @param string|null $type
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function create(string $type = null, string $name = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->type = $type;
-        $instance->name = $name;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function array(string $name = null): self
+    public static function array(string $objectId = null): self
     {
-        return static::create(static::TYPE_ARRAY, $name);
+        return static::create($objectId)->type(static::TYPE_ARRAY);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function boolean(string $name = null): self
+    public static function boolean(string $objectId = null): self
     {
-        return static::create(static::TYPE_BOOLEAN, $name);
+        return static::create($objectId)->type(static::TYPE_BOOLEAN);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function integer(string $name = null): self
+    public static function integer(string $objectId = null): self
     {
-        return static::create(static::TYPE_INTEGER, $name);
+        return static::create($objectId)->type(static::TYPE_INTEGER);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function number(string $name = null): self
+    public static function number(string $objectId = null): self
     {
-        return static::create(static::TYPE_NUMBER, $name);
+        return static::create($objectId)->type(static::TYPE_NUMBER);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function object(string $name = null): self
+    public static function object(string $objectId = null): self
     {
-        return static::create(static::TYPE_OBJECT, $name);
+        return static::create($objectId)->type(static::TYPE_OBJECT);
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function string(string $name = null): self
+    public static function string(string $objectId = null): self
     {
-        return static::create(static::TYPE_STRING, $name);
-    }
-
-    /**
-     * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
-     */
-    public function name(?string $name): self
-    {
-        $instance = clone $this;
-
-        $instance->name = $name;
-
-        return $instance;
+        return static::create($objectId)->type(static::TYPE_STRING);
     }
 
     /**
@@ -549,7 +524,7 @@ class Schema extends BaseObject implements SchemaContract
         foreach ($required as &$require) {
             // If a Schema instance was passed in then extract it's name string.
             if ($require instanceof Schema) {
-                $require = $require->name;
+                $require = $require->objectId;
                 continue;
             }
 
@@ -730,7 +705,7 @@ class Schema extends BaseObject implements SchemaContract
     {
         $properties = [];
         foreach ($this->properties ?? [] as $property) {
-            $properties[$property->name] = $property->toArray();
+            $properties[$property->objectId] = $property->toArray();
         }
 
         return Arr::filter([

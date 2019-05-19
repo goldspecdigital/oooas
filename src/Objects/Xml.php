@@ -41,13 +41,12 @@ class Xml extends BaseObject
     protected $wrapped;
 
     /**
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml
      */
-    public static function create(): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

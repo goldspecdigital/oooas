@@ -52,7 +52,7 @@ class OpenApiTest extends TestCase
         $userResponse = Response::create()
             ->statusCode(200)
             ->description('OK')
-            ->content(MediaType::json($userSchema));
+            ->content(MediaType::json()->schema($userSchema));
 
         // Create the operation for the route (i.e. GET, POST, etc.).
         $showUser = Operation::get()
@@ -90,11 +90,10 @@ class OpenApiTest extends TestCase
             ->description('All the audits');
 
         // Factory creation method.
-        $contact = Contact::create(
-            'GoldSpec Digital',
-            'https://goldspecdigital.com',
-            'hello@goldspecdigital.com'
-        );
+        $contact = Contact::create()
+            ->name('GoldSpec Digital')
+            ->url('https://goldspecdigital.com')
+            ->email('hello@goldspecdigital.com');
 
         // Alternative method chaining creation method.
         $info = Info::create()
@@ -110,7 +109,7 @@ class OpenApiTest extends TestCase
                 Schema::string('created_at')->format(Schema::FORMAT_DATE_TIME),
                 Schema::integer('age')->example(60),
                 Schema::array('data')->items(
-                    AllOf::create(
+                    AllOf::create()->schemas(
                         Schema::string('id')->format(Schema::FORMAT_UUID)
                     )
                 )
@@ -121,34 +120,37 @@ class OpenApiTest extends TestCase
         $exampleResponse = Response::create()
             ->statusCode(200)
             ->description('OK')
-            ->content(MediaType::json($exampleObject));
+            ->content(
+                MediaType::json()->schema($exampleObject)
+            );
 
         // Create an operation for a route.
-        $listAudits = Operation::get($exampleResponse)
+        $listAudits = Operation::get()
+            ->responses($exampleResponse)
             ->tags($tag)
             ->summary('List all audits')
             ->operationId('audits.index');
 
         // Create an operation for a route.
-        $createAudit = Operation::post($exampleResponse)
+        $createAudit = Operation::post()
+            ->responses($exampleResponse)
             ->tags($tag)
             ->summary('Create an audit')
             ->operationId('audits.store')
-            ->requestBody(RequestBody::create(
-                MediaType::json($exampleObject)
+            ->requestBody(RequestBody::create()->content(
+                MediaType::json()->schema($exampleObject)
             ));
 
         // Create parameter schemas.
-        $auditId = Schema::string()
-            ->name('audit')
+        $auditId = Schema::string('audit')
             ->format(Schema::FORMAT_UUID);
-        $format = Schema::string()
-            ->name('format')
+        $format = Schema::string('format')
             ->enum('json', 'ics')
             ->default('json');
 
         // Create an operation for a route.
-        $readAudit = Operation::get($exampleResponse)
+        $readAudit = Operation::get()
+            ->responses($exampleResponse)
             ->tags($tag)
             ->summary('View an audit')
             ->operationId('audits.show')
@@ -176,8 +178,8 @@ class OpenApiTest extends TestCase
 
         // Specify the server endpoints.
         $servers = [
-            Server::create('https://api.example.com/v1'),
-            Server::create('https://api.example.com/v2'),
+            Server::create()->url('https://api.example.com/v1'),
+            Server::create()->url('https://api.example.com/v2'),
         ];
 
         // Create a security scheme component.
@@ -186,17 +188,16 @@ class OpenApiTest extends TestCase
             ->tokenUrl('https://api.example.com/oauth/authorize');
 
         $components = Components::create()->securitySchemes(
-            SecurityScheme::oauth2()
-                ->objectId('OAuth2')
+            SecurityScheme::oauth2('OAuth2')
                 ->flows($authFlow)
         );
 
         // Specify the security.
-        $security = SecurityRequirement::create()
-            ->name('OAuth2');
+        $security = SecurityRequirement::create('OAuth2');
 
         // Specify external documentatino for the API.
-        $externalDocs = ExternalDocs::create('https://github.com/goldspecdigital/oooas')
+        $externalDocs = ExternalDocs::create()
+            ->url('https://github.com/goldspecdigital/oooas')
             ->description('GitHub Wiki');
 
         // Create the main OpenAPI object composed off everything created above.

@@ -16,8 +16,7 @@ class EncodingTest extends TestCase
     /** @test */
     public function create_with_all_parameters_works()
     {
-        $header = Header::create()
-            ->name('HeaderName')
+        $header = Header::create('HeaderName')
             ->description('Lorem ipsum')
             ->required()
             ->deprecated()
@@ -28,13 +27,12 @@ class EncodingTest extends TestCase
             ->schema(Schema::string())
             ->example('Example String')
             ->examples(
-                Example::create('Example value')
-                    ->name('ExampleName')
+                Example::create('ExampleName')
+                    ->value('Example value')
             )
             ->content(MediaType::json());
 
-        $encoding = Encoding::create()
-            ->name('EncodingName')
+        $encoding = Encoding::create('EncodingName')
             ->contentType('application/json')
             ->headers($header)
             ->style('simple')

@@ -18,16 +18,12 @@ class Not extends BaseObject implements SchemaContract
     protected $schema;
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Not
      */
-    public static function create(Schema $schema = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->schema = $schema;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**

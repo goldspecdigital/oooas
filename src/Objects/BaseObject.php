@@ -7,14 +7,37 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException;
 use JsonSerializable;
 
+/**
+ * @property string|null $objectId
+ */
 abstract class BaseObject implements JsonSerializable
 {
     /**
-     * Object constructor.
+     * @var string|null
      */
-    protected function __construct()
+    protected $objectId;
+
+    /**
+     * BaseObject constructor.
+     *
+     * @param string|null $objectId
+     */
+    public function __construct(string $objectId = null)
     {
-        // Prevent instantiation.
+        $this->objectId = $objectId;
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\BaseObject
+     */
+    public function objectId(?string $objectId): self
+    {
+        $instance = clone $this;
+
+        $instance->objectId = $objectId;
+
+        return $instance;
     }
 
     /**

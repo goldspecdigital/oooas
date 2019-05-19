@@ -13,8 +13,7 @@ class LinkTest extends TestCase
     /** @test */
     public function create_with_all_parameters_works()
     {
-        $link = Link::create()
-            ->name('LinkName')
+        $link = Link::create('LinkName')
             ->href('https://goldspecdigital.com')
             ->operationId('goldspecdigital')
             ->description('The GoldSpec Digital website');

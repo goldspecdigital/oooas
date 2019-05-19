@@ -41,122 +41,133 @@ class Response extends BaseObject
     protected $links;
 
     /**
-     * @param int|null $statusCode
-     * @param string|null $description
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function create(
-        int $statusCode = null,
-        string $description = null,
-        MediaType ...$content
-    ): self {
-        $instance = new static();
-
-        $instance->statusCode = $statusCode;
-        $instance->description = $description;
-        $instance->content = $content ?: null;
-
-        return $instance;
+    public static function create(string $objectId = null): self
+    {
+        return new static($objectId);
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function ok(MediaType ...$content): self
+    public static function ok(string $objectId = null): self
     {
-        return static::create(200, 'OK', ...$content);
+        return static::create($objectId)
+            ->statusCode(200)
+            ->description('OK');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function created(MediaType ...$content): self
+    public static function created(string $objectId = null): self
     {
-        return static::create(201, 'Created', ...$content);
+        return static::create($objectId)
+            ->statusCode(201)
+            ->description('Created');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function movedPermanently(MediaType ...$content): self
+    public static function movedPermanently(string $objectId = null): self
     {
-        return static::create(301, 'Moved Permanently', ...$content);
+        return static::create($objectId)
+            ->statusCode(301)
+            ->description('Moved Permanently');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function movedTemporarily(MediaType ...$content): self
+    public static function movedTemporarily(string $objectId = null): self
     {
-        return static::create(302, 'Moved Temporarily', ...$content);
+        return static::create($objectId)
+            ->statusCode(302)
+            ->description('Moved Temporarily');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function badRequest(MediaType ...$content): self
+    public static function badRequest(string $objectId = null): self
     {
-        return static::create(400, 'Bad Request', ...$content);
+        return static::create($objectId)
+            ->statusCode(400)
+            ->description('Bad Request');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function unauthorized(MediaType ...$content): self
+    public static function unauthorized(string $objectId = null): self
     {
-        return static::create(401, 'Unauthorized', ...$content);
+        return static::create($objectId)
+            ->statusCode(401)
+            ->description('Unauthorized');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function forbidden(MediaType ...$content): self
+    public static function forbidden(string $objectId = null): self
     {
-        return static::create(403, 'Forbidden', ...$content);
+        return static::create($objectId)
+            ->statusCode(403)
+            ->description('Forbidden');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function notFound(MediaType ...$content): self
+    public static function notFound(string $objectId = null): self
     {
-        return static::create(404, 'Not Found', ...$content);
+        return static::create($objectId)
+            ->statusCode(404)
+            ->description('Not Found');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function unprocessableEntity(MediaType ...$content): self
+    public static function unprocessableEntity(string $objectId = null): self
     {
-        return static::create(422, 'Unprocessable Entity', ...$content);
+        return static::create($objectId)
+            ->statusCode(422)
+            ->description('Unprocessable Entity');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function tooManyRequests(MediaType ...$content): self
+    public static function tooManyRequests(string $objectId = null): self
     {
-        return static::create(429, 'Too Many Requests', ...$content);
+        return static::create($objectId)
+            ->statusCode(429)
+            ->description('Too Many Requests');
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function internalServerError(MediaType ...$content): self
+    public static function internalServerError(string $objectId = null): self
     {
-        return static::create(500, 'Internal Server Error', ...$content);
+        return static::create($objectId)
+            ->statusCode(500)
+            ->description('Internal Server Error');
     }
 
     /**
@@ -231,7 +242,7 @@ class Response extends BaseObject
     {
         $headers = [];
         foreach ($this->headers ?? [] as $header) {
-            $headers[$header->name] = $header;
+            $headers[$header->objectId] = $header;
         }
 
         $content = [];
@@ -241,7 +252,7 @@ class Response extends BaseObject
 
         $links = [];
         foreach ($this->links ?? [] as $link) {
-            $links[$link->name] = $link;
+            $links[$link->objectId] = $link;
         }
 
         return Arr::filter([
