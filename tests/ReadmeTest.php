@@ -94,6 +94,26 @@ class ReadmeTest extends TestCase
     }
 
     /** @test */
+    public function unsetting_variadic_methods()
+    {
+        $path = PathItem::create()
+            ->route('/users');
+
+        $openApi = OpenAPI::create()
+            ->paths($path);
+
+        $this->assertEquals([
+            'paths' => [
+                '/users' => [],
+            ],
+        ], $openApi->toArray());
+
+        $openApi = $openApi->paths();
+
+        $this->assertEquals([], $openApi->toArray());
+    }
+
+    /** @test */
     public function retrieving_properties()
     {
         $info = Info::create()->title('Example API');

@@ -43,8 +43,8 @@
 
 An object oriented approach to generating OpenAPI specs, implemented in PHP. 
 
-You can build up your API spec using PHP classes, and then export the spec to 
-JSON (or YAML with the help of another package).
+You can build up your API spec using immutable PHP classes, and then export the 
+spec to JSON (or YAML with the help of another package).
 
 This package is **dependency free** and makes heavy use of **PHP 7 features**, 
 mainly being **type hints** and enabling **strict types**. This should make your 
@@ -198,9 +198,10 @@ they relate to one another.
 
 ### Setting and unsetting properties
 
-Each object has setter methods for it's supported properties. These methods all
-allow `null` values which must be explicitly passed. This will have the effect
-of removing the property from the output:
+Each object has setter methods for it's supported properties. Most of these 
+methods allow `null` values which will need to be explicitly passed (see the 
+next example for how to unset using variadic setter methods). This will have the 
+effect of unsetting the property:
 
 ```php
 $info = Info::create()
@@ -211,6 +212,21 @@ $openApi = OpenAPI::create()
 // $openApi->toJson() -> '{"info": {"title": "Example API"}}'
 
 $openApi = $openApi->info(null);
+// $openApi->toJson() -> '{}'
+```
+
+For variadic setter methods, if you call the method and don't supply any
+parameters, then this will have the effect of unsetting the property:
+
+```php
+$path = PathItem::create()
+    ->route('/users');
+
+$openApi = OpenAPI::create()
+    ->paths($path);
+// $openApi->toJson() -> '{"paths": {"/users": []}}'
+
+$openApi = $openApi->paths();
 // $openApi->toJson() -> '{}'
 ```
 
