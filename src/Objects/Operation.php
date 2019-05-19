@@ -18,18 +18,19 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody|null $requestBody
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[]|null $responses
  * @property bool|null $deprecated
- * @property array|null $security;
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null $security
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
  */
 class Operation extends BaseObject
 {
-    const GET = 'get';
-    const PUT = 'put';
-    const POST = 'post';
-    const DELETE = 'delete';
-    const OPTIONS = 'options';
-    const HEAD = 'head';
-    const PATCH = 'patch';
+    const ACTION_GET = 'get';
+    const ACTION_PUT = 'put';
+    const ACTION_POST = 'post';
+    const ACTION_DELETE = 'delete';
+    const ACTION_OPTIONS = 'options';
+    const ACTION_HEAD = 'head';
+    const ACTION_PATCH = 'patch';
+    const ACTION_TRACE = 'trace';
 
     /**
      * @var string|null
@@ -82,7 +83,7 @@ class Operation extends BaseObject
     protected $deprecated;
 
     /**
-     * @var array|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null
      */
     protected $security;
 
@@ -92,76 +93,79 @@ class Operation extends BaseObject
     protected $servers;
 
     /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function create(string $objectId = null): self
+    {
+        return new static($objectId);
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function get(string $objectId = null): self
+    {
+        return static::create($objectId)->action(static::ACTION_GET);
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function put(string $objectId = null): self
+    {
+        return static::create($objectId)->action(static::ACTION_PUT);
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function post(string $objectId = null): self
+    {
+        return static::create($objectId)->action(static::ACTION_POST);
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function delete(string $objectId = null): self
+    {
+        return static::create($objectId)->action(static::ACTION_DELETE);
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function head(string $objectId = null): self
+    {
+        return static::create($objectId)->action(static::ACTION_HEAD);
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function patch(string $objectId = null): self
+    {
+        return static::create($objectId)->action(static::ACTION_PATCH);
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public static function trace(string $objectId = null): self
+    {
+        return static::create($objectId)->action(static::ACTION_TRACE);
+    }
+
+    /**
      * @param string|null $action
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
-     */
-    public static function create(string $action = null, Response ...$responses): self
-    {
-        $instance = new static();
-
-        $instance->action = $action;
-        $instance->responses = $responses ?: null;
-
-        return $instance;
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
-     */
-    public static function get(Response ...$responses): self
-    {
-        return static::create(static::GET, ...$responses);
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
-     */
-    public static function put(Response ...$responses): self
-    {
-        return static::create(static::PUT, ...$responses);
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
-     */
-    public static function post(Response ...$responses): self
-    {
-        return static::create(static::POST, ...$responses);
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
-     */
-    public static function delete(Response ...$responses): self
-    {
-        return static::create(static::DELETE, ...$responses);
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
-     */
-    public static function head(Response ...$responses): self
-    {
-        return static::create(static::HEAD, ...$responses);
-    }
-
-    /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
-     */
-    public static function patch(Response ...$responses): self
-    {
-        return static::create(static::PATCH, ...$responses);
-    }
-
-    /**
-     * @param null|string $action
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function action(?string $action): self
@@ -203,7 +207,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param null|string $summary
+     * @param string|null $summary
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function summary(?string $summary): self
@@ -216,7 +220,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function description(?string $description): self
@@ -242,7 +246,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param null|string $operationId
+     * @param string|null $operationId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function operationId(?string $operationId): self
@@ -294,7 +298,7 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param null|bool $deprecated
+     * @param bool|null $deprecated
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function deprecated(?bool $deprecated = true): self
@@ -307,14 +311,14 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param array|null $security
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null $security
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public function security(?array $security): self
+    public function security(SecurityRequirement ...$security): self
     {
         $instance = clone $this;
 
-        $instance->security = $security;
+        $instance->security = $security ?: null;
 
         return $instance;
     }
@@ -338,8 +342,8 @@ class Operation extends BaseObject
     public function toArray(): array
     {
         $responses = [];
-        foreach ($this->responses as $response) {
-            $responses[$response->statusCode] = $response;
+        foreach ($this->responses ?? [] as $response) {
+            $responses[$response->statusCode ?? 'default'] = $response;
         }
 
         return Arr::filter([
@@ -350,7 +354,7 @@ class Operation extends BaseObject
             'operationId' => $this->operationId,
             'parameters' => $this->parameters,
             'requestBody' => $this->requestBody,
-            'responses' => $responses,
+            'responses' => $responses ?: null,
             'deprecated' => $this->deprecated,
             'security' => $this->security,
             'servers' => $this->servers,

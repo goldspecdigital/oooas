@@ -29,27 +29,16 @@ class Contact extends BaseObject
     protected $email;
 
     /**
-     * @param string|null $name
-     * @param string|null $url
-     * @param string|null $email
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
-    public static function create(
-        string $name = null,
-        string $url = null,
-        string $email = null
-    ): self {
-        $instance = new static();
-
-        $instance->name = $name;
-        $instance->url = $url;
-        $instance->email = $email;
-
-        return $instance;
+    public static function create(string $objectId = null): self
+    {
+        return new static($objectId);
     }
 
     /**
-     * @param null|string $name
+     * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
     public function name(?string $name): self
@@ -62,7 +51,7 @@ class Contact extends BaseObject
     }
 
     /**
-     * @param null|string $url
+     * @param string|null $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
     public function url(?string $url): self
@@ -75,7 +64,7 @@ class Contact extends BaseObject
     }
 
     /**
-     * @param null|string $email
+     * @param string|null $email
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
      */
     public function email(?string $email): self

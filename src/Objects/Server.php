@@ -9,6 +9,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 /**
  * @property string|null $url
  * @property string|null $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable[]|null $variables
  */
 class Server extends BaseObject
 {
@@ -23,20 +24,21 @@ class Server extends BaseObject
     protected $description;
 
     /**
-     * @param string|null $url
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable[]|null
+     */
+    protected $variables;
+
+    /**
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
      */
-    public static function create(string $url = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->url = $url;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param null|string $url
+     * @param string|null $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
      */
     public function url(?string $url): self
@@ -49,7 +51,7 @@ class Server extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
      */
     public function description(?string $description): self
@@ -62,13 +64,32 @@ class Server extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable[] $variables
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
+     */
+    public function variables(ServerVariable ...$variables): self
+    {
+        $instance = clone $this;
+
+        $instance->variables = $variables ?: null;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
     {
+        $variables = [];
+        foreach ($this->variables ?? [] as $variable) {
+            $variables[$variable->objectId] = $variable->toArray();
+        }
+
         return Arr::filter([
             'url' => $this->url,
             'description' => $this->description,
+            'variables' => $variables ?: null,
         ]);
     }
 }

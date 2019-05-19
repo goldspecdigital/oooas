@@ -23,20 +23,16 @@ class ExternalDocs extends BaseObject
     protected $url;
 
     /**
-     * @param string|null $url
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
-    public static function create(string $url = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->url = $url;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
     public function description(?string $description): self
@@ -49,7 +45,7 @@ class ExternalDocs extends BaseObject
     }
 
     /**
-     * @param null|string $url
+     * @param string|null $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
     public function url(?string $url): self

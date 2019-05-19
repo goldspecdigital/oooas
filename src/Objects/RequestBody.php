@@ -29,20 +29,16 @@ class RequestBody extends BaseObject
     protected $required;
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
-    public static function create(MediaType ...$content): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->content = $content ?: null;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
     public function description(?string $description): self
@@ -68,7 +64,7 @@ class RequestBody extends BaseObject
     }
 
     /**
-     * @param null|bool $required
+     * @param bool|null $required
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
     public function required(?bool $required = true): self

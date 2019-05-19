@@ -9,6 +9,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 /**
  * @property string|null $name
  * @property string|null $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
  */
 class Tag extends BaseObject
 {
@@ -23,20 +24,21 @@ class Tag extends BaseObject
     protected $description;
 
     /**
-     * @param string|null $name
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null
+     */
+    protected $externalDocs;
+
+    /**
+     * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
-    public static function create(string $name = null): self
+    public static function create(string $objectId = null): self
     {
-        $instance = new static();
-
-        $instance->name = $name;
-
-        return $instance;
+        return new static($objectId);
     }
 
     /**
-     * @param null|string $name
+     * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
     public function name(?string $name): self
@@ -49,7 +51,7 @@ class Tag extends BaseObject
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
     public function description(?string $description): self
@@ -62,6 +64,19 @@ class Tag extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
+     */
+    public function externalDocs(?ExternalDocs $externalDocs): self
+    {
+        $instance = clone $this;
+
+        $instance->externalDocs = $externalDocs;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
@@ -69,6 +84,7 @@ class Tag extends BaseObject
         return Arr::filter([
             'name' => $this->name,
             'description' => $this->description,
+            'externalDocs' => $this->externalDocs,
         ]);
     }
 }
