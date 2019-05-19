@@ -53,7 +53,9 @@ class OperationTest extends TestCase
                 ],
                 'deprecated' => true,
                 'security' => [
-                    'OAuth2' => [],
+                    [
+                        'OAuth2' => [],
+                    ],
                 ],
                 'servers' => [
                     [],

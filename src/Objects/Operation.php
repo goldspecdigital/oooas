@@ -18,7 +18,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody|null $requestBody
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[]|null $responses
  * @property bool|null $deprecated
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement|null $security
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null $security
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
  */
 class Operation extends BaseObject
@@ -83,7 +83,7 @@ class Operation extends BaseObject
     protected $deprecated;
 
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement|null
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null
      */
     protected $security;
 
@@ -311,14 +311,14 @@ class Operation extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement|null $security
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null $security
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public function security(?SecurityRequirement $security): self
+    public function security(SecurityRequirement ...$security): self
     {
         $instance = clone $this;
 
-        $instance->security = $security;
+        $instance->security = $security ?: null;
 
         return $instance;
     }

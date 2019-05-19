@@ -7,16 +7,17 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property string|null $href
+ * @property string|null $operationRef
  * @property string|null $operationId
  * @property string|null $description
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server|null $server
  */
 class Link extends BaseObject
 {
     /**
      * @var string|null
      */
-    protected $href;
+    protected $operationRef;
 
     /**
      * @var string|null
@@ -29,6 +30,11 @@ class Link extends BaseObject
     protected $description;
 
     /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Server|null
+     */
+    protected $server;
+
+    /**
      * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
      */
@@ -38,14 +44,14 @@ class Link extends BaseObject
     }
 
     /**
-     * @param string|null $href
+     * @param string|null $operationRef
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
      */
-    public function href(?string $href): self
+    public function operationRef(?string $operationRef): self
     {
         $instance = clone $this;
 
-        $instance->href = $href;
+        $instance->operationRef = $operationRef;
 
         return $instance;
     }
@@ -77,14 +83,28 @@ class Link extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server|null $server
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
+     */
+    public function server(?Server $server): self
+    {
+        $instance = clone $this;
+
+        $instance->server = $server;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
     {
         return Arr::filter([
-            'href' => $this->href,
+            'operationRef' => $this->operationRef,
             'operationId' => $this->operationId,
             'description' => $this->description,
+            'server' => $this->server,
         ]);
     }
 }

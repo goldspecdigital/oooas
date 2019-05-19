@@ -10,8 +10,8 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 /**
  * @property string|null $mediaType
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null $examples
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example|null $example
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null $examples
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding[]|null $encoding
  */
 class MediaType extends BaseObject

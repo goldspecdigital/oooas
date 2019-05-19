@@ -147,8 +147,8 @@ class PathItem extends BaseObject
             array_merge($operations, [
                 'summary' => $this->summary,
                 'description' => $this->description,
-                'servers' => $this->servers ?: null,
-                'parameters' => $this->parameters ?: null,
+                'servers' => $this->servers,
+                'parameters' => $this->parameters,
             ])
         );
     }
