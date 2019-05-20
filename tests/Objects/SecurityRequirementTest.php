@@ -14,10 +14,10 @@ class SecurityRequirementTest extends TestCase
     /** @test */
     public function create_with_all_parameters_works()
     {
-        $securityScheme = SecurityScheme::create();
+        $securityScheme = SecurityScheme::create('OAuth2');
 
-        $securityRequirement = SecurityRequirement::create('OAuth2')
-            ->securitySchemes($securityScheme);
+        $securityRequirement = SecurityRequirement::create()
+            ->securityScheme($securityScheme);
 
         $openApi = OpenApi::create()
             ->security($securityRequirement);
