@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme|null $securityScheme
+ * @property string|null $securityScheme
  * @property string[]|null $scopes
  */
 class SecurityRequirement extends BaseObject
 {
     /**
-     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme|null
+     * @var string|null
      */
     protected $securityScheme;
 
@@ -32,11 +33,22 @@ class SecurityRequirement extends BaseObject
     }
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme $securityScheme
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme|string|null $securityScheme
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
      */
-    public function securityScheme(SecurityScheme $securityScheme): self
+    public function securityScheme($securityScheme): self
     {
+        // If a SecurityScheme instance passed in, then use its Object ID.
+        if ($securityScheme instanceof SecurityScheme) {
+            $securityScheme = $securityScheme->objectId;
+        }
+
+        // If the $securityScheme is not a string or null then thrown an exception.
+        if (!is_string($securityScheme) && !is_null($securityScheme)) {
+            throw new InvalidArgumentException();
+        }
+
         $instance = clone $this;
 
         $instance->securityScheme = $securityScheme;
@@ -63,7 +75,7 @@ class SecurityRequirement extends BaseObject
     public function toArray(): array
     {
         return Arr::filter([
-            $this->securityScheme->objectId => $this->scopes ?? [],
+            $this->securityScheme => $this->scopes ?? [],
         ]);
     }
 }
