@@ -131,13 +131,13 @@ class OpenApiTest extends TestCase
             ->flow(OAuthFlow::FLOW_PASSWORD)
             ->tokenUrl('https://api.example.com/oauth/authorize');
 
-        $components = Components::create()->securitySchemes(
-            SecurityScheme::oauth2('OAuth2')
-                ->flows($authFlow)
-        );
+        $securityScheme = SecurityScheme::oauth2('OAuth2')
+            ->flows($authFlow);
+
+        $components = Components::create()->securitySchemes($securityScheme);
 
         // Specify the security.
-        $security = SecurityRequirement::create('OAuth2');
+        $security = SecurityRequirement::create()->securityScheme($securityScheme);
 
         // Specify external documentatino for the API.
         $externalDocs = ExternalDocs::create()

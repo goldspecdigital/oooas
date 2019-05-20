@@ -7,11 +7,11 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
- * @package string|null $contentType
- * @package \GoldSpecDigital\ObjectOrientedOAS\Objects\Header[]|null $headers
- * @package string|null $style
- * @package bool|null $explode
- * @package bool|null $allowReserved
+ * @property string|null $contentType
+ * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Header[]|null $headers
+ * @property string|null $style
+ * @property bool|null $explode
+ * @property bool|null $allowReserved
  */
 class Encoding extends BaseObject
 {
