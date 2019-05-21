@@ -19,6 +19,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[]|null $responses
  * @property bool|null $deprecated
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null $security
+ * @property bool|null $noSecurity
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null $servers
  */
 class Operation extends BaseObject
@@ -86,6 +87,11 @@ class Operation extends BaseObject
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null
      */
     protected $security;
+
+    /**
+     * @var bool|null
+     */
+    protected $noSecurity;
 
     /**
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[]|null
@@ -179,8 +185,8 @@ class Operation extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[]|string[] $tags
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function tags(...$tags): self
     {
@@ -319,6 +325,20 @@ class Operation extends BaseObject
         $instance = clone $this;
 
         $instance->security = $security ?: null;
+        $instance->noSecurity = null;
+
+        return $instance;
+    }
+
+    /**
+     * @param bool|null $noSecurity
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     */
+    public function noSecurity(?bool $noSecurity = true): self
+    {
+        $instance = clone $this;
+
+        $instance->noSecurity = $noSecurity;
 
         return $instance;
     }
@@ -356,7 +376,7 @@ class Operation extends BaseObject
             'requestBody' => $this->requestBody,
             'responses' => $responses ?: null,
             'deprecated' => $this->deprecated,
-            'security' => $this->security,
+            'security' => $this->noSecurity ? [] : $this->security,
             'servers' => $this->servers,
         ]);
     }

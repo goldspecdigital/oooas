@@ -109,8 +109,8 @@ class OAuthFlow extends BaseObject
 
     /**
      * @param array|null $scopes
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
      */
     public function scopes(?array $scopes): self
     {

@@ -32,7 +32,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $additionalProperties
  * @property int|null $maxProperties
  * @property int|null $minProperties
- * @property boolean|null $nullable
+ * @property bool|null $nullable
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator|null $discriminator
  * @property bool|null $readOnly
  * @property bool|null $writeOnly
@@ -177,7 +177,7 @@ class Schema extends BaseObject implements SchemaContract
     protected $minProperties;
 
     /**
-     * @var boolean|null
+     * @var bool|null
      */
     protected $nullable;
 
@@ -515,8 +515,8 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|string[] $required
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
     public function required(...$required): self
     {

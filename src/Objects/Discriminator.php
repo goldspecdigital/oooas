@@ -47,8 +47,8 @@ class Discriminator extends BaseObject
 
     /**
      * @param array $mapping
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator
      */
     public function mapping(array $mapping): self
     {

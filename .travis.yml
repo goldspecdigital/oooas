@@ -25,5 +25,5 @@ install:
 
 # Run the code style and unit tests.
 script:
-  - vendor/bin/phpcs
-  - vendor/bin/phpunit
+  - composer test:style
+  - composer test:unit
