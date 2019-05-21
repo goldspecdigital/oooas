@@ -54,7 +54,7 @@ abstract class BaseObject implements JsonSerializable
     }
 
     /**
-     * Specify data which should be serialized to JSON
+     * Specify data which should be serialized to JSON.
      *
      * @return array
      */
@@ -65,8 +65,8 @@ abstract class BaseObject implements JsonSerializable
 
     /**
      * @param string $name
-     * @return mixed
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException
+     * @return mixed
      */
     public function __get(string $name)
     {

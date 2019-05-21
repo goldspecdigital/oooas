@@ -185,8 +185,8 @@ class Operation extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[]|string[] $tags
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
     public function tags(...$tags): self
     {
