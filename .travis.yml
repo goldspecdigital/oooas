@@ -26,4 +26,4 @@ install:
 # Run the code style and unit tests.
 script:
   - vendor/bin/phpcs
-  - vendor/bin/phpunit
+  - vendor/bin/php-cs-fixer --config=.php_cs --allow-risky=yes --dry-run --diff --verbose --using-cache=no
