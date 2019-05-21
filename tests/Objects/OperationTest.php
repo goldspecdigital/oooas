@@ -67,4 +67,19 @@ class OperationTest extends TestCase
             ],
         ], $pathItem->toArray());
     }
+
+    /** @test */
+    public function create_with_no_security_works()
+    {
+        $operation = Operation::get()
+            ->noSecurity();
+
+        $pathItem = PathItem::create()->operations($operation);
+
+        $this->assertEquals([
+            'get' => [
+                'security' => [],
+            ],
+        ], $pathItem->toArray());
+    }
 }
