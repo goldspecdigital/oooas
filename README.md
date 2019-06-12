@@ -95,6 +95,9 @@ $userResponse = Response::create()
         MediaType::json()->schema($userSchema)
     );
     
+// Or you can use reference object
+$userResponse = Response::ok()->setReference('pet.json');
+    
 // Create the operation for the route (i.e. GET, POST, etc.).
 $showUser = Operation::get()
     ->responses($userResponse)
