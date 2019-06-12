@@ -6,6 +6,7 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Tests\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Reference;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody;
 use GoldSpecDigital\ObjectOrientedOAS\Tests\TestCase;
 
@@ -31,5 +32,18 @@ class RequestBodyTest extends TestCase
                 'required' => true,
             ],
         ], $operation->toArray());
+    }
+
+    /** @test */
+    public function create_with_reference()
+    {
+        $requestBody = RequestBody::create()->setReference(Reference::create()->dollarRef('pet.json'));
+
+        $this->assertInstanceOf(Reference::class, $requestBody->getReference());
+        $this->assertEquals('pet.json', $requestBody->getReference()->dollarRef);
+
+        $this->assertEquals([
+            '$ref' => 'pet.json',
+        ], $requestBody->toArray());
     }
 }

@@ -13,6 +13,8 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class RequestBody extends BaseObject
 {
+    use Referenceable;
+
     /**
      * @var string|null
      */
@@ -81,6 +83,10 @@ class RequestBody extends BaseObject
      */
     public function toArray(): array
     {
+        if ($this->getReference()) {
+            return $this->getReference()->toArray();
+        }
+
         $content = [];
         foreach ($this->content ?? [] as $contentItem) {
             $content[$contentItem->mediaType] = $contentItem;

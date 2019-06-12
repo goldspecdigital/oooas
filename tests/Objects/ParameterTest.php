@@ -8,6 +8,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Example;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Reference;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use GoldSpecDigital\ObjectOrientedOAS\Tests\TestCase;
 
@@ -57,5 +58,18 @@ class ParameterTest extends TestCase
                 ],
             ],
         ], $operation->toArray());
+    }
+
+    /** @test */
+    public function create_with_reference()
+    {
+        $parameter = Parameter::create()->setReference(Reference::create()->dollarRef('pet.json'));
+
+        $this->assertInstanceOf(Reference::class, $parameter->getReference());
+        $this->assertEquals('pet.json', $parameter->getReference()->dollarRef);
+
+        $this->assertEquals([
+            '$ref' => 'pet.json',
+        ], $parameter->toArray());
     }
 }

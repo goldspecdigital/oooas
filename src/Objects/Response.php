@@ -15,6 +15,8 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Response extends BaseObject
 {
+    use Referenceable;
+
     /**
      * @var int|null
      */
@@ -240,6 +242,10 @@ class Response extends BaseObject
      */
     public function toArray(): array
     {
+        if ($this->getReference()) {
+            return $this->getReference()->toArray();
+        }
+
         $headers = [];
         foreach ($this->headers ?? [] as $header) {
             $headers[$header->objectId] = $header;

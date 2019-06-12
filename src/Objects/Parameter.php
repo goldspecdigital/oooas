@@ -24,6 +24,8 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Parameter extends BaseObject
 {
+    use Referenceable;
+
     const IN_QUERY = 'query';
     const IN_HEADER = 'header';
     const IN_PATH = 'path';
@@ -321,6 +323,10 @@ class Parameter extends BaseObject
      */
     public function toArray(): array
     {
+        if ($this->getReference()) {
+            return $this->getReference()->toArray();
+        }
+
         $examples = [];
         foreach ($this->examples ?? [] as $example) {
             $examples[$example->objectId] = $example->toArray();

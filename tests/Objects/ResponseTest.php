@@ -8,6 +8,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Example;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Header;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Link;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Reference;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use GoldSpecDigital\ObjectOrientedOAS\Tests\TestCase;
@@ -45,33 +46,33 @@ class ResponseTest extends TestCase
         $this->assertEquals(
             [
                 'description' => 'OK',
-                'headers' => [
+                'headers'     => [
                     'HeaderName' => [
-                        'description' => 'Lorem ipsum',
-                        'required' => true,
-                        'deprecated' => true,
+                        'description'     => 'Lorem ipsum',
+                        'required'        => true,
+                        'deprecated'      => true,
                         'allowEmptyValue' => true,
-                        'style' => 'simple',
-                        'explode' => true,
-                        'allowReserved' => true,
-                        'schema' => [
+                        'style'           => 'simple',
+                        'explode'         => true,
+                        'allowReserved'   => true,
+                        'schema'          => [
                             'type' => 'string',
                         ],
-                        'example' => 'Example String',
-                        'examples' => [
+                        'example'         => 'Example String',
+                        'examples'        => [
                             'ExampleName' => [
                                 'value' => 'Example value',
                             ],
                         ],
-                        'content' => [
+                        'content'         => [
                             'application/json' => [],
                         ],
                     ],
                 ],
-                'content' => [
+                'content'     => [
                     'application/json' => [],
                 ],
-                'links' => [
+                'links'       => [
                     'MyLink' => [],
                 ],
             ],
@@ -167,5 +168,18 @@ class ResponseTest extends TestCase
 
         $this->assertEquals(500, $response->statusCode);
         $this->assertEquals('Internal Server Error', $response->description);
+    }
+
+    /** @test */
+    public function create_with_reference()
+    {
+        $response = Response::create()->setReference(Reference::create()->dollarRef('pet.json'));
+
+        $this->assertInstanceOf(Reference::class, $response->getReference());
+        $this->assertEquals('pet.json', $response->getReference()->dollarRef);
+
+        $this->assertEquals([
+            '$ref' => 'pet.json',
+        ], $response->toArray());
     }
 }
