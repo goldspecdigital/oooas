@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
  * @property string|null $dollarRef
- *
- * @package GoldSpecDigital\ObjectOrientedOAS\Objects
  */
 class Reference extends BaseObject
 {
