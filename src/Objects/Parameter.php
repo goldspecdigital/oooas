@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
+use GoldSpecDigital\ObjectOrientedOAS\Traits\Referenceable;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -24,6 +25,8 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Parameter extends BaseObject
 {
+    use Referenceable;
+
     const IN_QUERY = 'query';
     const IN_HEADER = 'header';
     const IN_PATH = 'path';
@@ -321,6 +324,10 @@ class Parameter extends BaseObject
      */
     public function toArray(): array
     {
+        if ($this->ref !== null) {
+            return ['$ref' => $this->ref];
+        }
+
         $examples = [];
         foreach ($this->examples ?? [] as $example) {
             $examples[$example->objectId] = $example->toArray();
