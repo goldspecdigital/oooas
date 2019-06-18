@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
-use GoldSpecDigital\ObjectOrientedOAS\Traits\Referenceable;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -16,8 +15,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Response extends BaseObject
 {
-    use Referenceable;
-
     /**
      * @var int|null
      */
@@ -42,15 +39,6 @@ class Response extends BaseObject
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\Link[]|null
      */
     protected $links;
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
 
     /**
      * @param string|null $objectId
@@ -241,12 +229,8 @@ class Response extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
-        if ($this->ref !== null) {
-            return ['$ref' => $this->ref];
-        }
-
         $headers = [];
         foreach ($this->headers ?? [] as $header) {
             $headers[$header->objectId] = $header;

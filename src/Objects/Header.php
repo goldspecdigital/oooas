@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
-use GoldSpecDigital\ObjectOrientedOAS\Traits\Referenceable;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -23,8 +22,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Header extends BaseObject
 {
-    use Referenceable;
-
     const STYLE_MATRIX = 'matrix';
     const STYLE_LABEL = 'label';
     const STYLE_FORM = 'form';
@@ -87,15 +84,6 @@ class Header extends BaseObject
      * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[]|null
      */
     protected $content;
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Header
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
 
     /**
      * @param string|null $description
@@ -243,12 +231,8 @@ class Header extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
-        if ($this->ref !== null) {
-            return ['$ref' => $this->ref];
-        }
-
         $examples = [];
         foreach ($this->examples ?? [] as $example) {
             $examples[$example->objectId] = $example->toArray();

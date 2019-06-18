@@ -18,15 +18,6 @@ abstract class SchemaComposition extends BaseObject implements SchemaContract
     protected $schemas;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SchemaComposition
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $schemas
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SchemaComposition
      */
@@ -47,7 +38,7 @@ abstract class SchemaComposition extends BaseObject implements SchemaContract
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             $this->compositionType() => $this->schemas,

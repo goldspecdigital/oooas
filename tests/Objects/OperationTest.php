@@ -82,25 +82,4 @@ class OperationTest extends TestCase
             ],
         ], $pathItem->toArray());
     }
-
-    /** @test */
-    public function create_with_refs_works()
-    {
-        $operation = Operation::create()
-            ->action(Operation::ACTION_GET)
-            ->responses(Response::ref('#/components/responses/TestResponse'));
-
-        $pathItem = PathItem::create()
-            ->operations($operation);
-
-        $this->assertEquals([
-            'get' => [
-                'responses' => [
-                    'default' => [
-                        '$ref' => '#/components/responses/TestResponse',
-                    ],
-                ],
-            ],
-        ], $pathItem->toArray());
-    }
 }

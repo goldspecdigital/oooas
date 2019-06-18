@@ -6,7 +6,6 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
 use GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException;
-use GoldSpecDigital\ObjectOrientedOAS\Traits\Referenceable;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -44,8 +43,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Schema extends BaseObject implements SchemaContract
 {
-    use Referenceable;
-
     const TYPE_ARRAY = 'array';
     const TYPE_BOOLEAN = 'boolean';
     const TYPE_INTEGER = 'integer';
@@ -218,15 +215,6 @@ class Schema extends BaseObject implements SchemaContract
      * @var bool|null
      */
     protected $deprecated;
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
 
     /**
      * @param string|null $objectId
@@ -704,12 +692,8 @@ class Schema extends BaseObject implements SchemaContract
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
-        if ($this->ref !== null) {
-            return ['$ref' => $this->ref];
-        }
-
         $properties = [];
         foreach ($this->properties ?? [] as $property) {
             $properties[$property->objectId] = $property->toArray();

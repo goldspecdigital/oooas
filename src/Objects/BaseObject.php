@@ -9,6 +9,7 @@ use JsonSerializable;
 
 /**
  * @property string|null $objectId
+ * @property string|null $ref
  */
 abstract class BaseObject implements JsonSerializable
 {
@@ -16,6 +17,11 @@ abstract class BaseObject implements JsonSerializable
      * @var string|null
      */
     protected $objectId;
+
+    /**
+     * @var string|null
+     */
+    protected $ref;
 
     /**
      * BaseObject constructor.
@@ -29,7 +35,29 @@ abstract class BaseObject implements JsonSerializable
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\BaseObject
+     * @return static
+     */
+    public static function create(string $objectId = null): self
+    {
+        return new static($objectId);
+    }
+
+    /**
+     * @param string $ref
+     * @return static
+     */
+    public static function ref(string $ref): self
+    {
+        $instance = new static();
+
+        $instance->ref = $ref;
+
+        return $instance;
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return static
      */
     public function objectId(?string $objectId): self
     {
@@ -43,7 +71,19 @@ abstract class BaseObject implements JsonSerializable
     /**
      * @return array
      */
-    abstract public function toArray(): array;
+    abstract protected function generate(): array;
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        if ($this->ref !== null) {
+            return ['$ref' => $this->ref];
+        }
+
+        return $this->generate();
+    }
 
     /**
      * @return string

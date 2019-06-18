@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
-use GoldSpecDigital\ObjectOrientedOAS\Traits\Referenceable;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -14,8 +13,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class RequestBody extends BaseObject
 {
-    use Referenceable;
-
     /**
      * @var string|null
      */
@@ -30,15 +27,6 @@ class RequestBody extends BaseObject
      * @var bool|null
      */
     protected $required;
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
 
     /**
      * @param string|null $description
@@ -82,12 +70,8 @@ class RequestBody extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
-        if ($this->ref !== null) {
-            return ['$ref' => $this->ref];
-        }
-
         $content = [];
         foreach ($this->content ?? [] as $contentItem) {
             $content[$contentItem->mediaType] = $contentItem;

@@ -71,15 +71,6 @@ class OpenApi extends BaseObject
     protected $externalDocs;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $openapi
      * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
      */
@@ -186,7 +177,7 @@ class OpenApi extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $paths = [];
         foreach ($this->paths ?? [] as $path) {

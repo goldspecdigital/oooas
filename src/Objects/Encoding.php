@@ -41,15 +41,6 @@ class Encoding extends BaseObject
     protected $allowReserved;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $contentType
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding
      */
@@ -117,7 +108,7 @@ class Encoding extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $headers = [];
         foreach ($this->headers ?? [] as $header) {

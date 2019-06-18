@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
-use GoldSpecDigital\ObjectOrientedOAS\Traits\Referenceable;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -15,8 +14,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  */
 class Example extends BaseObject
 {
-    use Referenceable;
-
     /**
      * @var string|null
      */
@@ -36,15 +33,6 @@ class Example extends BaseObject
      * @var string|null
      */
     protected $externalValue;
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
 
     /**
      * @param string|null $summary
@@ -101,12 +89,8 @@ class Example extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
-        if ($this->ref !== null) {
-            return ['$ref' => $this->ref];
-        }
-
         return Arr::filter([
             'summary' => $this->summary,
             'description' => $this->description,

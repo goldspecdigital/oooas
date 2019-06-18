@@ -53,15 +53,6 @@ class MediaType extends BaseObject
      * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
      */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
-     */
     public static function json(string $objectId = null): self
     {
         return static::create($objectId)
@@ -196,7 +187,7 @@ class MediaType extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $examples = [];
         foreach ($this->examples ?? [] as $example) {
