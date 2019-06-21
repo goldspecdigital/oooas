@@ -58,34 +58,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "name"
-                        ],
-                        "properties": {
-                          "name": {
-                            "type": "string"
-                          },
-                          "tag": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "id"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64"
-                          }
-                        }
-                      }
-                    ]
+                    "$ref": "#/components/schemas/Pet"
                   }
                 }
               }
@@ -96,20 +69,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "code",
-                    "message"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -125,18 +85,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "name"
-                ],
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "tag": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/NewPet"
               }
             }
           }
@@ -147,34 +96,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "name"
-                      ],
-                      "properties": {
-                        "name": {
-                          "type": "string"
-                        },
-                        "tag": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "id"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64"
-                        }
-                      }
-                    }
-                  ]
+                  "$ref": "#/components/schemas/Pet"
                 }
               }
             }
@@ -184,20 +106,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "code",
-                    "message"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -227,34 +136,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "name"
-                      ],
-                      "properties": {
-                        "name": {
-                          "type": "string"
-                        },
-                        "tag": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "id"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64"
-                        }
-                      }
-                    }
-                  ]
+                  "$ref": "#/components/schemas/Pet"
                 }
               }
             }
@@ -264,20 +146,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "code",
-                    "message"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -308,23 +177,60 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "code",
-                    "message"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewPet"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ]
+      },
+      "NewPet": {
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
           }
         }
       }
