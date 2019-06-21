@@ -209,10 +209,10 @@ $info = Info::create()
 
 $openApi = OpenApi::create()
     ->info($info);
-// $openApi->toJson() -> '{"info": {"title": "Example API"}}'
+echo $openApi->toJson(); // '{"info": {"title": "Example API"}}'
 
 $openApi = $openApi->info(null);
-// $openApi->toJson() -> '{}'
+echo $openApi->toJson(); // '{}'
 ```
 
 For variadic setter methods, if you call the method and don't supply any
@@ -224,10 +224,10 @@ $path = PathItem::create()
 
 $openApi = OpenApi::create()
     ->paths($path);
-// $openApi->toJson() -> '{"paths": {"/users": []}}'
+echo $openApi->toJson(); // '{"paths": {"/users": []}}'
 
 $openApi = $openApi->paths();
-// $openApi->toJson() -> '{}'
+echo $openApi->toJson(); // '{}'
 ```
 
 ### Retrieving properties
@@ -239,7 +239,7 @@ to give better auto-completion in IDEs:
 ```php
 $info = Info::create()->title('Example API');
 
-// $info->title -> 'Example API'
+echo $info->title; // 'Example API'
 ```
 
 ### Object ID
@@ -259,7 +259,7 @@ $schema = Schema::create()
         Schema::create('age')->type(Schema::TYPE_INTEGER)
     );
     
-$schema->toJson();
+echo $schema->toJson();
 /* 
 {
   "type": "object",
@@ -286,7 +286,7 @@ $schema = Schema::object()
         Schema::integer('age')
     );
     
-$schema->toJson();
+echo $schema->toJson();
 /* 
 {
   "type": "object",
@@ -301,6 +301,28 @@ $schema->toJson();
 } 
 */
 ``` 
+
+### $ref
+
+The use of `$ref` has been applied to every single object to use as you wish.
+You may substitute any object for a `$ref` by invoking the `ref()` static method 
+on the object class: 
+
+```php
+$schema = AllOf::create()
+    ->schemas(
+        Schema::ref('#/components/schemas/ExampleSchema')
+    );
+    
+echo $schema->toJson();
+/*
+{
+  "allOf": [
+    ["$ref": "#/components/schemas/ExampleSchema"]
+  ]
+}
+*/
+```
 
 ## Running the tests
 

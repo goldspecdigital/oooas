@@ -29,15 +29,6 @@ class ServerVariable extends BaseObject
     protected $description;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string[] $enum
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable
      */
@@ -79,7 +70,7 @@ class ServerVariable extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'enum' => $this->enum,

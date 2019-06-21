@@ -24,15 +24,6 @@ class Discriminator extends BaseObject
     protected $mapping;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $propertyName
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator
      */
@@ -71,7 +62,7 @@ class Discriminator extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'propertyName' => $this->propertyName,

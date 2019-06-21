@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GoldSpecDigital\ObjectOrientedOAS\Tests;
 
 use GoldSpecDigital\ObjectOrientedOAS\Objects\AllOf;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\License;
@@ -62,45 +63,55 @@ class PetStoreTest extends TestCase
                 Schema::integer()->format(Schema::FORMAT_INT32)
             );
 
-        $newPetSchema = Schema::object()
+        $petSchema = AllOf::create('Pet')
+            ->schemas(
+                Schema::ref('#/components/schemas/NewPet'),
+                Schema::create()
+                    ->required('id')
+                    ->properties(
+                        Schema::integer('id')->format(Schema::FORMAT_INT64)
+                    )
+            );
+
+        $newPetSchema = Schema::create('NewPet')
             ->required('name')
             ->properties(
                 Schema::string('name'),
                 Schema::string('tag')
             );
 
-        $petSchema = AllOf::create()->schemas(
-            $newPetSchema,
-            Schema::object()
-                ->required('id')
-                ->properties(
-                    Schema::integer('id')->format(Schema::FORMAT_INT64)
-                )
-        );
+        $errorSchema = Schema::create('Error')
+            ->required('code', 'message')
+            ->properties(
+                Schema::integer('code')->format(Schema::FORMAT_INT32),
+                Schema::string('message')
+            );
+
+        $components = Components::create()
+            ->schemas($petSchema, $newPetSchema, $errorSchema);
 
         $petResponse = Response::ok()
             ->description('pet response')
             ->content(
-                MediaType::json()->schema($petSchema)
+                MediaType::json()->schema(
+                    Schema::ref('#/components/schemas/Pet')
+                )
             );
 
         $petListingResponse = Response::ok()
             ->description('pet response')
             ->content(
                 MediaType::json()->schema(
-                    Schema::array()->items($petSchema)
+                    Schema::array()->items(
+                        Schema::ref('#/components/schemas/Pet')
+                    )
                 )
             );
 
-        $defaultErrorResponse = Response::create()
+        $defaultErrorResponse = Response::create('Error')
             ->description('unexpected error')
             ->content(MediaType::json()->schema(
-                Schema::object()
-                    ->required('code', 'message')
-                    ->properties(
-                        Schema::integer('code')->format(Schema::FORMAT_INT32),
-                        Schema::string('message')
-                    )
+                Schema::ref('#/components/schemas/Error')
             ));
 
         $findPets = Operation::get()
@@ -117,7 +128,9 @@ class PetStoreTest extends TestCase
                     ->description('Pet to add to the store')
                     ->required()
                     ->content(
-                        MediaType::json()->schema($newPetSchema)
+                        MediaType::json()->schema(
+                            Schema::ref('#/components/schemas/NewPet')
+                        )
                     )
             )
             ->responses($petResponse, $defaultErrorResponse);
@@ -158,7 +171,8 @@ class PetStoreTest extends TestCase
             ->openapi(OpenApi::OPENAPI_3_0_0)
             ->info($info)
             ->servers($server)
-            ->paths($petRoot, $petNested);
+            ->paths($petRoot, $petNested)
+            ->components($components);
 
         $exampleResponse = file_get_contents(realpath(__DIR__) . '/storage/petstore_expanded.json');
 

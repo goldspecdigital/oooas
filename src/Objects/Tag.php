@@ -29,15 +29,6 @@ class Tag extends BaseObject
     protected $externalDocs;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
      */
@@ -79,7 +70,7 @@ class Tag extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'name' => $this->name,

@@ -23,15 +23,6 @@ class License extends BaseObject
     protected $url;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\License
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\License
      */
@@ -60,7 +51,7 @@ class License extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'name' => $this->name,

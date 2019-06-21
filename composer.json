@@ -1,6 +1,6 @@
 {
   "name": "goldspecdigital/oooas",
-  "description": "An object oriented implementation for generating OpenAPI docs.",
+  "description": "An object oriented approach to generating OpenAPI specs, implemented in PHP.",
   "type": "library",
   "license": "MIT",
   "keywords": ["php", "oas", "openapi", "swagger"],
@@ -27,11 +27,11 @@
   },
   "scripts": {
     "test": [
-      "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --dry-run --diff --verbose --using-cache=no",
+      "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --dry-run --diff --verbose",
       "@php vendor/bin/phpunit"
     ],
-    "test:style": "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --dry-run --diff --verbose --using-cache=no",
+    "test:style": "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --dry-run --diff --verbose",
     "test:unit": "@php vendor/bin/phpunit",
-    "fix:style": "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --diff --verbose --using-cache=no"
+    "fix:style": "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --diff --verbose"
   }
 }

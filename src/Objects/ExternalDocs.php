@@ -23,15 +23,6 @@ class ExternalDocs extends BaseObject
     protected $url;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs
      */
@@ -60,7 +51,7 @@ class ExternalDocs extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'description' => $this->description,

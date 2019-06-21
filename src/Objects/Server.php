@@ -29,15 +29,6 @@ class Server extends BaseObject
     protected $variables;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $url
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
      */
@@ -79,7 +70,7 @@ class Server extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $variables = [];
         foreach ($this->variables ?? [] as $variable) {

@@ -44,15 +44,6 @@ class Response extends BaseObject
      * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
      */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
-     */
     public static function ok(string $objectId = null): self
     {
         return static::create($objectId)
@@ -238,7 +229,7 @@ class Response extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $headers = [];
         foreach ($this->headers ?? [] as $header) {

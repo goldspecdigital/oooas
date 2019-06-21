@@ -102,15 +102,6 @@ class Operation extends BaseObject
      * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
-     */
     public static function get(string $objectId = null): self
     {
         return static::create($objectId)->action(static::ACTION_GET);
@@ -359,7 +350,7 @@ class Operation extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $responses = [];
         foreach ($this->responses ?? [] as $response) {

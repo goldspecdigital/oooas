@@ -106,15 +106,6 @@ class Parameter extends BaseObject
      * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
      */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
-     */
     public static function query(string $objectId = null): self
     {
         return static::create($objectId)->in(static::IN_QUERY);
@@ -319,7 +310,7 @@ class Parameter extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $examples = [];
         foreach ($this->examples ?? [] as $example) {

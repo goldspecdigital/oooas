@@ -29,15 +29,6 @@ class RequestBody extends BaseObject
     protected $required;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $description
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
      */
@@ -79,7 +70,7 @@ class RequestBody extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $content = [];
         foreach ($this->content ?? [] as $contentItem) {

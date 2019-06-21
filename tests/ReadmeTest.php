@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Tests;
 
+use GoldSpecDigital\ObjectOrientedOAS\Objects\AllOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
@@ -162,6 +163,21 @@ class ReadmeTest extends TestCase
                 'age' => [
                     'type' => 'integer',
                 ],
+            ],
+        ], $schema->toArray());
+    }
+
+    /** @test */
+    public function dollar_ref()
+    {
+        $schema = AllOf::create()
+            ->schemas(
+                Schema::ref('#/components/schemas/ExampleSchema')
+            );
+
+        $this->assertEquals([
+            'allOf' => [
+                ['$ref' => '#/components/schemas/ExampleSchema'],
             ],
         ], $schema->toArray());
     }

@@ -71,15 +71,6 @@ class SecurityScheme extends BaseObject
      * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
      */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
-     */
     public static function oauth2(string $objectId = null): self
     {
         return static::create($objectId)->type(static::TYPE_OAUTH2);
@@ -192,7 +183,7 @@ class SecurityScheme extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $flows = [];
         foreach ($this->flows ?? [] as $flow) {
