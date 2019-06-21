@@ -43,4 +43,22 @@ class MediaTypeTest extends TestCase
             ],
         ], $response->toArray());
     }
+
+    /** @test */
+    public function create_example_with_ref_Works()
+    {
+        $mediaType = MediaType::create()
+            ->mediaType(MediaType::MEDIA_TYPE_APPLICATION_JSON)
+            ->examples(
+                Example::ref('#/components/examples/FrogExample', 'frog')
+            );
+
+        $this->assertEquals([
+            'examples' => [
+                'frog' => [
+                    '$ref' => '#/components/examples/FrogExample',
+                ],
+            ],
+        ], $mediaType->toArray());
+    }
 }
