@@ -44,11 +44,12 @@ abstract class BaseObject implements JsonSerializable
 
     /**
      * @param string $ref
+     * @param string|null $objectId
      * @return static
      */
-    public static function ref(string $ref): self
+    public static function ref(string $ref, string $objectId = null): self
     {
-        $instance = new static();
+        $instance = new static($objectId);
 
         $instance->ref = $ref;
 
