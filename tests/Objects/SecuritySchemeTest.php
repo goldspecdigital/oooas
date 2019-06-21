@@ -17,10 +17,9 @@ class SecuritySchemeTest extends TestCase
         $oauthFlow = OAuthFlow::create()
             ->flow(OAuthFlow::FLOW_CLIENT_CREDENTIALS);
 
-        $securityScheme = SecurityScheme::create()
+        $securityScheme = SecurityScheme::create('OAuth2')
             ->type(SecurityScheme::TYPE_OAUTH2)
             ->description('Standard auth')
-            ->objectId('OAuth2')
             ->in(SecurityScheme::IN_HEADER)
             ->scheme('basic')
             ->bearerFormat('JWT')
