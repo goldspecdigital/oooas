@@ -17,15 +17,6 @@ class Components extends BaseObject
     protected $securitySchemes;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme[] $securitySchemes
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
      */
@@ -41,7 +32,7 @@ class Components extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $securitySchemes = [];
         foreach ($this->securitySchemes ?? [] as $securityScheme) {

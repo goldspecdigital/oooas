@@ -18,15 +18,6 @@ class Not extends BaseObject implements SchemaContract
     protected $schema;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Not
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Not
      */
@@ -42,7 +33,7 @@ class Not extends BaseObject implements SchemaContract
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'not' => $this->schema,

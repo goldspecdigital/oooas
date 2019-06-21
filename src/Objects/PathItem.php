@@ -47,15 +47,6 @@ class PathItem extends BaseObject
     protected $parameters;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $route
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
      */
@@ -136,7 +127,7 @@ class PathItem extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $operations = [];
         foreach ($this->operations ?? [] as $operation) {

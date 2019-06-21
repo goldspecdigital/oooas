@@ -41,15 +41,6 @@ class Xml extends BaseObject
     protected $wrapped;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $name
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml
      */
@@ -117,7 +108,7 @@ class Xml extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'name' => $this->name,

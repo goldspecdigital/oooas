@@ -220,15 +220,6 @@ class Schema extends BaseObject implements SchemaContract
      * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
-     */
     public static function array(string $objectId = null): self
     {
         return static::create($objectId)->type(static::TYPE_ARRAY);
@@ -701,7 +692,7 @@ class Schema extends BaseObject implements SchemaContract
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         $properties = [];
         foreach ($this->properties ?? [] as $property) {

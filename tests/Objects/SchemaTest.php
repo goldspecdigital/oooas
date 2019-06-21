@@ -304,4 +304,20 @@ class SchemaTest extends TestCase
             ],
         ], $response->toArray());
     }
+
+    /** @test */
+    public function create_array_with_ref_works()
+    {
+        $schema = Schema::array()
+            ->items(
+                Schema::ref('#/components/schemas/pet')
+            );
+
+        $this->assertEquals([
+            'type' => 'array',
+            'items' => [
+                '$ref' => '#/components/schemas/pet',
+            ],
+        ], $schema->toArray());
+    }
 }

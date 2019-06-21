@@ -35,15 +35,6 @@ class Link extends BaseObject
     protected $server;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $operationRef
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
      */
@@ -98,7 +89,7 @@ class Link extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'operationRef' => $this->operationRef,

@@ -35,15 +35,6 @@ class Example extends BaseObject
     protected $externalValue;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $summary
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Example
      */
@@ -98,7 +89,7 @@ class Example extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'summary' => $this->summary,

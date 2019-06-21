@@ -47,15 +47,6 @@ class OAuthFlow extends BaseObject
     protected $scopes;
 
     /**
-     * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
-     */
-    public static function create(string $objectId = null): self
-    {
-        return new static($objectId);
-    }
-
-    /**
      * @param string|null $flow
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
      */
@@ -133,7 +124,7 @@ class OAuthFlow extends BaseObject
     /**
      * @return array
      */
-    public function toArray(): array
+    protected function generate(): array
     {
         return Arr::filter([
             'authorizationUrl' => $this->authorizationUrl,
