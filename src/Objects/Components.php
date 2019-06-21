@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
 
 /**
@@ -59,10 +60,10 @@ class Components extends BaseObject
     protected $links;
 
     /**
-     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $schemas
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract[] $schemas
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
      */
-    public function schemas(Schema ...$schemas): self
+    public function schemas(SchemaContract ...$schemas): self
     {
         $instance = clone $this;
 
