@@ -31,8 +31,8 @@
   },
   "scripts": {
     "test": [
-      "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --dry-run --diff --verbose",
-      "@php vendor/bin/phpunit"
+      "@test:style",
+      "@test:unit"
     ],
     "test:style": "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --dry-run --diff --verbose",
     "test:unit": "@php vendor/bin/phpunit",
