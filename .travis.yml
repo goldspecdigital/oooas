@@ -2,7 +2,6 @@
 branches:
   only:
     - master
-    - develop
 
 # The language of the Travis CI container.
 language: php
