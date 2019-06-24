@@ -13,7 +13,11 @@
   ],
   "autoload": {
     "psr-4": {
-      "GoldSpecDigital\\ObjectOrientedOAS\\": "src/",
+      "GoldSpecDigital\\ObjectOrientedOAS\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "GoldSpecDigital\\ObjectOrientedOAS\\Tests\\": "tests/"
     }
   },
