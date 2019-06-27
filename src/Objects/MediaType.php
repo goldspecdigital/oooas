@@ -23,6 +23,7 @@ class MediaType extends BaseObject
     const MEDIA_TYPE_TEXT_CALENDAR = 'text/calendar';
     const MEDIA_TYPE_TEXT_PLAIN = 'text/plain';
     const MEDIA_TYPE_TEXT_XML = 'text/xml';
+    const MEDIA_TYPE_APPLICATION_X_WWW_FORM_URLENCODED = 'application/x-www-form-urlencoded';
 
     /**
      * @var string|null
@@ -117,6 +118,16 @@ class MediaType extends BaseObject
     {
         return static::create($objectId)
             ->mediaType(static::MEDIA_TYPE_TEXT_XML);
+    }
+
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     */
+    public static function formUrlEncoded(string $objectId = null): self
+    {
+        return static::create($objectId)
+            ->mediaType(static::MEDIA_TYPE_APPLICATION_X_WWW_FORM_URLENCODED);
     }
 
     /**
