@@ -120,6 +120,10 @@ class MediaType extends BaseObject
             ->mediaType(static::MEDIA_TYPE_TEXT_XML);
     }
 
+    /**
+     * @param string|null $objectId
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     */
     public static function formUrlEncoded(string $objectId = null): self
     {
         return static::create($objectId)
