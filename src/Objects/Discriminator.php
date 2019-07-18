@@ -49,7 +49,7 @@ class Discriminator extends BaseObject
                 continue;
             }
 
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('Each mapping must have a string key and a string value.');
         }
 
         $instance = clone $this;

@@ -193,7 +193,12 @@ class Operation extends BaseObject
                 continue;
             }
 
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException(
+                sprintf(
+                    'The tags must either be a string or an instance of [%s].',
+                    Tag::class
+                )
+            );
         }
 
         $instance = clone $this;
