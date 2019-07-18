@@ -37,7 +37,12 @@ class SecurityRequirement extends BaseObject
 
         // If the $securityScheme is not a string or null then thrown an exception.
         if (!is_string($securityScheme) && !is_null($securityScheme)) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException(
+                sprintf(
+                    'The security scheme must either be an instance of [%s], a string or null.',
+                    SecurityScheme::class
+                )
+            );
         }
 
         $instance = clone $this;

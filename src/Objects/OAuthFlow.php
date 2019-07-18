@@ -111,7 +111,7 @@ class OAuthFlow extends BaseObject
                 continue;
             }
 
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('Each scope must have a string key and a string value.');
         }
 
         $instance = clone $this;

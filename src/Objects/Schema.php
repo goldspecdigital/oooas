@@ -451,7 +451,7 @@ class Schema extends BaseObject implements SchemaContract
             && !is_float($maximum)
             && !is_null($maximum)
         ) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('The maximum must either be an int, float or null.');
         }
 
         $instance = clone $this;
@@ -473,7 +473,7 @@ class Schema extends BaseObject implements SchemaContract
             && !is_float($exclusiveMaximum)
             && !is_null($exclusiveMaximum)
         ) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('The exclusive maximum must either be an int, float or null.');
         }
 
         $instance = clone $this;
@@ -495,7 +495,7 @@ class Schema extends BaseObject implements SchemaContract
             && !is_float($minimum)
             && !is_null($minimum)
         ) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('The minimum must either be an int, float or null.');
         }
 
         $instance = clone $this;
@@ -517,7 +517,7 @@ class Schema extends BaseObject implements SchemaContract
             && !is_float($exclusiveMinimum)
             && !is_null($exclusiveMinimum)
         ) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('The exclusive minimum must either be an int, float, or null.');
         }
 
         $instance = clone $this;
@@ -539,7 +539,7 @@ class Schema extends BaseObject implements SchemaContract
             && !is_float($multipleOf)
             && !is_null($multipleOf)
         ) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('The multiple of must either be an int, float or null.');
         }
 
         $instance = clone $this;
@@ -568,7 +568,12 @@ class Schema extends BaseObject implements SchemaContract
                 continue;
             }
 
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException(
+                sprintf(
+                    'The required must either be an instance of [%s] or a string.',
+                    Schema::class
+                )
+            );
         }
 
         $instance = clone $this;
