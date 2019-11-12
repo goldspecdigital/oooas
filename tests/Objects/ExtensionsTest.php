@@ -63,11 +63,42 @@ class ExtensionsTest extends TestCase
      * @dataProvider schemasDataProvider
      * @param string|Schema $schema
      */
-    public function getter($schema)
+    public function get_single_extension($schema)
     {
         $object = $schema::create()->x('foo', 'bar');
 
         $this->assertEquals('bar', $object->xFoo);
+    }
+
+    /**
+     * @test
+     * @expectedException \GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException
+     * @dataProvider schemasDataProvider
+     * @param string|Schema $schema
+     */
+    public function get_single_extension_does_not_exist($schema)
+    {
+        $object = $schema::create()->x('foo', 'bar');
+
+        $this->assertEquals('bar', $object->xKey);
+    }
+
+    /**
+     * @test
+     * @dataProvider schemasDataProvider
+     * @param string|Schema $schema
+     */
+    public function get_all_extensions($schema)
+    {
+        $object = $schema::create();
+
+        $this->assertNull($object->xExtensions);
+
+        $object = $object
+            ->x('key', 'value')
+            ->x('foo', 'bar');
+
+        $this->assertEquals(['key' => 'value', 'foo' => 'bar'], $object->xExtensions);
     }
 
     public function schemasDataProvider()

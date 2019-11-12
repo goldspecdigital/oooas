@@ -10,6 +10,7 @@ use JsonSerializable;
 /**
  * @property string|null $objectId
  * @property string|null $ref
+ * @property-read array|null xExtensions
  */
 abstract class BaseObject implements JsonSerializable
 {
@@ -139,6 +140,11 @@ abstract class BaseObject implements JsonSerializable
     {
         if (property_exists($this, $name)) {
             return $this->$name;
+        }
+
+        // get all extensions
+        if($name === 'xExtensions') {
+            return $this->extensions;
         }
 
         // get extension by name
