@@ -143,10 +143,10 @@ abstract class BaseObject implements JsonSerializable
         }
 
         // get single extension
-        if(strpos($name, 'x') === 0) {
+        if (mb_strpos($name, 'x') === 0) {
             $key = mb_strtolower(substr_replace($name, '', 0, 1));
 
-            if(isset($this->extensions[$key])) {
+            if (isset($this->extensions[$key])) {
                 return $this->extensions[$key];
             }
         }

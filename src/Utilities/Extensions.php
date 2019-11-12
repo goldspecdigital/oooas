@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GoldSpecDigital\ObjectOrientedOAS\Utilities;
 
 use ArrayAccess;
@@ -15,15 +17,15 @@ class Extensions implements ArrayAccess
     protected $items = [];
 
     /**
-     * Whether a offset exists
+     * Whether a offset exists.
      * @link https://php.net/manual/en/arrayaccess.offsetexists.php
      * @param mixed $offset <p>
-     * An offset to check for.
-     * </p>
+     *                      An offset to check for.
+     *                      </p>
      * @return bool true on success or false on failure.
-     * </p>
-     * <p>
-     * The return value will be casted to boolean if non-boolean was returned.
+     *              </p>
+     *              <p>
+     *              The return value will be casted to boolean if non-boolean was returned.
      * @since 5.0.0
      */
     public function offsetExists($offset)
@@ -32,14 +34,14 @@ class Extensions implements ArrayAccess
     }
 
     /**
-     * Offset to retrieve
+     * Offset to retrieve.
      * @link https://php.net/manual/en/arrayaccess.offsetget.php
      * @param mixed $offset <p>
-     * The offset to retrieve.
-     * </p>
-     * @return mixed Can return all value types.
-     * @since 5.0.0
+     *                      The offset to retrieve.
+     *                      </p>
      * @throws ExtensionDoesNotExistException
+     * @return mixed can return all value types
+     * @since 5.0.0
      */
     public function offsetGet($offset)
     {
@@ -51,21 +53,21 @@ class Extensions implements ArrayAccess
     }
 
     /**
-     * Offset to set
+     * Offset to set.
      * @link https://php.net/manual/en/arrayaccess.offsetset.php
      * @param mixed $offset <p>
-     * The offset to assign the value to.
-     * </p>
+     *                      The offset to assign the value to.
+     *                      </p>
      * @param mixed $value <p>
-     * The value to set.
-     * </p>
-     * @return void
+     *                     The value to set.
+     *                     </p>
      * @since 5.0.0
      */
     public function offsetSet($offset, $value)
     {
         if ($value === self::X_EMPTY_VALUE) {
             $this->offsetUnset($offset);
+
             return;
         }
 
@@ -73,12 +75,11 @@ class Extensions implements ArrayAccess
     }
 
     /**
-     * Offset to unset
+     * Offset to unset.
      * @link https://php.net/manual/en/arrayaccess.offsetunset.php
      * @param mixed $offset <p>
-     * The offset to unset.
-     * </p>
-     * @return void
+     *                      The offset to unset.
+     *                      </p>
      * @since 5.0.0
      */
     public function offsetUnset($offset)
@@ -97,7 +98,7 @@ class Extensions implements ArrayAccess
 
     protected function normalizeOffset($offset)
     {
-        if (strpos($offset, 'x-') === 0) {
+        if (mb_strpos($offset, 'x-') === 0) {
             return $offset;
         }
 

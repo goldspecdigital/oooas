@@ -23,7 +23,7 @@ class Arr
                 $value = $value->toArray();
             }
 
-            if (is_string($index) && strpos($index, 'x-') === 0) {
+            if (is_string($index) && mb_strpos($index, 'x-') === 0) {
                 continue;
             }
 
