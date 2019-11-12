@@ -22,11 +22,11 @@ use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
  * @property string|null $pattern
  * @property int|null $maxLength
  * @property int|null $minLength
- * @property int|null $maximum
- * @property int|null $exclusiveMaximum
- * @property int|null $minimum
- * @property int|null $exclusiveMinimum
- * @property int|null $multipleOf
+ * @property int|float|null $maximum
+ * @property int|float|null $exclusiveMaximum
+ * @property int|float|null $minimum
+ * @property int|float|null $exclusiveMinimum
+ * @property int|float|null $multipleOf
  * @property string[]|null $required
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|null $properties
  * @property \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $additionalProperties
@@ -440,11 +440,20 @@ class Schema extends BaseObject implements SchemaContract
     }
 
     /**
-     * @param int|null $maximum
+     * @param int|float|null $maximum
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function maximum(?int $maximum): self
+    public function maximum($maximum): self
     {
+        if (
+            !is_int($maximum)
+            && !is_float($maximum)
+            && !is_null($maximum)
+        ) {
+            throw new InvalidArgumentException('The maximum must either be an int, float or null.');
+        }
+
         $instance = clone $this;
 
         $instance->maximum = $maximum;
@@ -453,11 +462,20 @@ class Schema extends BaseObject implements SchemaContract
     }
 
     /**
-     * @param int|null $exclusiveMaximum
+     * @param int|float|null $exclusiveMaximum
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function exclusiveMaximum(?int $exclusiveMaximum): self
+    public function exclusiveMaximum($exclusiveMaximum): self
     {
+        if (
+            !is_int($exclusiveMaximum)
+            && !is_float($exclusiveMaximum)
+            && !is_null($exclusiveMaximum)
+        ) {
+            throw new InvalidArgumentException('The exclusive maximum must either be an int, float or null.');
+        }
+
         $instance = clone $this;
 
         $instance->exclusiveMaximum = $exclusiveMaximum;
@@ -466,11 +484,20 @@ class Schema extends BaseObject implements SchemaContract
     }
 
     /**
-     * @param int|null $minimum
+     * @param int|float|null $minimum
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function minimum(?int $minimum): self
+    public function minimum($minimum): self
     {
+        if (
+            !is_int($minimum)
+            && !is_float($minimum)
+            && !is_null($minimum)
+        ) {
+            throw new InvalidArgumentException('The minimum must either be an int, float or null.');
+        }
+
         $instance = clone $this;
 
         $instance->minimum = $minimum;
@@ -479,11 +506,20 @@ class Schema extends BaseObject implements SchemaContract
     }
 
     /**
-     * @param int|null $exclusiveMinimum
+     * @param int|float|null $exclusiveMinimum
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function exclusiveMinimum(?int $exclusiveMinimum): self
+    public function exclusiveMinimum($exclusiveMinimum): self
     {
+        if (
+            !is_int($exclusiveMinimum)
+            && !is_float($exclusiveMinimum)
+            && !is_null($exclusiveMinimum)
+        ) {
+            throw new InvalidArgumentException('The exclusive minimum must either be an int, float, or null.');
+        }
+
         $instance = clone $this;
 
         $instance->exclusiveMinimum = $exclusiveMinimum;
@@ -492,11 +528,20 @@ class Schema extends BaseObject implements SchemaContract
     }
 
     /**
-     * @param int|null $multipleOf
+     * @param int|float|null $multipleOf
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
      */
-    public function multipleOf(?int $multipleOf): self
+    public function multipleOf($multipleOf): self
     {
+        if (
+            !is_int($multipleOf)
+            && !is_float($multipleOf)
+            && !is_null($multipleOf)
+        ) {
+            throw new InvalidArgumentException('The multiple of must either be an int, float or null.');
+        }
+
         $instance = clone $this;
 
         $instance->multipleOf = $multipleOf;
@@ -523,7 +568,12 @@ class Schema extends BaseObject implements SchemaContract
                 continue;
             }
 
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException(
+                sprintf(
+                    'The required must either be an instance of [%s] or a string.',
+                    Schema::class
+                )
+            );
         }
 
         $instance = clone $this;

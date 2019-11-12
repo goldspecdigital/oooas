@@ -151,6 +151,6 @@ abstract class BaseObject implements JsonSerializable
             }
         }
 
-        throw new PropertyDoesNotExistException();
+        throw new PropertyDoesNotExistException("[{$name}] is not a valid property.");
     }
 }
