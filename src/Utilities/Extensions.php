@@ -3,7 +3,7 @@
 namespace GoldSpecDigital\ObjectOrientedOAS\Utilities;
 
 use ArrayAccess;
-use GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException;
+use GoldSpecDigital\ObjectOrientedOAS\Exceptions\ExtensionDoesNotExistException;
 
 /**
  * @internal
@@ -39,12 +39,12 @@ class Extensions implements ArrayAccess
      * </p>
      * @return mixed Can return all value types.
      * @since 5.0.0
-     * @throws PropertyDoesNotExistException
+     * @throws ExtensionDoesNotExistException
      */
     public function offsetGet($offset)
     {
         if (!$this->offsetExists($offset)) {
-            throw new PropertyDoesNotExistException();
+            throw new ExtensionDoesNotExistException("[{$offset}] is not a valid extension.");
         }
 
         return $this->items[$this->normalizeOffset($offset)];
