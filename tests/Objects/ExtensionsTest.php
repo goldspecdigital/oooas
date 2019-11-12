@@ -39,16 +39,16 @@ class ExtensionsTest extends TestCase
 
     /**
      * @test
-     * @dataProvider schemasDataProvider
      * @param string|Schema $schema
      */
-    public function can_unset_extensions($schema)
+    public function can_unset_extensions()
     {
-        $object = $schema::create()
+        $object = Schema::create()
+            ->x('key', 'value')
             ->x('x-foo', 'bar')
             ->x('x-baz', null);
 
-        $object->x('key');
+        $object = $object->x('key');
 
         $this->assertEquals([
             'x-foo' => 'bar',
@@ -92,13 +92,13 @@ class ExtensionsTest extends TestCase
     {
         $object = $schema::create();
 
-        $this->assertNull($object->xExtensions);
+        $this->assertEquals([], $object->xExtensions);
 
         $object = $object
             ->x('key', 'value')
             ->x('foo', 'bar');
 
-        $this->assertEquals(['key' => 'value', 'foo' => 'bar'], $object->xExtensions);
+        $this->assertEquals(['x-key' => 'value', 'x-foo' => 'bar'], $object->xExtensions);
     }
 
     public function schemasDataProvider()

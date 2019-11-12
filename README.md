@@ -324,6 +324,47 @@ echo $schema->toJson();
 */
 ```
 
+### Extensions
+
+You can add [Extensions](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#specificationExtensions) to any objects you wish.
+
+```php
+$schema = Schema::create()
+            ->x('foo', 'bar')
+            ->x('x-items', Schema::array()->items(Schema::string()));
+    
+echo $schema->toJson();
+/*
+{
+  "x-foo": "bar",
+  "x-items": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+*/
+```
+
+Also, you can unset extensions from object by avoiding value parameter:
+
+```php
+$schema = $schema->x('foo');
+    
+echo $schema->toJson();
+/*
+{
+  "x-items": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+*/
+```
+
 ## Running the tests
 
 To run the test suite you can use the following commands:

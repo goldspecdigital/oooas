@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException;
+use GoldSpecDigital\ObjectOrientedOAS\Utilities\Extensions;
 use JsonSerializable;
 
 /**
@@ -14,8 +15,6 @@ use JsonSerializable;
  */
 abstract class BaseObject implements JsonSerializable
 {
-    public const X_EMPTY_VALUE = 'X_EMPTY_VALUE';
-
     /**
      * @var string|null
      */
@@ -27,7 +26,7 @@ abstract class BaseObject implements JsonSerializable
     protected $ref;
 
     /**
-     * @var array|null
+     * @var Extensions
      */
     protected $extensions;
 
@@ -39,6 +38,7 @@ abstract class BaseObject implements JsonSerializable
     public function __construct(string $objectId = null)
     {
         $this->objectId = $objectId;
+        $this->extensions = new Extensions();
     }
 
     /**
@@ -82,15 +82,10 @@ abstract class BaseObject implements JsonSerializable
      * @param mixed $value
      * @return $this
      */
-    public function x(string $key, $value = self::X_EMPTY_VALUE): self
+    public function x(string $key, $value = Extensions::X_EMPTY_VALUE): self
     {
         $instance = clone $this;
-
-        if ($value === self::X_EMPTY_VALUE && isset($instance->extensions[$key])) {
-            unset($this->extensions[$key]);
-        } else {
-            $instance->extensions[$key] = $value;
-        }
+        $instance->extensions[$key] = $value;
 
         return $instance;
     }
@@ -109,7 +104,7 @@ abstract class BaseObject implements JsonSerializable
             return ['$ref' => $this->ref];
         }
 
-        return array_merge($this->generate(), $this->generateExtensions());
+        return array_merge($this->generate(), $this->extensions->toArray());
     }
 
     /**
@@ -143,12 +138,12 @@ abstract class BaseObject implements JsonSerializable
         }
 
         // get all extensions
-        if($name === 'xExtensions') {
-            return $this->extensions;
+        if ($name === 'xExtensions') {
+            return $this->extensions->toArray();
         }
 
-        // get extension by name
-        if (strpos($name, 'x') === 0) {
+        // get single extension
+        if(strpos($name, 'x') === 0) {
             $key = mb_strtolower(substr_replace($name, '', 0, 1));
 
             if(isset($this->extensions[$key])) {
@@ -157,27 +152,5 @@ abstract class BaseObject implements JsonSerializable
         }
 
         throw new PropertyDoesNotExistException();
-    }
-
-    /**
-     * @return array
-     */
-    protected function generateExtensions(): array
-    {
-        if (!$this->extensions) {
-            return [];
-        }
-
-        $extensions = [];
-
-        foreach ($this->extensions as $key => $value) {
-            if (strpos($key, 'x-') !== 0) {
-                $key = 'x-' . $key;
-            }
-
-            $extensions[$key] = $value;
-        }
-
-        return $extensions;
     }
 }
