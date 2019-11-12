@@ -6,6 +6,9 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Utilities;
 
 use GoldSpecDigital\ObjectOrientedOAS\Objects\BaseObject;
 
+/**
+ * @internal
+ */
 class Arr
 {
     /**
@@ -18,6 +21,10 @@ class Arr
             // If the value is an object, then parse to array.
             if ($value instanceof BaseObject) {
                 $value = $value->toArray();
+            }
+
+            if (is_string($index) && strpos($index, 'x-') === 0) {
+                continue;
             }
 
             // If the value is null then remove it.

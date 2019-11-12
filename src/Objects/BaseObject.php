@@ -13,6 +13,8 @@ use JsonSerializable;
  */
 abstract class BaseObject implements JsonSerializable
 {
+    public const X_EMPTY_VALUE = 'X_EMPTY_VALUE';
+
     /**
      * @var string|null
      */
@@ -22,6 +24,11 @@ abstract class BaseObject implements JsonSerializable
      * @var string|null
      */
     protected $ref;
+
+    /**
+     * @var array|null
+     */
+    protected $extensions;
 
     /**
      * BaseObject constructor.
@@ -70,6 +77,24 @@ abstract class BaseObject implements JsonSerializable
     }
 
     /**
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function x(string $key, $value = self::X_EMPTY_VALUE): self
+    {
+        $instance = clone $this;
+
+        if ($value === self::X_EMPTY_VALUE && isset($instance->extensions[$key])) {
+            unset($this->extensions[$key]);
+        } else {
+            $instance->extensions[$key] = $value;
+        }
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     abstract protected function generate(): array;
@@ -83,7 +108,7 @@ abstract class BaseObject implements JsonSerializable
             return ['$ref' => $this->ref];
         }
 
-        return $this->generate();
+        return array_merge($this->generate(), $this->generateExtensions());
     }
 
     /**
@@ -117,5 +142,27 @@ abstract class BaseObject implements JsonSerializable
         }
 
         throw new PropertyDoesNotExistException();
+    }
+
+    /**
+     * @return array
+     */
+    protected function generateExtensions(): array
+    {
+        if (!$this->extensions) {
+            return [];
+        }
+
+        $extensions = [];
+
+        foreach ($this->extensions as $key => $value) {
+            if (strpos($key, 'x-') !== 0) {
+                $key = 'x-' . $key;
+            }
+
+            $extensions[$key] = $value;
+        }
+
+        return $extensions;
     }
 }
