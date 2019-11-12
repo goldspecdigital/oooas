@@ -18,9 +18,7 @@ class ExtensionsTest extends TestCase
      */
     public function create_with_extensions($schema)
     {
-        $object = $schema::create();
-
-        $object = $object
+        $object = $schema::create()
             ->x('key', 'value')
             ->x('x-foo', 'bar')
             ->x('x-baz', null)
@@ -46,9 +44,7 @@ class ExtensionsTest extends TestCase
      */
     public function can_unset_extensions($schema)
     {
-        $object = $schema::create();
-
-        $object = $object
+        $object = $schema::create()
             ->x('x-foo', 'bar')
             ->x('x-baz', null);
 
@@ -60,6 +56,18 @@ class ExtensionsTest extends TestCase
         ], $object->toArray());
 
         $this->assertEquals('{"x-foo":"bar","x-baz":null}', $object->toJson());
+    }
+
+    /**
+     * @test
+     * @dataProvider schemasDataProvider
+     * @param string|Schema $schema
+     */
+    public function getter($schema)
+    {
+        $object = $schema::create()->x('foo', 'bar');
+
+        $this->assertEquals('bar', $object->xFoo);
     }
 
     public function schemasDataProvider()

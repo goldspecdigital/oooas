@@ -141,6 +141,15 @@ abstract class BaseObject implements JsonSerializable
             return $this->$name;
         }
 
+        // get extension by name
+        if (strpos($name, 'x') === 0) {
+            $key = mb_strtolower(substr_replace($name, '', 0, 1));
+
+            if(isset($this->extensions[$key])) {
+                return $this->extensions[$key];
+            }
+        }
+
         throw new PropertyDoesNotExistException();
     }
 
