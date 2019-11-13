@@ -324,14 +324,15 @@ echo $schema->toJson();
 */
 ```
 
-### Extensions
+### Specification extensions
 
-You can add [Extensions](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#specificationExtensions) to any objects you wish.
+You can add [specification extensions](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#specificationExtensions)
+to all objects:
 
 ```php
 $schema = Schema::create()
-            ->x('foo', 'bar')
-            ->x('x-items', Schema::array()->items(Schema::string()));
+    ->x('foo', 'bar')
+    ->x('x-items', Schema::array()->items(Schema::string()));
     
 echo $schema->toJson();
 /*
@@ -347,7 +348,8 @@ echo $schema->toJson();
 */
 ```
 
-Also, you can unset extensions from object by avoiding value parameter:
+You can also unset specification extensions by invoking the `x()` method and
+only providing the key:
 
 ```php
 $schema = $schema->x('foo');
