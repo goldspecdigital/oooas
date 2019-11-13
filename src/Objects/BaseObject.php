@@ -11,7 +11,7 @@ use JsonSerializable;
 /**
  * @property string|null $objectId
  * @property string|null $ref
- * @property-read array|null xExtensions
+ * @property array|null xExtensions
  */
 abstract class BaseObject implements JsonSerializable
 {
@@ -138,13 +138,13 @@ abstract class BaseObject implements JsonSerializable
             return $this->$name;
         }
 
-        // get all extensions
+        // Get all extensions.
         if ($name === 'xExtensions') {
             return $this->extensions->toArray();
         }
 
-        // get single extension
-        if (mb_strpos($name, 'x') === 0) {
+        // Get a single extension.
+        if (mb_strpos($name, 'x-') === 0) {
             $key = mb_strtolower(substr_replace($name, '', 0, 1));
 
             if (isset($this->extensions[$key])) {
