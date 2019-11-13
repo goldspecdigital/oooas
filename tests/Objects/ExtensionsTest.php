@@ -14,7 +14,7 @@ class ExtensionsTest extends TestCase
     /**
      * @test
      * @dataProvider schemasDataProvider
-     * @param string|Schema $schema
+     * @param string|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      */
     public function create_with_extensions($schema)
     {
@@ -37,10 +37,7 @@ class ExtensionsTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @param string|Schema $schema
-     */
+    /** @test */
     public function can_unset_extensions()
     {
         $object = Schema::create()
@@ -61,7 +58,7 @@ class ExtensionsTest extends TestCase
     /**
      * @test
      * @dataProvider schemasDataProvider
-     * @param string|Schema $schema
+     * @param string|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      */
     public function get_single_extension($schema)
     {
@@ -74,7 +71,7 @@ class ExtensionsTest extends TestCase
      * @test
      * @expectedException \GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException
      * @dataProvider schemasDataProvider
-     * @param string|Schema $schema
+     * @param string|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      */
     public function get_single_extension_does_not_exist($schema)
     {
@@ -86,7 +83,7 @@ class ExtensionsTest extends TestCase
     /**
      * @test
      * @dataProvider schemasDataProvider
-     * @param string|Schema $schema
+     * @param string|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      */
     public function get_all_extensions($schema)
     {
@@ -101,7 +98,10 @@ class ExtensionsTest extends TestCase
         $this->assertEquals(['x-key' => 'value', 'x-foo' => 'bar'], $object->xExtensions);
     }
 
-    public function schemasDataProvider()
+    /**
+     * @return array
+     */
+    public function schemasDataProvider(): array
     {
         return [
             [Components::class],
