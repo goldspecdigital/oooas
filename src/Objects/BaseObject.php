@@ -105,7 +105,10 @@ abstract class BaseObject implements JsonSerializable
             return ['$ref' => $this->ref];
         }
 
-        return array_merge($this->generate(), $this->extensions->toArray());
+        return array_merge(
+            $this->generate(),
+            $this->extensions->toArray()
+        );
     }
 
     /**
