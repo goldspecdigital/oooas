@@ -26,7 +26,7 @@ abstract class BaseObject implements JsonSerializable
     protected $ref;
 
     /**
-     * @var Extensions
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Utilities\Extensions
      */
     protected $extensions;
 
@@ -85,6 +85,7 @@ abstract class BaseObject implements JsonSerializable
     public function x(string $key, $value = Extensions::X_EMPTY_VALUE): self
     {
         $instance = clone $this;
+
         $instance->extensions[$key] = $value;
 
         return $instance;
