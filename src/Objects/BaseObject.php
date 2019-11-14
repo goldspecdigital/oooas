@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace GoldSpecDigital\ObjectOrientedOAS\Objects;
 
 use GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException;
+use GoldSpecDigital\ObjectOrientedOAS\Utilities\Extensions;
 use JsonSerializable;
 
 /**
  * @property string|null $objectId
  * @property string|null $ref
+ * @property array|null $x
  */
 abstract class BaseObject implements JsonSerializable
 {
@@ -24,6 +26,11 @@ abstract class BaseObject implements JsonSerializable
     protected $ref;
 
     /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Utilities\Extensions
+     */
+    protected $extensions;
+
+    /**
      * BaseObject constructor.
      *
      * @param string|null $objectId
@@ -31,6 +38,7 @@ abstract class BaseObject implements JsonSerializable
     public function __construct(string $objectId = null)
     {
         $this->objectId = $objectId;
+        $this->extensions = new Extensions();
     }
 
     /**
@@ -70,6 +78,24 @@ abstract class BaseObject implements JsonSerializable
     }
 
     /**
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function x(string $key, $value = Extensions::X_EMPTY_VALUE): self
+    {
+        $instance = clone $this;
+
+        if (mb_strpos($key, 'x-') === 0) {
+            $key = mb_substr($key, 2);
+        }
+
+        $instance->extensions[$key] = $value;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     abstract protected function generate(): array;
@@ -83,7 +109,10 @@ abstract class BaseObject implements JsonSerializable
             return ['$ref' => $this->ref];
         }
 
-        return $this->generate();
+        return array_merge(
+            $this->generate(),
+            $this->extensions->toArray()
+        );
     }
 
     /**
@@ -114,6 +143,20 @@ abstract class BaseObject implements JsonSerializable
     {
         if (property_exists($this, $name)) {
             return $this->$name;
+        }
+
+        // Get all extensions.
+        if ($name === 'x') {
+            return $this->extensions->toArray();
+        }
+
+        // Get a single extension.
+        if (mb_strpos($name, 'x-') === 0) {
+            $key = mb_strtolower(substr_replace($name, '', 0, 2));
+
+            if (isset($this->extensions[$key])) {
+                return $this->extensions[$key];
+            }
         }
 
         throw new PropertyDoesNotExistException("[{$name}] is not a valid property.");
