@@ -99,6 +99,11 @@ class Operation extends BaseObject
     protected $servers;
 
     /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null
+     */
+    protected $callbacks;
+
+    /**
      * @param string|null $objectId
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
      */
@@ -353,6 +358,19 @@ class Operation extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $callbacks
+     * @return $this
+     */
+    public function callbacks(PathItem ...$callbacks): self
+    {
+        $instance = clone $this;
+
+        $instance->callbacks = $callbacks ?: null;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     protected function generate(): array
@@ -360,6 +378,11 @@ class Operation extends BaseObject
         $responses = [];
         foreach ($this->responses ?? [] as $response) {
             $responses[$response->statusCode ?? 'default'] = $response;
+        }
+
+        $callbacks = [];
+        foreach ($this->callbacks ?? [] as $callback) {
+            $callbacks[$callback->objectId] = $callback;
         }
 
         return Arr::filter([
@@ -374,6 +397,7 @@ class Operation extends BaseObject
             'deprecated' => $this->deprecated,
             'security' => $this->noSecurity ? [] : $this->security,
             'servers' => $this->servers,
+            'callbacks' => $callbacks ?: null,
         ]);
     }
 }

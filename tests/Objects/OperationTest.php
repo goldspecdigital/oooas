@@ -24,6 +24,15 @@ class OperationTest extends TestCase
         $securityScheme = SecurityScheme::create('OAuth2')
             ->type(SecurityScheme::TYPE_OAUTH2);
 
+        $callback = PathItem::create('MyEvent')
+            ->route('{$request.query.callbackUrl}')
+            ->operations(
+                Operation::post()->requestBody(
+                    RequestBody::create()
+                        ->description('something happened')
+                )
+            );
+
         $operation = Operation::create()
             ->action(Operation::ACTION_GET)
             ->tags(Tag::create()->name('Users'))
@@ -36,7 +45,8 @@ class OperationTest extends TestCase
             ->responses(Response::create())
             ->deprecated()
             ->security(SecurityRequirement::create()->securityScheme($securityScheme))
-            ->servers(Server::create());
+            ->servers(Server::create())
+            ->callbacks($callback);
 
         $pathItem = PathItem::create()
             ->operations($operation);
@@ -63,6 +73,15 @@ class OperationTest extends TestCase
                 ],
                 'servers' => [
                     [],
+                ],
+                'callbacks' => [
+                    'MyEvent' => [
+                        'post' => [
+                            'requestBody' => [
+                                'description' => 'something happened',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ], $pathItem->toArray());
