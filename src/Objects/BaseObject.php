@@ -11,7 +11,7 @@ use JsonSerializable;
 /**
  * @property string|null $objectId
  * @property string|null $ref
- * @property-read array|null xExtensions
+ * @property array|null $x
  */
 abstract class BaseObject implements JsonSerializable
 {
@@ -26,7 +26,7 @@ abstract class BaseObject implements JsonSerializable
     protected $ref;
 
     /**
-     * @var Extensions
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Utilities\Extensions
      */
     protected $extensions;
 
@@ -85,6 +85,11 @@ abstract class BaseObject implements JsonSerializable
     public function x(string $key, $value = Extensions::X_EMPTY_VALUE): self
     {
         $instance = clone $this;
+
+        if (mb_strpos($key, 'x-') === 0) {
+            $key = mb_substr($key, 2);
+        }
+
         $instance->extensions[$key] = $value;
 
         return $instance;
@@ -104,7 +109,10 @@ abstract class BaseObject implements JsonSerializable
             return ['$ref' => $this->ref];
         }
 
-        return array_merge($this->generate(), $this->extensions->toArray());
+        return array_merge(
+            $this->generate(),
+            $this->extensions->toArray()
+        );
     }
 
     /**
@@ -137,14 +145,14 @@ abstract class BaseObject implements JsonSerializable
             return $this->$name;
         }
 
-        // get all extensions
-        if ($name === 'xExtensions') {
+        // Get all extensions.
+        if ($name === 'x') {
             return $this->extensions->toArray();
         }
 
-        // get single extension
-        if (mb_strpos($name, 'x') === 0) {
-            $key = mb_strtolower(substr_replace($name, '', 0, 1));
+        // Get a single extension.
+        if (mb_strpos($name, 'x-') === 0) {
+            $key = mb_strtolower(substr_replace($name, '', 0, 2));
 
             if (isset($this->extensions[$key])) {
                 return $this->extensions[$key];

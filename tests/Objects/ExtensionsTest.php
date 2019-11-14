@@ -14,7 +14,7 @@ class ExtensionsTest extends TestCase
     /**
      * @test
      * @dataProvider schemasDataProvider
-     * @param string|Schema $schema
+     * @param string|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      */
     public function create_with_extensions($schema)
     {
@@ -37,10 +37,7 @@ class ExtensionsTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @param string|Schema $schema
-     */
+    /** @test */
     public function can_unset_extensions()
     {
         $object = Schema::create()
@@ -61,47 +58,50 @@ class ExtensionsTest extends TestCase
     /**
      * @test
      * @dataProvider schemasDataProvider
-     * @param string|Schema $schema
+     * @param string|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      */
     public function get_single_extension($schema)
     {
         $object = $schema::create()->x('foo', 'bar');
 
-        $this->assertEquals('bar', $object->xFoo);
+        $this->assertEquals('bar', $object->{'x-foo'});
     }
 
     /**
      * @test
      * @expectedException \GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException
      * @dataProvider schemasDataProvider
-     * @param string|Schema $schema
+     * @param string|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      */
     public function get_single_extension_does_not_exist($schema)
     {
         $object = $schema::create()->x('foo', 'bar');
 
-        $this->assertEquals('bar', $object->xKey);
+        $this->assertEquals('bar', $object->{'x-key'});
     }
 
     /**
      * @test
      * @dataProvider schemasDataProvider
-     * @param string|Schema $schema
+     * @param string|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      */
     public function get_all_extensions($schema)
     {
         $object = $schema::create();
 
-        $this->assertEquals([], $object->xExtensions);
+        $this->assertEquals([], $object->x);
 
         $object = $object
             ->x('key', 'value')
             ->x('foo', 'bar');
 
-        $this->assertEquals(['x-key' => 'value', 'x-foo' => 'bar'], $object->xExtensions);
+        $this->assertEquals(['x-key' => 'value', 'x-foo' => 'bar'], $object->x);
     }
 
-    public function schemasDataProvider()
+    /**
+     * @return array
+     */
+    public function schemasDataProvider(): array
     {
         return [
             [Components::class],
