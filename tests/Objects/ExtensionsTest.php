@@ -64,7 +64,7 @@ class ExtensionsTest extends TestCase
     {
         $object = $schema::create()->x('foo', 'bar');
 
-        $this->assertEquals('bar', $object->xFoo);
+        $this->assertEquals('bar', $object->{'x-foo'});
     }
 
     /**
@@ -77,7 +77,7 @@ class ExtensionsTest extends TestCase
     {
         $object = $schema::create()->x('foo', 'bar');
 
-        $this->assertEquals('bar', $object->xKey);
+        $this->assertEquals('bar', $object->{'x-key'});
     }
 
     /**
@@ -89,13 +89,13 @@ class ExtensionsTest extends TestCase
     {
         $object = $schema::create();
 
-        $this->assertEquals([], $object->xExtensions);
+        $this->assertEquals([], $object->x);
 
         $object = $object
             ->x('key', 'value')
             ->x('foo', 'bar');
 
-        $this->assertEquals(['x-key' => 'value', 'x-foo' => 'bar'], $object->xExtensions);
+        $this->assertEquals(['x-key' => 'value', 'x-foo' => 'bar'], $object->x);
     }
 
     /**

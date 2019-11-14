@@ -127,7 +127,6 @@ starts to increase in size - the ability to reuse objects and split them into
 separate files easily will be a massive help.
 
 ```yaml
----
 openapi: 3.0.2
 info:
   title: API Specification
@@ -332,7 +331,7 @@ to all objects:
 ```php
 $schema = Schema::create()
     ->x('foo', 'bar')
-    ->x('x-items', Schema::array()->items(Schema::string()));
+    ->x('items', Schema::array()->items(Schema::string()));
     
 echo $schema->toJson();
 /*
@@ -346,17 +345,45 @@ echo $schema->toJson();
   }
 }
 */
+
+echo $schema->{'x-foo'}; // 'bar'
 ```
 
 You can also unset specification extensions by invoking the `x()` method and
 only providing the key:
 
 ```php
+$schema = Schema::create()
+    ->x('foo', 'bar')
+    ->x('items', Schema::array()->items(Schema::string()));
+
 $schema = $schema->x('foo');
     
 echo $schema->toJson();
 /*
 {
+  "x-items": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+*/
+```
+
+To retrieve an array of all the specification extensions you can call the `$x`
+property:
+
+```php
+$schema = Schema::create()
+    ->x('foo', 'bar')
+    ->x('items', Schema::array()->items(Schema::string()));
+
+echo json_encode($schema->x);
+/*
+{
+  "x-foo": "bar",
   "x-items": {
     "type": "array",
     "items": {
