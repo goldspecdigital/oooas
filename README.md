@@ -394,6 +394,25 @@ echo json_encode($schema->x);
 */
 ```
 
+### Validation
+
+In order to perform validation you must install `justinrainbow/json-schema` package before:
+
+```bash
+composer require justinrainbow/json-schema:^5.2
+```
+
+Now you can run `validate` method on your `OpenApi` object:
+
+```php
+$openApi = OpenApi::create();
+// ...
+$openApi->validate();
+```
+
+If validation fails, `GoldSpecDigital\ObjectOrientedOAS\Exceptions\ValidationException` will be thrown.
+You `getErrors` method from exception in order to retrieve all errors.
+
 ## Running the tests
 
 To run the test suite you can use the following commands:

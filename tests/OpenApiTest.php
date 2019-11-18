@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Tests;
 
+use GoldSpecDigital\ObjectOrientedOAS\Exceptions\ValidationException;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\AllOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Contact;
@@ -26,7 +27,7 @@ use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 class OpenApiTest extends TestCase
 {
     /** @test */
-    public function all_properties_works()
+    public function all_properties_works_and_validation_passes()
     {
         // Create a tag.
         $tag = Tag::create()
@@ -161,5 +162,37 @@ class OpenApiTest extends TestCase
             json_decode($exampleResponse, true),
             $openApi->toArray()
         );
+
+        $openApi->validate();
+    }
+
+    /** @test */
+    public function validate()
+    {
+        $exceptionThrown = false;
+
+        try {
+            $openApi = OpenApi::create()
+                ->openapi('4.0.0')
+                ->info(
+                    Info::create()->title('foo')
+                )
+                ->paths(
+                    PathItem::create()
+                        ->route('/foo')
+                        ->operations(
+                            Operation::get()
+                        )
+                );
+
+            $openApi->validate();
+        }
+        catch(ValidationException $exception) {
+            $exceptionThrown = true;
+
+            $this->assertCount(3, $exception->getErrors());
+        }
+
+        $this->assertTrue($exceptionThrown);
     }
 }
