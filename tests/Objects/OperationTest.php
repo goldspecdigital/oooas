@@ -76,9 +76,11 @@ class OperationTest extends TestCase
                 ],
                 'callbacks' => [
                     'MyEvent' => [
-                        'post' => [
-                            'requestBody' => [
-                                'description' => 'something happened',
+                        '{$request.query.callbackUrl}' => [
+                            'post' => [
+                                'requestBody' => [
+                                    'description' => 'something happened',
+                                ],
                             ],
                         ],
                     ],
