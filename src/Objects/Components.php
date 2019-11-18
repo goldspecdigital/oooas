@@ -60,6 +60,11 @@ class Components extends BaseObject
     protected $links;
 
     /**
+     * @var \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[]|null
+     */
+    protected $callbacks;
+
+    /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract[] $schemas
      * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
      */
@@ -164,6 +169,19 @@ class Components extends BaseObject
     }
 
     /**
+     * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $callbacks
+     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     */
+    public function callbacks(PathItem ...$callbacks): self
+    {
+        $instance = clone $this;
+
+        $instance->callbacks = $callbacks ?: null;
+
+        return $instance;
+    }
+
+    /**
      * @return array
      */
     protected function generate(): array
@@ -208,6 +226,11 @@ class Components extends BaseObject
             $links[$link->objectId] = $link;
         }
 
+        $callbacks = [];
+        foreach ($this->callbacks ?? [] as $callback) {
+            $callbacks[$callback->objectId] = $callback;
+        }
+
         return Arr::filter([
             'schemas' => $schemas ?: null,
             'responses' => $responses ?: null,
@@ -217,6 +240,7 @@ class Components extends BaseObject
             'headers' => $headers ?: null,
             'securitySchemes' => $securitySchemes ?: null,
             'links' => $links ?: null,
+            'callbacks' => $callbacks ?: null,
         ]);
     }
 }

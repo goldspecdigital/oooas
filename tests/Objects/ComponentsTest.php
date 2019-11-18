@@ -9,7 +9,9 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Example;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Header;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Link;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
@@ -45,6 +47,15 @@ class ComponentsTest extends TestCase
 
         $link = Link::create('LinkExample');
 
+        $callback = PathItem::create('MyEvent')
+            ->route('{$request.query.callbackUrl}')
+            ->operations(
+                Operation::post()->requestBody(
+                    RequestBody::create()
+                        ->description('something happened')
+                )
+            );
+
         $components = Components::create()
             ->schemas($schema)
             ->responses($response)
@@ -53,7 +64,8 @@ class ComponentsTest extends TestCase
             ->requestBodies($requestBody)
             ->headers($header)
             ->securitySchemes($securityScheme)
-            ->links($link);
+            ->links($link)
+            ->callbacks($callback);
 
         $this->assertEquals([
             'schemas' => [
@@ -95,6 +107,15 @@ class ComponentsTest extends TestCase
             ],
             'links' => [
                 'LinkExample' => [],
+            ],
+            'callbacks' => [
+                'MyEvent' => [
+                    'post' => [
+                        'requestBody' => [
+                            'description' => 'something happened',
+                        ],
+                    ],
+                ],
             ],
         ], $components->toArray());
     }
