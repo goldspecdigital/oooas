@@ -382,7 +382,7 @@ class Operation extends BaseObject
 
         $callbacks = [];
         foreach ($this->callbacks ?? [] as $callback) {
-            $callbacks[$callback->objectId] = $callback;
+            $callbacks[$callback->objectId][$callback->route] = $callback;
         }
 
         return Arr::filter([
