@@ -191,11 +191,9 @@ class OpenApi extends BaseObject
         $validator = new Validator();
         $validator->validate($data, (object)['$ref' => 'file://' . __DIR__ . '/../schemas/v3.0.json']);
 
-        if ($validator->isValid()) {
-            return;
+        if (! $validator->isValid()) {
+            throw new ValidationException($validator->getErrors());
         }
-
-        throw new ValidationException($validator->getErrors());
     }
 
     /**
