@@ -188,10 +188,15 @@ class OpenApi extends BaseObject
 
         $data = BaseConstraint::arrayToObjectRecursive($this->generate());
 
-        $validator = new Validator();
-        $validator->validate($data, (object)['$ref' => 'file://' . __DIR__ . '/../schemas/v3.0.json']);
+        $schema = file_get_contents(
+            realpath(__DIR__ . '/../schemas/v3.0.json')
+        );
+        $schema = json_decode($schema);
 
-        if (! $validator->isValid()) {
+        $validator = new Validator();
+        $validator->validate($data, $schema);
+
+        if (!$validator->isValid()) {
             throw new ValidationException($validator->getErrors());
         }
     }
