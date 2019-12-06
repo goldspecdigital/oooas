@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GoldSpecDigital\ObjectOrientedOAS;
 
+use GoldSpecDigital\ObjectOrientedOAS\Exceptions\ValidationException;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\BaseObject;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
@@ -13,6 +14,8 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Tag;
 use GoldSpecDigital\ObjectOrientedOAS\Utilities\Arr;
+use JsonSchema\Constraints\BaseConstraint;
+use JsonSchema\Validator;
 
 /**
  * @property string|null $openapi
@@ -172,6 +175,30 @@ class OpenApi extends BaseObject
         $instance->externalDocs = $externalDocs;
 
         return $instance;
+    }
+
+    /**
+     * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\ValidationException
+     */
+    public function validate(): void
+    {
+        if (!class_exists('JsonSchema\Validator')) {
+            throw new \RuntimeException('justinrainbow/json-schema should be installed for validation');
+        }
+
+        $data = BaseConstraint::arrayToObjectRecursive($this->generate());
+
+        $schema = file_get_contents(
+            realpath(__DIR__ . '/../schemas/v3.0.json')
+        );
+        $schema = json_decode($schema);
+
+        $validator = new Validator();
+        $validator->validate($data, $schema);
+
+        if (!$validator->isValid()) {
+            throw new ValidationException($validator->getErrors());
+        }
     }
 
     /**
