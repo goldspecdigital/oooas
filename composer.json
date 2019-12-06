@@ -42,8 +42,8 @@
       "@test:style",
       "@test:unit"
     ],
-    "test:style": "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --dry-run --diff --verbose",
+    "test:style": "@fix:style --dry-run",
     "test:unit": "@php vendor/bin/phpunit",
-    "fix:style": "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --diff --verbose"
+    "fix:style": "@php vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --diff --diff-format=udiff --verbose"
   }
 }
