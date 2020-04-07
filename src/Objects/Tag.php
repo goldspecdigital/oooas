@@ -30,7 +30,7 @@ class Tag extends BaseObject
 
     /**
      * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
+     * @return static
      */
     public function name(?string $name): self
     {
@@ -43,7 +43,7 @@ class Tag extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -56,7 +56,7 @@ class Tag extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag
+     * @return static
      */
     public function externalDocs(?ExternalDocs $externalDocs): self
     {

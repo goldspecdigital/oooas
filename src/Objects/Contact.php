@@ -30,7 +30,7 @@ class Contact extends BaseObject
 
     /**
      * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
+     * @return static
      */
     public function name(?string $name): self
     {
@@ -43,7 +43,7 @@ class Contact extends BaseObject
 
     /**
      * @param string|null $url
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
+     * @return static
      */
     public function url(?string $url): self
     {
@@ -56,7 +56,7 @@ class Contact extends BaseObject
 
     /**
      * @param string|null $email
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact
+     * @return static
      */
     public function email(?string $email): self
     {

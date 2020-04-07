@@ -30,7 +30,7 @@ class Server extends BaseObject
 
     /**
      * @param string|null $url
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
+     * @return static
      */
     public function url(?string $url): self
     {
@@ -43,7 +43,7 @@ class Server extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -56,7 +56,7 @@ class Server extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable[] $variables
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Server
+     * @return static
      */
     public function variables(ServerVariable ...$variables): self
     {

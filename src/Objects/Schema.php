@@ -218,7 +218,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public static function array(string $objectId = null): self
     {
@@ -227,7 +227,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public static function boolean(string $objectId = null): self
     {
@@ -236,7 +236,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public static function integer(string $objectId = null): self
     {
@@ -245,7 +245,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public static function number(string $objectId = null): self
     {
@@ -254,7 +254,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public static function object(string $objectId = null): self
     {
@@ -263,7 +263,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public static function string(string $objectId = null): self
     {
@@ -272,7 +272,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $title
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function title(?string $title): self
     {
@@ -285,7 +285,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -298,7 +298,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param mixed[] $enum
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function enum(...$enum): self
     {
@@ -311,7 +311,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param mixed|null $default
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function default($default): self
     {
@@ -324,7 +324,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $format
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function format(?string $format): self
     {
@@ -337,7 +337,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $type
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function type(?string $type): self
     {
@@ -350,7 +350,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract $items
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function items(SchemaContract $items): self
     {
@@ -363,7 +363,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param int|null $maxItems
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function maxItems(?int $maxItems): self
     {
@@ -376,7 +376,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param int|null $minItems
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function minItems(?int $minItems): self
     {
@@ -389,7 +389,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param bool|null $uniqueItems
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function uniqueItems(?bool $uniqueItems = true): self
     {
@@ -402,7 +402,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param string|null $pattern
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function pattern(?string $pattern): self
     {
@@ -415,7 +415,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param int|null $maxLength
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function maxLength(?int $maxLength): self
     {
@@ -428,7 +428,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param int|null $minLength
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function minLength(?int $minLength): self
     {
@@ -442,7 +442,7 @@ class Schema extends BaseObject implements SchemaContract
     /**
      * @param int|float|null $maximum
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function maximum($maximum): self
     {
@@ -464,7 +464,7 @@ class Schema extends BaseObject implements SchemaContract
     /**
      * @param int|float|null $exclusiveMaximum
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function exclusiveMaximum($exclusiveMaximum): self
     {
@@ -486,7 +486,7 @@ class Schema extends BaseObject implements SchemaContract
     /**
      * @param int|float|null $minimum
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function minimum($minimum): self
     {
@@ -508,7 +508,7 @@ class Schema extends BaseObject implements SchemaContract
     /**
      * @param int|float|null $exclusiveMinimum
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function exclusiveMinimum($exclusiveMinimum): self
     {
@@ -530,7 +530,7 @@ class Schema extends BaseObject implements SchemaContract
     /**
      * @param int|float|null $multipleOf
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function multipleOf($multipleOf): self
     {
@@ -552,7 +552,7 @@ class Schema extends BaseObject implements SchemaContract
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[]|string[] $required
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function required(...$required): self
     {
@@ -585,7 +585,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $properties
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function properties(Schema ...$properties): self
     {
@@ -598,7 +598,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $additionalProperties
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function additionalProperties(?Schema $additionalProperties): self
     {
@@ -611,7 +611,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param int|null $maxProperties
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function maxProperties(?int $maxProperties): self
     {
@@ -624,7 +624,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param int|null $minProperties
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function minProperties(?int $minProperties): self
     {
@@ -637,7 +637,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param bool|null $nullable
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function nullable(?bool $nullable = true): self
     {
@@ -650,7 +650,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator|null $discriminator
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function discriminator(?Discriminator $discriminator): self
     {
@@ -663,7 +663,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param bool|null $readOnly
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function readOnly(?bool $readOnly = true): self
     {
@@ -676,7 +676,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param bool|null $writeOnly
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function writeOnly(?bool $writeOnly = true): self
     {
@@ -689,7 +689,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml|null $xml
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function xml(?Xml $xml): self
     {
@@ -702,7 +702,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function externalDocs(?ExternalDocs $externalDocs): self
     {
@@ -715,7 +715,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param mixed|null $example
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function example($example): self
     {
@@ -728,7 +728,7 @@ class Schema extends BaseObject implements SchemaContract
 
     /**
      * @param bool|null $deprecated
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema
+     * @return static
      */
     public function deprecated(?bool $deprecated = true): self
     {

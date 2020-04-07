@@ -30,7 +30,7 @@ class RequestBody extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -43,7 +43,7 @@ class RequestBody extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
+     * @return static
      */
     public function content(MediaType ...$content): self
     {
@@ -56,7 +56,7 @@ class RequestBody extends BaseObject
 
     /**
      * @param bool|null $required
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody
+     * @return static
      */
     public function required(?bool $required = true): self
     {

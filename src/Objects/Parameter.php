@@ -104,7 +104,7 @@ class Parameter extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public static function query(string $objectId = null): self
     {
@@ -113,7 +113,7 @@ class Parameter extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public static function header(string $objectId = null): self
     {
@@ -122,7 +122,7 @@ class Parameter extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public static function path(string $objectId = null): self
     {
@@ -131,7 +131,7 @@ class Parameter extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public static function cookie(string $objectId = null): self
     {
@@ -140,7 +140,7 @@ class Parameter extends BaseObject
 
     /**
      * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function name(?string $name): self
     {
@@ -153,7 +153,7 @@ class Parameter extends BaseObject
 
     /**
      * @param string|null $in
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function in(?string $in): self
     {
@@ -166,7 +166,7 @@ class Parameter extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -179,7 +179,7 @@ class Parameter extends BaseObject
 
     /**
      * @param bool|null $required
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function required(?bool $required = true): self
     {
@@ -192,7 +192,7 @@ class Parameter extends BaseObject
 
     /**
      * @param bool|null $deprecated
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function deprecated(?bool $deprecated = true): self
     {
@@ -205,7 +205,7 @@ class Parameter extends BaseObject
 
     /**
      * @param bool|null $allowEmptyValue
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function allowEmptyValue(?bool $allowEmptyValue = true): self
     {
@@ -218,7 +218,7 @@ class Parameter extends BaseObject
 
     /**
      * @param string|null $style
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function style(?string $style): self
     {
@@ -231,7 +231,7 @@ class Parameter extends BaseObject
 
     /**
      * @param bool|null $explode
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function explode(?bool $explode = true): self
     {
@@ -244,7 +244,7 @@ class Parameter extends BaseObject
 
     /**
      * @param bool|null $allowReserved
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function allowReserved(?bool $allowReserved = true): self
     {
@@ -257,7 +257,7 @@ class Parameter extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function schema(?SchemaContract $schema): self
     {
@@ -270,7 +270,7 @@ class Parameter extends BaseObject
 
     /**
      * @param mixed|null $example
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function example($example): self
     {
@@ -283,7 +283,7 @@ class Parameter extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null $examples
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function examples(Example ...$examples): self
     {
@@ -296,7 +296,7 @@ class Parameter extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter
+     * @return static
      */
     public function content(MediaType ...$content): self
     {

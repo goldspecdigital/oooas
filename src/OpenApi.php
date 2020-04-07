@@ -75,7 +75,7 @@ class OpenApi extends BaseObject
 
     /**
      * @param string|null $openapi
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     * @return static
      */
     public function openapi(?string $openapi): self
     {
@@ -88,7 +88,7 @@ class OpenApi extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Info|null $info
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     * @return static
      */
     public function info(?Info $info): self
     {
@@ -101,7 +101,7 @@ class OpenApi extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[] $servers
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     * @return static
      */
     public function servers(Server ...$servers): self
     {
@@ -114,7 +114,7 @@ class OpenApi extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $paths
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     * @return static
      */
     public function paths(PathItem ...$paths): self
     {
@@ -127,7 +127,7 @@ class OpenApi extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Components|null $components
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     * @return static
      */
     public function components(?Components $components): self
     {
@@ -140,7 +140,7 @@ class OpenApi extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[] $security
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     * @return static
      */
     public function security(SecurityRequirement ...$security): self
     {
@@ -153,7 +153,7 @@ class OpenApi extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[] $tags
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     * @return static
      */
     public function tags(Tag ...$tags): self
     {
@@ -166,7 +166,7 @@ class OpenApi extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
-     * @return \GoldSpecDigital\ObjectOrientedOAS\OpenApi
+     * @return static
      */
     public function externalDocs(?ExternalDocs $externalDocs): self
     {

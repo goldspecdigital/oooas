@@ -48,7 +48,7 @@ class OAuthFlow extends BaseObject
 
     /**
      * @param string|null $flow
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
+     * @return static
      */
     public function flow(?string $flow): self
     {
@@ -61,7 +61,7 @@ class OAuthFlow extends BaseObject
 
     /**
      * @param string|null $authorizationUrl
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
+     * @return static
      */
     public function authorizationUrl(?string $authorizationUrl): self
     {
@@ -74,7 +74,7 @@ class OAuthFlow extends BaseObject
 
     /**
      * @param string|null $tokenUrl
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
+     * @return static
      */
     public function tokenUrl(?string $tokenUrl): self
     {
@@ -87,7 +87,7 @@ class OAuthFlow extends BaseObject
 
     /**
      * @param string|null $refreshUrl
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
+     * @return static
      */
     public function refreshUrl(?string $refreshUrl): self
     {
@@ -101,7 +101,7 @@ class OAuthFlow extends BaseObject
     /**
      * @param array|null $scopes
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow
+     * @return static
      */
     public function scopes(?array $scopes): self
     {

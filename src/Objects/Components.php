@@ -66,7 +66,7 @@ class Components extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract[] $schemas
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     * @return static
      */
     public function schemas(SchemaContract ...$schemas): self
     {
@@ -79,7 +79,7 @@ class Components extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     * @return static
      */
     public function responses(Response ...$responses): self
     {
@@ -92,7 +92,7 @@ class Components extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter[] $parameters
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     * @return static
      */
     public function parameters(Parameter ...$parameters): self
     {
@@ -105,7 +105,7 @@ class Components extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[] $examples
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     * @return static
      */
     public function examples(Example ...$examples): self
     {
@@ -118,7 +118,7 @@ class Components extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody[] $requestBodies
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     * @return static
      */
     public function requestBodies(RequestBody ...$requestBodies): self
     {
@@ -131,7 +131,7 @@ class Components extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Header[] $headers
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     * @return static
      */
     public function headers(Header ...$headers): self
     {
@@ -144,7 +144,7 @@ class Components extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme[] $securitySchemes
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     * @return static
      */
     public function securitySchemes(SecurityScheme ...$securitySchemes): self
     {
@@ -157,7 +157,7 @@ class Components extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Link[] $links
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     * @return static
      */
     public function links(Link ...$links): self
     {
@@ -170,7 +170,7 @@ class Components extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem[] $callbacks
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Components
+     * @return static
      */
     public function callbacks(PathItem ...$callbacks): self
     {

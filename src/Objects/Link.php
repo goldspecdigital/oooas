@@ -36,7 +36,7 @@ class Link extends BaseObject
 
     /**
      * @param string|null $operationRef
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
+     * @return static
      */
     public function operationRef(?string $operationRef): self
     {
@@ -49,7 +49,7 @@ class Link extends BaseObject
 
     /**
      * @param string|null $operationId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
+     * @return static
      */
     public function operationId(?string $operationId): self
     {
@@ -62,7 +62,7 @@ class Link extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -75,7 +75,7 @@ class Link extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server|null $server
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Link
+     * @return static
      */
     public function server(?Server $server): self
     {

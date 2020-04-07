@@ -25,7 +25,7 @@ class Discriminator extends BaseObject
 
     /**
      * @param string|null $propertyName
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator
+     * @return static
      */
     public function propertyName(?string $propertyName): self
     {
@@ -39,7 +39,7 @@ class Discriminator extends BaseObject
     /**
      * @param array $mapping
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator
+     * @return static
      */
     public function mapping(array $mapping): self
     {

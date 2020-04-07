@@ -19,7 +19,7 @@ abstract class SchemaComposition extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema[] $schemas
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SchemaComposition
+     * @return static
      */
     public function schemas(Schema ...$schemas): self
     {

@@ -26,7 +26,7 @@ class SecurityRequirement extends BaseObject
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme|string|null $securityScheme
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement
+     * @return static
      */
     public function securityScheme($securityScheme): self
     {
@@ -54,7 +54,7 @@ class SecurityRequirement extends BaseObject
 
     /**
      * @param string[] $scopes
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement
+     * @return static
      */
     public function scopes(string ...$scopes): self
     {

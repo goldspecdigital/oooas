@@ -42,7 +42,7 @@ class Xml extends BaseObject
 
     /**
      * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml
+     * @return static
      */
     public function name(?string $name): self
     {
@@ -55,7 +55,7 @@ class Xml extends BaseObject
 
     /**
      * @param string|null $namespace
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml
+     * @return static
      */
     public function namespace(?string $namespace): self
     {
@@ -68,7 +68,7 @@ class Xml extends BaseObject
 
     /**
      * @param string|null $prefix
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml
+     * @return static
      */
     public function prefix(?string $prefix): self
     {
@@ -81,7 +81,7 @@ class Xml extends BaseObject
 
     /**
      * @param bool|null $attribute
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml
+     * @return static
      */
     public function attribute(?bool $attribute = true): self
     {
@@ -94,7 +94,7 @@ class Xml extends BaseObject
 
     /**
      * @param bool|null $wrapped
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Xml
+     * @return static
      */
     public function wrapped(?bool $wrapped = true): self
     {

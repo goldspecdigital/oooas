@@ -48,7 +48,7 @@ class PathItem extends BaseObject
 
     /**
      * @param string|null $route
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     * @return static
      */
     public function route(?string $route): self
     {
@@ -61,7 +61,7 @@ class PathItem extends BaseObject
 
     /**
      * @param string|null $summary
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     * @return static
      */
     public function summary(?string $summary): self
     {
@@ -74,7 +74,7 @@ class PathItem extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -87,7 +87,7 @@ class PathItem extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation[] $operations
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     * @return static
      */
     public function operations(Operation ...$operations): self
     {
@@ -100,7 +100,7 @@ class PathItem extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[] $servers
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     * @return static
      */
     public function servers(Server ...$servers): self
     {
@@ -113,7 +113,7 @@ class PathItem extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter[] $parameters
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem
+     * @return static
      */
     public function parameters(Parameter ...$parameters): self
     {

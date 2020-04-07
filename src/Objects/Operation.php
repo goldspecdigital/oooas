@@ -105,7 +105,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public static function get(string $objectId = null): self
     {
@@ -114,7 +114,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public static function put(string $objectId = null): self
     {
@@ -123,7 +123,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public static function post(string $objectId = null): self
     {
@@ -132,7 +132,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public static function delete(string $objectId = null): self
     {
@@ -141,7 +141,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public static function head(string $objectId = null): self
     {
@@ -150,7 +150,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public static function patch(string $objectId = null): self
     {
@@ -159,7 +159,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public static function trace(string $objectId = null): self
     {
@@ -168,7 +168,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $action
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function action(?string $action): self
     {
@@ -182,7 +182,7 @@ class Operation extends BaseObject
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Tag[]|string[] $tags
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\InvalidArgumentException
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function tags(...$tags): self
     {
@@ -215,7 +215,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $summary
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function summary(?string $summary): self
     {
@@ -228,7 +228,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -241,7 +241,7 @@ class Operation extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs|null $externalDocs
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function externalDocs(?ExternalDocs $externalDocs): self
     {
@@ -254,7 +254,7 @@ class Operation extends BaseObject
 
     /**
      * @param string|null $operationId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function operationId(?string $operationId): self
     {
@@ -267,7 +267,7 @@ class Operation extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter[] $parameters
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function parameters(Parameter ...$parameters): self
     {
@@ -280,7 +280,7 @@ class Operation extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\RequestBody|null $requestBody
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function requestBody(?RequestBody $requestBody): self
     {
@@ -293,7 +293,7 @@ class Operation extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Response[] $responses
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function responses(Response ...$responses): self
     {
@@ -306,7 +306,7 @@ class Operation extends BaseObject
 
     /**
      * @param bool|null $deprecated
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function deprecated(?bool $deprecated = true): self
     {
@@ -319,7 +319,7 @@ class Operation extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityRequirement[]|null $security
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function security(SecurityRequirement ...$security): self
     {
@@ -333,7 +333,7 @@ class Operation extends BaseObject
 
     /**
      * @param bool|null $noSecurity
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function noSecurity(?bool $noSecurity = true): self
     {
@@ -346,7 +346,7 @@ class Operation extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Server[] $servers
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Operation
+     * @return static
      */
     public function servers(Server ...$servers): self
     {

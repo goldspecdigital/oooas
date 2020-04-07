@@ -24,7 +24,7 @@ class License extends BaseObject
 
     /**
      * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\License
+     * @return static
      */
     public function name(?string $name): self
     {
@@ -37,7 +37,7 @@ class License extends BaseObject
 
     /**
      * @param string|null $url
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\License
+     * @return static
      */
     public function url(?string $url): self
     {
