@@ -30,7 +30,7 @@ class ServerVariable extends BaseObject
 
     /**
      * @param string[] $enum
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable
+     * @return static
      */
     public function enum(string ...$enum): self
     {
@@ -43,7 +43,7 @@ class ServerVariable extends BaseObject
 
     /**
      * @param string|null $default
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable
+     * @return static
      */
     public function default(?string $default): self
     {
@@ -56,7 +56,7 @@ class ServerVariable extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\ServerVariable
+     * @return static
      */
     public function description(?string $description): self
     {

@@ -19,7 +19,7 @@ class Not extends BaseObject implements SchemaContract
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Schema|null $schema
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Not
+     * @return static
      */
     public function schema(?Schema $schema): self
     {

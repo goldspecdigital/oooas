@@ -42,7 +42,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function ok(string $objectId = null): self
     {
@@ -53,7 +53,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function created(string $objectId = null): self
     {
@@ -64,7 +64,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function movedPermanently(string $objectId = null): self
     {
@@ -75,7 +75,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function movedTemporarily(string $objectId = null): self
     {
@@ -86,7 +86,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function badRequest(string $objectId = null): self
     {
@@ -97,7 +97,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function unauthorized(string $objectId = null): self
     {
@@ -108,7 +108,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function forbidden(string $objectId = null): self
     {
@@ -119,7 +119,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function notFound(string $objectId = null): self
     {
@@ -130,7 +130,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function unprocessableEntity(string $objectId = null): self
     {
@@ -141,7 +141,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function tooManyRequests(string $objectId = null): self
     {
@@ -152,7 +152,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public static function internalServerError(string $objectId = null): self
     {
@@ -163,7 +163,7 @@ class Response extends BaseObject
 
     /**
      * @param int|null $statusCode
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public function statusCode(?int $statusCode): self
     {
@@ -176,7 +176,7 @@ class Response extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -189,7 +189,7 @@ class Response extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Header[] $headers
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public function headers(Header ...$headers): self
     {
@@ -202,7 +202,7 @@ class Response extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType[] $content
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public function content(MediaType ...$content): self
     {
@@ -215,7 +215,7 @@ class Response extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Link[] $links
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Response
+     * @return static
      */
     public function links(Link ...$links): self
     {

@@ -42,7 +42,7 @@ class Encoding extends BaseObject
 
     /**
      * @param string|null $contentType
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding
+     * @return static
      */
     public function contentType(?string $contentType): self
     {
@@ -55,7 +55,7 @@ class Encoding extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Header[] $headers
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding
+     * @return static
      */
     public function headers(Header ...$headers): self
     {
@@ -68,7 +68,7 @@ class Encoding extends BaseObject
 
     /**
      * @param string|null $style
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding
+     * @return static
      */
     public function style(?string $style): self
     {
@@ -81,7 +81,7 @@ class Encoding extends BaseObject
 
     /**
      * @param bool|null $explode
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding
+     * @return static
      */
     public function explode(?bool $explode = true): self
     {
@@ -94,7 +94,7 @@ class Encoding extends BaseObject
 
     /**
      * @param bool|null $allowReserved
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding
+     * @return static
      */
     public function allowReserved(?bool $allowReserved = true): self
     {

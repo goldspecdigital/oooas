@@ -48,7 +48,7 @@ class Info extends BaseObject
 
     /**
      * @param string|null $title
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
+     * @return static
      */
     public function title(?string $title): self
     {
@@ -61,7 +61,7 @@ class Info extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -74,7 +74,7 @@ class Info extends BaseObject
 
     /**
      * @param string|null $termsOfService
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
+     * @return static
      */
     public function termsOfService(?string $termsOfService): self
     {
@@ -87,7 +87,7 @@ class Info extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Contact|null $contact
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
+     * @return static
      */
     public function contact(?Contact $contact): self
     {
@@ -100,7 +100,7 @@ class Info extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\License|null $license
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
+     * @return static
      */
     public function license(?License $license): self
     {
@@ -113,7 +113,7 @@ class Info extends BaseObject
 
     /**
      * @param string|null $version
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\Info
+     * @return static
      */
     public function version(?string $version): self
     {

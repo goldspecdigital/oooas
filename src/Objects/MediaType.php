@@ -52,7 +52,7 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public static function json(string $objectId = null): self
     {
@@ -62,7 +62,7 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public static function pdf(string $objectId = null): self
     {
@@ -72,7 +72,7 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public static function jpeg(string $objectId = null): self
     {
@@ -82,7 +82,7 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public static function png(string $objectId = null): self
     {
@@ -92,7 +92,7 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public static function calendar(string $objectId = null): self
     {
@@ -102,7 +102,7 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public static function plainText(string $objectId = null): self
     {
@@ -112,7 +112,7 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public static function xml(string $objectId = null): self
     {
@@ -122,7 +122,7 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public static function formUrlEncoded(string $objectId = null): self
     {
@@ -132,7 +132,7 @@ class MediaType extends BaseObject
 
     /**
      * @param string|null $mediaType
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public function mediaType(?string $mediaType): self
     {
@@ -145,7 +145,7 @@ class MediaType extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract|null $schema
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public function schema(?SchemaContract $schema): self
     {
@@ -158,7 +158,7 @@ class MediaType extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Example|null $example
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public function example(?Example $example): self
     {
@@ -171,7 +171,7 @@ class MediaType extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Example[]|null $examples
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public function examples(Example ...$examples): self
     {
@@ -184,7 +184,7 @@ class MediaType extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\Encoding[] $encoding
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType
+     * @return static
      */
     public function encoding(Encoding ...$encoding): self
     {

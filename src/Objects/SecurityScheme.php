@@ -69,7 +69,7 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $objectId
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
+     * @return static
      */
     public static function oauth2(string $objectId = null): self
     {
@@ -78,7 +78,7 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $type
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
+     * @return static
      */
     public function type(?string $type): self
     {
@@ -91,7 +91,7 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $description
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
+     * @return static
      */
     public function description(?string $description): self
     {
@@ -104,7 +104,7 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $name
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
+     * @return static
      */
     public function name(?string $name): self
     {
@@ -117,7 +117,7 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $in
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
+     * @return static
      */
     public function in(?string $in): self
     {
@@ -130,7 +130,7 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $scheme
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
+     * @return static
      */
     public function scheme(?string $scheme): self
     {
@@ -143,7 +143,7 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $bearerFormat
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
+     * @return static
      */
     public function bearerFormat(?string $bearerFormat): self
     {
@@ -156,7 +156,7 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param \GoldSpecDigital\ObjectOrientedOAS\Objects\OAuthFlow[] $flows
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
+     * @return static
      */
     public function flows(OAuthFlow ...$flows): self
     {
@@ -169,7 +169,7 @@ class SecurityScheme extends BaseObject
 
     /**
      * @param string|null $openIdConnectUrl
-     * @return \GoldSpecDigital\ObjectOrientedOAS\Objects\SecurityScheme
+     * @return static
      */
     public function openIdConnectUrl(?string $openIdConnectUrl): self
     {
