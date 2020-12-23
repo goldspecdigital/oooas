@@ -17,9 +17,9 @@
         alt="GitHub tag (latest SemVer)" 
         src="https://img.shields.io/github/tag/goldspecdigital/oooas.svg"
     ></a>
-    <a href="https://travis-ci.com/goldspecdigital/oooas"><img 
+    <a href="https://github.com/goldspecdigital/oooas/actions"><img 
         alt="Build status"
-        src="https://travis-ci.com/goldspecdigital/oooas.svg?branch=master" 
+        src="https://github.com/goldspecdigital/oooas/workflows/Tests/badge.svg" 
     ></a>
     <a href="https://packagist.org/packages/goldspecdigital/oooas"><img 
         alt="Packagist" 
