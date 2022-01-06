@@ -26,7 +26,7 @@ class Extensions implements ArrayAccess
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->items[$this->normalizeOffset($offset)]);
     }
@@ -39,7 +39,7 @@ class Extensions implements ArrayAccess
      * @throws \GoldSpecDigital\ObjectOrientedOAS\Exceptions\ExtensionDoesNotExistException
      * @return mixed can return all value types
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (!$this->offsetExists($offset)) {
             throw new ExtensionDoesNotExistException("[{$offset}] is not a valid extension.");
@@ -55,7 +55,7 @@ class Extensions implements ArrayAccess
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if ($value === static::X_EMPTY_VALUE) {
             $this->offsetUnset($offset);
@@ -72,7 +72,7 @@ class Extensions implements ArrayAccess
      * @link https://php.net/manual/en/arrayaccess.offsetunset.php
      * @param mixed $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         if (!$this->offsetExists($offset)) {
             return;
