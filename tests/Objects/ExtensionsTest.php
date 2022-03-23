@@ -2,6 +2,7 @@
 
 namespace GoldSpecDigital\ObjectOrientedOAS\Tests\Objects;
 
+use GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Components;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
@@ -69,7 +70,6 @@ class ExtensionsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \GoldSpecDigital\ObjectOrientedOAS\Exceptions\PropertyDoesNotExistException
      * @dataProvider schemasDataProvider
      * @param string|\GoldSpecDigital\ObjectOrientedOAS\Objects\Schema $schema
      */
@@ -77,6 +77,8 @@ class ExtensionsTest extends TestCase
     {
         $object = $schema::create()->x('foo', 'bar');
 
+        $this->expectException(PropertyDoesNotExistException::class);
+        $this->expectExceptionMessage('[x-key] is not a valid property');
         $this->assertEquals('bar', $object->{'x-key'});
     }
 
