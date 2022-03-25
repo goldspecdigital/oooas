@@ -44,4 +44,10 @@ abstract class SchemaComposition extends BaseObject implements SchemaContract
             $this->compositionType() => $this->schemas,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->schemas(...($properties['schemas'] ?? []));
+    }
 }

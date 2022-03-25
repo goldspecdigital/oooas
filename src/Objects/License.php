@@ -58,4 +58,11 @@ class License extends BaseObject
             'url' => $this->url,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->name($properties['name'])
+            ->url($properties['url']);
+    }
 }

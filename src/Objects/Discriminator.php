@@ -69,4 +69,11 @@ class Discriminator extends BaseObject
             'mapping' => $this->mapping,
         ]);
     }
+    
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->propertyName($properties['propertyName'])
+            ->mapping($properties['mapping']);
+    }
 }

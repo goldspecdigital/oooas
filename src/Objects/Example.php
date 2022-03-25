@@ -98,4 +98,13 @@ class Example extends BaseObject
             'externalValue' => $this->externalValue,
         ]);
     }
+    
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->summary($properties['summary'])
+            ->description($properties['description'])
+            ->value($properties['value'])
+            ->externalValue($properties['externalValue']);
+    }
 }

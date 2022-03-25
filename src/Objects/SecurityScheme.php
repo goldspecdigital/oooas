@@ -201,4 +201,17 @@ class SecurityScheme extends BaseObject
             'openIdConnectUrl' => $this->openIdConnectUrl,
         ]);
     }
+
+    public static function __set_state(array $properties): self
+    {
+        return parent::__set_state($properties)
+            ->type($properties['type'])
+            ->description($properties['description'])
+            ->name($properties['name'])
+            ->in($properties['in'])
+            ->scheme($properties['scheme'])
+            ->bearerFormat($properties['bearerFormat'])
+            ->flows(...($properties['flows'] ?? []))
+            ->openIdConnectUrl($properties['openIdConnectUrl']);
+    }
 }

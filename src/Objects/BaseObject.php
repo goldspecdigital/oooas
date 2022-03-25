@@ -161,4 +161,14 @@ abstract class BaseObject implements JsonSerializable
 
         throw new PropertyDoesNotExistException("[{$name}] is not a valid property.");
     }
+
+    public static function __set_state(array $properties)
+    {
+        $obj = new static($properties['objectId']);
+
+        $obj->ref = $properties['ref'];
+        $obj->extensions = $properties['extensions'];
+
+        return $obj;
+    }
 }

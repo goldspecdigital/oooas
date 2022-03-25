@@ -78,4 +78,12 @@ class Tag extends BaseObject
             'externalDocs' => $this->externalDocs,
         ]);
     }
+
+    public static function __set_state(array $properties): self
+    {
+        return parent::__set_state($properties)
+            ->name($properties['name'])
+            ->description($properties['description'])
+            ->externalDocs($properties['externalDocs']);
+    }
 }

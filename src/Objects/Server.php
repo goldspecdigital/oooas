@@ -83,4 +83,12 @@ class Server extends BaseObject
             'variables' => $variables ?: null,
         ]);
     }
+
+    public static function __set_state(array $properties): self
+    {
+        return parent::__set_state($properties)
+            ->url($properties['url'])
+            ->description($properties['description'])
+            ->variables(...($properties['variables'] ?? []));
+    }
 }

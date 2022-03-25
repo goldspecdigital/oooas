@@ -217,4 +217,14 @@ class MediaType extends BaseObject
             'encoding' => $encodings ?: null,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->mediaType($properties['mediaType'])
+            ->schema($properties['schema'])
+            ->example($properties['example'])
+            ->examples(...($properties['examples'] ?? []))
+            ->encoding(...($properties['encoding'] ?? []));
+    }
 }

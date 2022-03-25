@@ -78,4 +78,12 @@ class Contact extends BaseObject
             'email' => $this->email,
         ]);
     }
+    
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->name($properties['name'])
+            ->url($properties['url'])
+            ->email($properties['email']);
+    }
 }

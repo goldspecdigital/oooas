@@ -29,6 +29,59 @@ class OpenApiTest extends TestCase
     /** @test */
     public function all_properties_works_and_validation_passes()
     {
+        $openApi = $this->createSchema();
+
+        $exampleResponse = file_get_contents(realpath(__DIR__) . '/storage/example_response.json');
+
+        $this->assertEquals(
+            json_decode($exampleResponse, true),
+            $openApi->toArray()
+        );
+
+        $openApi->validate();
+    }
+
+    /** @test */
+    public function set_state_passes_equality()
+    {
+        $openApi = $this->createSchema();
+
+        $imported = eval('return ' . var_export($openApi, true) . ';');
+
+        $this->assertEquals($openApi, $imported);
+    }
+
+    /** @test */
+    public function validate()
+    {
+        $exceptionThrown = false;
+
+        try {
+            $openApi = OpenApi::create()
+                ->openapi('4.0.0')
+                ->info(
+                    Info::create()->title('foo')
+                )
+                ->paths(
+                    PathItem::create()
+                        ->route('/foo')
+                        ->operations(
+                            Operation::get()
+                        )
+                );
+
+            $openApi->validate();
+        }
+        catch(ValidationException $exception) {
+            $exceptionThrown = true;
+
+            $this->assertCount(3, $exception->getErrors());
+        }
+
+        $this->assertTrue($exceptionThrown);
+    }
+
+    protected function createSchema(): OpenApi {
         // Create a tag.
         $tag = Tag::create()
             ->name('Audits')
@@ -146,7 +199,7 @@ class OpenApiTest extends TestCase
             ->description('GitHub Wiki');
 
         // Create the main OpenAPI object composed off everything created above.
-        $openApi = OpenApi::create()
+        return OpenApi::create()
             ->openapi(OpenApi::OPENAPI_3_0_1)
             ->info($info)
             ->paths(...$paths)
@@ -155,44 +208,5 @@ class OpenApiTest extends TestCase
             ->security($security)
             ->tags($tag)
             ->externalDocs($externalDocs);
-
-        $exampleResponse = file_get_contents(realpath(__DIR__) . '/storage/example_response.json');
-
-        $this->assertEquals(
-            json_decode($exampleResponse, true),
-            $openApi->toArray()
-        );
-
-        $openApi->validate();
-    }
-
-    /** @test */
-    public function validate()
-    {
-        $exceptionThrown = false;
-
-        try {
-            $openApi = OpenApi::create()
-                ->openapi('4.0.0')
-                ->info(
-                    Info::create()->title('foo')
-                )
-                ->paths(
-                    PathItem::create()
-                        ->route('/foo')
-                        ->operations(
-                            Operation::get()
-                        )
-                );
-
-            $openApi->validate();
-        }
-        catch(ValidationException $exception) {
-            $exceptionThrown = true;
-
-            $this->assertCount(3, $exception->getErrors());
-        }
-
-        $this->assertTrue($exceptionThrown);
     }
 }

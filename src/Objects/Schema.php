@@ -352,7 +352,7 @@ class Schema extends BaseObject implements SchemaContract
      * @param \GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract $items
      * @return static
      */
-    public function items(SchemaContract $items): self
+    public function items(?SchemaContract $items): self
     {
         $instance = clone $this;
 
@@ -782,5 +782,41 @@ class Schema extends BaseObject implements SchemaContract
             'example' => $this->example,
             'deprecated' => $this->deprecated,
         ]);
+    }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->title($properties['title'])
+            ->description($properties['description'])
+            ->enum(...($properties['enum'] ?? []))
+            ->default($properties['default'])
+            ->format($properties['format'])
+            ->type($properties['type'])
+            ->items($properties['items'])
+            ->maxItems($properties['maxItems'])
+            ->minItems($properties['minItems'])
+            ->uniqueItems($properties['uniqueItems'])
+            ->pattern($properties['pattern'])
+            ->maxLength($properties['maxLength'])
+            ->minLength($properties['minLength'])
+            ->maximum($properties['maximum'])
+            ->exclusiveMaximum($properties['exclusiveMaximum'])
+            ->minimum($properties['minimum'])
+            ->exclusiveMinimum($properties['exclusiveMinimum'])
+            ->multipleOf($properties['multipleOf'])
+            ->required(...($properties['required'] ?? []))
+            ->properties(...($properties['properties'] ?? []))
+            ->additionalProperties($properties['additionalProperties'])
+            ->maxProperties($properties['maxProperties'])
+            ->minProperties($properties['minProperties'])
+            ->nullable($properties['nullable'])
+            ->discriminator($properties['discriminator'])
+            ->readOnly($properties['readOnly'])
+            ->writeOnly($properties['writeOnly'])
+            ->xml($properties['xml'])
+            ->externalDocs($properties['externalDocs'])
+            ->example($properties['example'])
+            ->deprecated($properties['deprecated']);
     }
 }

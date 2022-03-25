@@ -58,4 +58,11 @@ class ExternalDocs extends BaseObject
             'url' => $this->url,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->description($properties['description'])
+            ->url($properties['url']);
+    }
 }
