@@ -7,6 +7,7 @@ namespace GoldSpecDigital\ObjectOrientedOAS\Tests\Objects;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Discriminator;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\ExternalDocs;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\OneOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Xml;
 use GoldSpecDigital\ObjectOrientedOAS\Tests\TestCase;
@@ -319,5 +320,39 @@ class SchemaTest extends TestCase
                 '$ref' => '#/components/schemas/pet',
             ],
         ], $schema->toArray());
+    }
+
+    /** @test */
+    public function create_object_with_oneOf_works()
+    {
+        $string = Schema::string();
+        $number = Schema::number();
+
+        $schema = Schema::create()
+            ->type(Schema::TYPE_OBJECT)
+            ->properties(
+                OneOf::create('poly_type')->schemas($string, $number)
+            );
+
+        $response = MediaType::create()
+            ->schema($schema);
+
+        $this->assertEquals([
+            'schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'poly_type' => [
+                        'oneOf' => [
+                            [
+                                'type' => 'string',
+                            ],
+                            [
+                                'type' => 'number',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ], $response->toArray());
     }
 }
