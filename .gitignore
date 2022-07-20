@@ -1,5 +1,6 @@
 /composer.lock
-/.php_cs.cache
+/.php-cs-fixer.cache
+/.phpunit.result.cache
 
 # Created by https://www.gitignore.io/api/macos,phpstorm,composer
 
