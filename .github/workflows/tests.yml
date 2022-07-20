@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
 
+      - name: Install dev dependencies
+        run: composer update --dev --prefer-stable --prefer-dist --no-interaction --no-progress
+
       - name: Run PHP CS Fixer
         run: composer test:style
 
