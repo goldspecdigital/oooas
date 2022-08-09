@@ -138,4 +138,15 @@ class Info extends BaseObject
             'version' => $this->version,
         ]);
     }
+    
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->title($properties['title'])
+            ->description($properties['description'])
+            ->termsOfService($properties['termsOfService'])
+            ->contact($properties['contact'])
+            ->license($properties['license'])
+            ->version($properties['version']);
+    }
 }

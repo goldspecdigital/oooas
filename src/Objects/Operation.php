@@ -400,4 +400,23 @@ class Operation extends BaseObject
             'callbacks' => $callbacks ?: null,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->action($properties['action'])
+            ->tags(...($properties['tags'] ?? []))
+            ->summary($properties['summary'])
+            ->description($properties['description'])
+            ->externalDocs($properties['externalDocs'])
+            ->operationId($properties['operationId'])
+            ->parameters(...($properties['parameters'] ?? []))
+            ->requestBody($properties['requestBody'])
+            ->responses(...($properties['responses'] ?? []))
+            ->deprecated($properties['deprecated'])
+            ->security(...($properties['security'] ?? []))
+            ->noSecurity($properties['noSecurity'])
+            ->servers(...($properties['servers'] ?? []))
+            ->callbacks(...($properties['callbacks'] ?? []));
+    }
 }

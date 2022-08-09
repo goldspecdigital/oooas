@@ -243,4 +243,18 @@ class Components extends BaseObject
             'callbacks' => $callbacks ?: null,
         ]);
     }
+    
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->schemas(...($properties['schemas'] ?? []))
+            ->responses(...($properties['responses'] ?? []))
+            ->parameters(...($properties['parameters'] ?? []))
+            ->examples(...($properties['examples'] ?? []))
+            ->requestBodies(...($properties['requestBodies'] ?? []))
+            ->headers(...($properties['headers'] ?? []))
+            ->securitySchemes(...($properties['securitySchemes'] ?? []))
+            ->links(...($properties['links'] ?? []))
+            ->callbacks(...($properties['callbacks'] ?? []));
+    }
 }

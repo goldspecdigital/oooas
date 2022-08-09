@@ -74,4 +74,11 @@ class SecurityRequirement extends BaseObject
             $this->securityScheme => $this->scopes ?? [],
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->securityScheme($properties['securityScheme'])
+            ->scopes(...($properties['scopes'] ?? []));
+    }
 }

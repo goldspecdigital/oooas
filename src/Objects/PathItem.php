@@ -143,4 +143,15 @@ class PathItem extends BaseObject
             ])
         );
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->route($properties['route'])
+            ->summary($properties['summary'])
+            ->description($properties['description'])
+            ->operations(...$properties['operations'] ?? [])
+            ->servers(...$properties['servers'] ?? [])
+            ->parameters(...$properties['parameters'] ?? []);
+    }
 }

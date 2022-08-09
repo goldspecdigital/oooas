@@ -39,4 +39,10 @@ class Not extends BaseObject implements SchemaContract
             'not' => $this->schema,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->schema($properties['schema']);
+    }
 }

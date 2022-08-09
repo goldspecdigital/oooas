@@ -83,4 +83,12 @@ class RequestBody extends BaseObject
             'required' => $this->required,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->description($properties['description'])
+            ->content(...($properties['content'] ?? []))
+            ->required($properties['required']);
+    }
 }

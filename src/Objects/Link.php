@@ -98,4 +98,13 @@ class Link extends BaseObject
             'server' => $this->server,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->operationRef($properties['operationRef'])
+            ->operationId($properties['operationId'])
+            ->description($properties['description'])
+            ->server($properties['server']);
+    }
 }

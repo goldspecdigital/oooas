@@ -78,4 +78,12 @@ class ServerVariable extends BaseObject
             'description' => $this->description,
         ]);
     }
+
+    public static function __set_state(array $properties): self
+    {
+        return parent::__set_state($properties)
+            ->enum($properties['enum'])
+            ->default($properties['default'])
+            ->description($properties['description']);
+    }
 }

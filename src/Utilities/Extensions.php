@@ -105,4 +105,13 @@ class Extensions implements ArrayAccess
 
         return 'x-' . $offset;
     }
+
+    public static function __set_state(array $properties): self
+    {
+        $obj = new self();
+
+        $obj->items = $properties['items'];
+
+        return $obj;
+    }
 }

@@ -123,4 +123,14 @@ class Encoding extends BaseObject
             'allowReserved' => $this->allowReserved,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->contentType($properties['contentType'])
+            ->headers(...($properties['headers'] ?? []))
+            ->style($properties['style'])
+            ->explode($properties['explode'])
+            ->allowReserved($properties['allowReserved']);
+    }
 }

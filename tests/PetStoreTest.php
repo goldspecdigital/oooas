@@ -24,6 +24,27 @@ class PetStoreTest extends TestCase
     /** @test */
     public function pet_store_example()
     {
+        $openApi = $this->createSchema();
+
+        $exampleResponse = file_get_contents(realpath(__DIR__) . '/storage/petstore_expanded.json');
+
+        $this->assertEquals(
+            json_decode($exampleResponse, true),
+            $openApi->toArray()
+        );
+    }
+
+    /** @test */
+    public function set_state_passes_equality()
+    {
+        $openApi = $this->createSchema();
+
+        $imported = eval('return ' . var_export($openApi, true) . ';');
+
+        $this->assertEquals($openApi, $imported);
+    }
+
+    protected function createSchema(): OpenApi {
         $contact = Contact::create()
             ->name('Swagger API Team')
             ->email('apiteam@swagger.io')
@@ -167,18 +188,11 @@ class PetStoreTest extends TestCase
             ->route('/pets/{id}')
             ->operations($findPetById, $deletePetById);
 
-        $openApi = OpenApi::create()
+        return OpenApi::create()
             ->openapi(OpenApi::OPENAPI_3_0_0)
             ->info($info)
             ->servers($server)
             ->paths($petRoot, $petNested)
             ->components($components);
-
-        $exampleResponse = file_get_contents(realpath(__DIR__) . '/storage/petstore_expanded.json');
-
-        $this->assertEquals(
-            json_decode($exampleResponse, true),
-            $openApi->toArray()
-        );
     }
 }

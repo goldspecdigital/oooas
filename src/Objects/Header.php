@@ -257,4 +257,20 @@ class Header extends BaseObject
             'content' => $content ?: null,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->description($properties['description'])
+            ->required($properties['required'])
+            ->deprecated($properties['deprecated'])
+            ->allowEmptyValue($properties['allowEmptyValue'])
+            ->style($properties['style'])
+            ->explode($properties['explode'])
+            ->allowReserved($properties['allowReserved'])
+            ->schema($properties['schema'])
+            ->example($properties['example'])
+            ->examples(...($properties['examples'] ?? []))
+            ->content(...($properties['content'] ?? []));
+    }
 }

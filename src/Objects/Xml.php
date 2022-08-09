@@ -118,4 +118,14 @@ class Xml extends BaseObject
             'wrapped' => $this->wrapped,
         ]);
     }
+
+    public static function __set_state(array $properties): self
+    {
+        return parent::__set_state($properties)
+            ->name($properties['name'])
+            ->namespace($properties['namespace'])
+            ->prefix($properties['prefix'])
+            ->attribute($properties['attribute'])
+            ->wrapped($properties['wrapped']);
+    }
 }

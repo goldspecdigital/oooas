@@ -222,4 +222,17 @@ class OpenApi extends BaseObject
             'externalDocs' => $this->externalDocs,
         ]);
     }
+    
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->openapi($properties['openapi'])
+            ->info($properties['info'])
+            ->servers(...($properties['servers'] ?? []))
+            ->paths(...($properties['paths'] ?? []))
+            ->components($properties['components'])
+            ->security(...($properties['security'] ?? []))
+            ->tags(...($properties['tags'] ?? []))
+            ->externalDocs($properties['externalDocs']);
+    }
 }

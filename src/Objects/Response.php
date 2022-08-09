@@ -253,4 +253,14 @@ class Response extends BaseObject
             'links' => $links ?: null,
         ]);
     }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->statusCode($properties['statusCode'])
+            ->description($properties['description'])
+            ->headers(...$properties['headers'] ?? [])
+            ->content(...$properties['content'] ?? [])
+            ->links(...$properties['links'] ?? []);
+    }
 }

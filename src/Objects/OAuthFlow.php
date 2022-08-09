@@ -105,6 +105,14 @@ class OAuthFlow extends BaseObject
      */
     public function scopes(?array $scopes): self
     {
+        $instance = clone $this;
+
+        if ($scopes === null) {
+            $instance->scopes = null;
+
+            return $instance;
+        }
+
         // Ensure the scopes are string => string.
         foreach ($scopes as $key => $value) {
             if (is_string($key) && is_string($value)) {
@@ -113,8 +121,6 @@ class OAuthFlow extends BaseObject
 
             throw new InvalidArgumentException('Each scope must have a string key and a string value.');
         }
-
-        $instance = clone $this;
 
         $instance->scopes = $scopes;
 
@@ -132,5 +138,15 @@ class OAuthFlow extends BaseObject
             'refreshUrl' => $this->refreshUrl,
             'scopes' => $this->scopes,
         ]);
+    }
+
+    public static function __set_state(array $properties)
+    {
+        return parent::__set_state($properties)
+            ->flow($properties['flow'])
+            ->authorizationUrl($properties['authorizationUrl'])
+            ->tokenUrl($properties['tokenUrl'])
+            ->refreshUrl($properties['refreshUrl'])
+            ->scopes($properties['scopes']);
     }
 }
